@@ -1,0 +1,520 @@
+{
+  "manifestVersion": "3.2",
+  "proxies": [
+    {
+      "address": "0x4ba435Bf37957FC8a71Bd04D32d978dB1057c77B",
+      "txHash": "0x3a4c5f01c496be766c217e7830d03ebc86c8ae09d1127e60d4940a1d50da3a24",
+      "kind": "uups"
+    },
+    {
+      "address": "0x5fcFc64b63796AD735C3cEB67eE8f0AFe9588068",
+      "txHash": "0xcc56bd91b22ce081a5a65f899b9c569c324a7a30f24e118581c036b84712ee20",
+      "kind": "uups"
+    },
+    {
+      "address": "0x0aC1Bd605fd8E1Cc32DfBd35571d1728b08a4c21",
+      "txHash": "0xe89890805ee9c0790ca3091d8278c7e56c738a57020d99242452a238f6cb3356",
+      "kind": "uups"
+    },
+    {
+      "address": "0x03D70B0c5722f52F326779050B86F37598EE25B0",
+      "txHash": "0x4b43077ae4aba10deb2be61e59960799a88cde8eaf5363ffa59787da12036022",
+      "kind": "uups"
+    },
+    {
+      "address": "0xfdB0c9e26EeFA6B521b0Cf45E5ae1a40f7d43D9B",
+      "txHash": "0x21489ca57430fd4a28f36b0e2def80d7cff431b795e659c47d1b136e12eb447c",
+      "kind": "uups"
+    },
+    {
+      "address": "0xa8f420835F4A0C5ea7332d798d338e3028093162",
+      "txHash": "0x02548245b546b9064de07f4c08d9e4db7bbc639b86f0cd96738d85e8cb80e856",
+      "kind": "uups"
+    },
+    {
+      "address": "0x17cF85EFa70ADBcf396B61dbD6BDa9BFe19c2797",
+      "txHash": "0x13b8dcb55f9b3ed388bdf331a4eca6447fac27a8d2cbd2780ed8e29cb71d4ea5",
+      "kind": "uups"
+    },
+    {
+      "address": "0xFbF45B7048DF554129990180a77fFf413ff0fD97",
+      "txHash": "0xea3a23c6eeab86ec2bc2f2fa1ccaeca9f445815f6a3675e320ea62f6fc6517e1",
+      "kind": "uups"
+    },
+    {
+      "address": "0x54e9B2314BBB4583EB4e3bAD920a7cB4d944d082",
+      "txHash": "0xad226864f39882349849fea7b66cd6c6441148b9caf1d9c793338995dad19232",
+      "kind": "uups"
+    },
+    {
+      "address": "0x06a9E487C97455Df959422EE21A86009Ba5E7560",
+      "txHash": "0xdef6604342366e9bef4d062346e51e572d55e99857b3cf930d38185d7089cf07",
+      "kind": "uups"
+    },
+    {
+      "address": "0x64508eCdd38294D16dA36c8dB2b6f7E7f6CE9a8b",
+      "txHash": "0xdc311a487f4e074d1a3135a8c69f3e4f2e31556510e07201a78d484c93345fce",
+      "kind": "uups"
+    },
+    {
+      "address": "0x4A23742c1EB88A2A4Cb7E1D682e2fA0b231b7f7f",
+      "txHash": "0x649aff7b40e66eeed3b67f38c5afedc87e09eab257c75f87ea1fd50f133ca316",
+      "kind": "uups"
+    },
+    {
+      "address": "0xC4E2037019ef944b700bB61a04B7b29200fAeB04",
+      "txHash": "0xe8f298e463d680d15a81101c8a4498dbce63c33c1957f25481572d73251a3938",
+      "kind": "uups"
+    }
+  ],
+  "impls": {
+    "ced0af519a9d56d62869a8f52100cef9e2644cfa21b44c51212ce28cea3b055e": {
+      "address": "0xb7036708B7b80a3dd6db90988aafAdE82df6F446",
+      "txHash": "0x28ca3ccc5ddca33caabdfc9402309aa055dc3c7c8bc38a74c6c5d6fa245a9990",
+      "layout": {
+        "solcVersion": "0.8.22",
+        "storage": [
+          {
+            "label": "referralContract",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_contract(IPDAReferral)3708",
+            "contract": "PDADeposit",
+            "src": "contracts\\PDADeposit.sol:26"
+          },
+          {
+            "label": "liquidityManager",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_contract(IPDALiquidityManager)3633",
+            "contract": "PDADeposit",
+            "src": "contracts\\PDADeposit.sol:28"
+          },
+          {
+            "label": "operationAddress",
+            "offset": 0,
+            "slot": "2",
+            "type": "t_address",
+            "contract": "PDADeposit",
+            "src": "contracts\\PDADeposit.sol:31"
+          },
+          {
+            "label": "dappAddress",
+            "offset": 0,
+            "slot": "3",
+            "type": "t_address",
+            "contract": "PDADeposit",
+            "src": "contracts\\PDADeposit.sol:31"
+          },
+          {
+            "label": "totalDeposited",
+            "offset": 0,
+            "slot": "4",
+            "type": "t_mapping(t_address,t_uint256)",
+            "contract": "PDADeposit",
+            "src": "contracts\\PDADeposit.sol:37"
+          },
+          {
+            "label": "depositCount",
+            "offset": 0,
+            "slot": "5",
+            "type": "t_mapping(t_address,t_uint256)",
+            "contract": "PDADeposit",
+            "src": "contracts\\PDADeposit.sol:39"
+          }
+        ],
+        "types": {
+          "t_address": {
+            "label": "address",
+            "numberOfBytes": "20"
+          },
+          "t_bool": {
+            "label": "bool",
+            "numberOfBytes": "1"
+          },
+          "t_struct(InitializableStorage)73_storage": {
+            "label": "struct Initializable.InitializableStorage",
+            "members": [
+              {
+                "label": "_initialized",
+                "type": "t_uint64",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "_initializing",
+                "type": "t_bool",
+                "offset": 8,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_struct(OwnableStorage)13_storage": {
+            "label": "struct OwnableUpgradeable.OwnableStorage",
+            "members": [
+              {
+                "label": "_owner",
+                "type": "t_address",
+                "offset": 0,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_struct(ReentrancyGuardStorage)226_storage": {
+            "label": "struct ReentrancyGuardUpgradeable.ReentrancyGuardStorage",
+            "members": [
+              {
+                "label": "_status",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_uint256": {
+            "label": "uint256",
+            "numberOfBytes": "32"
+          },
+          "t_uint64": {
+            "label": "uint64",
+            "numberOfBytes": "8"
+          },
+          "t_contract(IPDALiquidityManager)3633": {
+            "label": "contract IPDALiquidityManager",
+            "numberOfBytes": "20"
+          },
+          "t_contract(IPDAReferral)3708": {
+            "label": "contract IPDAReferral",
+            "numberOfBytes": "20"
+          },
+          "t_mapping(t_address,t_uint256)": {
+            "label": "mapping(address => uint256)",
+            "numberOfBytes": "32"
+          }
+        },
+        "namespaces": {
+          "erc7201:openzeppelin.storage.ReentrancyGuard": [
+            {
+              "contract": "ReentrancyGuardUpgradeable",
+              "label": "_status",
+              "type": "t_uint256",
+              "src": "@openzeppelin\\contracts-upgradeable\\utils\\ReentrancyGuardUpgradeable.sol:43",
+              "offset": 0,
+              "slot": "0"
+            }
+          ],
+          "erc7201:openzeppelin.storage.Ownable": [
+            {
+              "contract": "OwnableUpgradeable",
+              "label": "_owner",
+              "type": "t_address",
+              "src": "@openzeppelin\\contracts-upgradeable\\access\\OwnableUpgradeable.sol:24",
+              "offset": 0,
+              "slot": "0"
+            }
+          ],
+          "erc7201:openzeppelin.storage.Initializable": [
+            {
+              "contract": "Initializable",
+              "label": "_initialized",
+              "type": "t_uint64",
+              "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:69",
+              "offset": 0,
+              "slot": "0"
+            },
+            {
+              "contract": "Initializable",
+              "label": "_initializing",
+              "type": "t_bool",
+              "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:73",
+              "offset": 8,
+              "slot": "0"
+            }
+          ]
+        }
+      }
+    },
+    "f958b075da652d127f2d6acc130edcfa5b24514d91aaa9dedd6a41e173fbfed6": {
+      "address": "0x8e955cB388A1D13991326975d22A65a39B559637",
+      "txHash": "0xcd574a2c13ebdcd52fcf901836bd1e953ff0f5bf9a5c003b40d2efbc76e0de98",
+      "layout": {
+        "solcVersion": "0.8.22",
+        "storage": [
+          {
+            "label": "referralContract",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_contract(IPDAReferral)3708",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:18"
+          },
+          {
+            "label": "liquidityManager",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_contract(IPDALiquidityManager)3633",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:20"
+          },
+          {
+            "label": "operationAddress",
+            "offset": 0,
+            "slot": "2",
+            "type": "t_address",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:22"
+          },
+          {
+            "label": "dappAddress",
+            "offset": 0,
+            "slot": "3",
+            "type": "t_address",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:23"
+          },
+          {
+            "label": "gameIdCounter",
+            "offset": 0,
+            "slot": "4",
+            "type": "t_uint256",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:47"
+          },
+          {
+            "label": "games",
+            "offset": 0,
+            "slot": "5",
+            "type": "t_mapping(t_uint256,t_struct(Game)2339_storage)",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:48"
+          },
+          {
+            "label": "gamesByType",
+            "offset": 0,
+            "slot": "6",
+            "type": "t_mapping(t_uint256,t_mapping(t_uint256,t_struct(Game)2339_storage))",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:49"
+          },
+          {
+            "label": "currentGameIndex",
+            "offset": 0,
+            "slot": "7",
+            "type": "t_mapping(t_uint256,t_uint256)",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:50"
+          },
+          {
+            "label": "userGames",
+            "offset": 0,
+            "slot": "8",
+            "type": "t_mapping(t_address,t_array(t_uint256)dyn_storage)",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:52"
+          },
+          {
+            "label": "gameTypes",
+            "offset": 0,
+            "slot": "9",
+            "type": "t_array(t_uint256)3_storage",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:54"
+          }
+        ],
+        "types": {
+          "t_address": {
+            "label": "address",
+            "numberOfBytes": "20"
+          },
+          "t_bool": {
+            "label": "bool",
+            "numberOfBytes": "1"
+          },
+          "t_struct(InitializableStorage)73_storage": {
+            "label": "struct Initializable.InitializableStorage",
+            "members": [
+              {
+                "label": "_initialized",
+                "type": "t_uint64",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "_initializing",
+                "type": "t_bool",
+                "offset": 8,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_struct(OwnableStorage)13_storage": {
+            "label": "struct OwnableUpgradeable.OwnableStorage",
+            "members": [
+              {
+                "label": "_owner",
+                "type": "t_address",
+                "offset": 0,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_struct(ReentrancyGuardStorage)226_storage": {
+            "label": "struct ReentrancyGuardUpgradeable.ReentrancyGuardStorage",
+            "members": [
+              {
+                "label": "_status",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_uint256": {
+            "label": "uint256",
+            "numberOfBytes": "32"
+          },
+          "t_uint64": {
+            "label": "uint64",
+            "numberOfBytes": "8"
+          },
+          "t_array(t_address)dyn_storage": {
+            "label": "address[]",
+            "numberOfBytes": "32"
+          },
+          "t_array(t_uint256)3_storage": {
+            "label": "uint256[3]",
+            "numberOfBytes": "96"
+          },
+          "t_array(t_uint256)dyn_storage": {
+            "label": "uint256[]",
+            "numberOfBytes": "32"
+          },
+          "t_contract(IPDALiquidityManager)3633": {
+            "label": "contract IPDALiquidityManager",
+            "numberOfBytes": "20"
+          },
+          "t_contract(IPDAReferral)3708": {
+            "label": "contract IPDAReferral",
+            "numberOfBytes": "20"
+          },
+          "t_mapping(t_address,t_array(t_uint256)dyn_storage)": {
+            "label": "mapping(address => uint256[])",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_uint256,t_mapping(t_uint256,t_struct(Game)2339_storage))": {
+            "label": "mapping(uint256 => mapping(uint256 => struct PDAGame.Game))",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_uint256,t_struct(Game)2339_storage)": {
+            "label": "mapping(uint256 => struct PDAGame.Game)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_uint256,t_uint256)": {
+            "label": "mapping(uint256 => uint256)",
+            "numberOfBytes": "32"
+          },
+          "t_struct(Game)2339_storage": {
+            "label": "struct PDAGame.Game",
+            "members": [
+              {
+                "label": "gameId",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "betAmount",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "1"
+              },
+              {
+                "label": "players",
+                "type": "t_array(t_address)dyn_storage",
+                "offset": 0,
+                "slot": "2"
+              },
+              {
+                "label": "startTime",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "3"
+              },
+              {
+                "label": "endTime",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "4"
+              },
+              {
+                "label": "finished",
+                "type": "t_bool",
+                "offset": 0,
+                "slot": "5"
+              },
+              {
+                "label": "refunded",
+                "type": "t_bool",
+                "offset": 1,
+                "slot": "5"
+              },
+              {
+                "label": "winner",
+                "type": "t_address",
+                "offset": 2,
+                "slot": "5"
+              }
+            ],
+            "numberOfBytes": "192"
+          }
+        },
+        "namespaces": {
+          "erc7201:openzeppelin.storage.ReentrancyGuard": [
+            {
+              "contract": "ReentrancyGuardUpgradeable",
+              "label": "_status",
+              "type": "t_uint256",
+              "src": "@openzeppelin\\contracts-upgradeable\\utils\\ReentrancyGuardUpgradeable.sol:43",
+              "offset": 0,
+              "slot": "0"
+            }
+          ],
+          "erc7201:openzeppelin.storage.Ownable": [
+            {
+              "contract": "OwnableUpgradeable",
+              "label": "_owner",
+              "type": "t_address",
+              "src": "@openzeppelin\\contracts-upgradeable\\access\\OwnableUpgradeable.sol:24",
+              "offset": 0,
+              "slot": "0"
+            }
+          ],
+          "erc7201:openzeppelin.storage.Initializable": [
+            {
+              "contract": "Initializable",
+              "label": "_initialized",
+              "type": "t_uint64",
+              "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:69",
+              "offset": 0,
+              "slot": "0"
+            },
+            {
+              "contract": "Initializable",
+              "label": "_initializing",
+              "type": "t_bool",
+              "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:73",
+              "offset": 8,
+              "slot": "0"
+            }
+          ]
+        }
+      }
+    }
+  }
+}
