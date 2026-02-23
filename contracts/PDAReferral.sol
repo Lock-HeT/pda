@@ -11,23 +11,16 @@ contract PDAReferral is Ownable {
     mapping(address => bool) public isActiveUser;
     mapping(address => uint256) public activeReferralCount;
 
-    mapping(address => bool) public authorizedBinders;
-
     mapping(address => bool) public authorizedContracts;
 
     event ReferrerBound(address indexed user, address indexed referrer, address indexed binder);
     event UserActivated(address indexed user);
-    event AuthorizedBinderAdded(address indexed binder);
-    event AuthorizedBinderRemoved(address indexed binder);
     event AuthorizedContractAdded(address indexed contractAddress);
     event AuthorizedContractRemoved(address indexed contractAddress);
     
-    constructor() Ownable(msg.sender) {
-        authorizedBinders[msg.sender] = true;
-    }
+    constructor() Ownable(msg.sender) {}
 
     function batchBindReferrer(address[] calldata users, address[] calldata referrers) external {
-        require(authorizedBinders[msg.sender], "Not authorized binder");
         require(users.length == referrers.length, "Array length mismatch");
         
         for (uint256 i = 0; i < users.length; i++) {
@@ -119,20 +112,6 @@ contract PDAReferral is Ownable {
     }
     
 
-    function addAuthorizedBinder(address binder) external onlyOwner {
-        require(binder != address(0), "Invalid binder address");
-        authorizedBinders[binder] = true;
-        emit AuthorizedBinderAdded(binder);
-    }
-    
-
-    function removeAuthorizedBinder(address binder) external onlyOwner {
-        authorizedBinders[binder] = false;
-        emit AuthorizedBinderRemoved(binder);
-    }
-
-    
-
     function addAuthorizedContract(address contractAddress) external onlyOwner {
         require(contractAddress != address(0), "Invalid contract address");
         authorizedContracts[contractAddress] = true;
@@ -143,11 +122,6 @@ contract PDAReferral is Ownable {
     function removeAuthorizedContract(address contractAddress) external onlyOwner {
         authorizedContracts[contractAddress] = false;
         emit AuthorizedContractRemoved(contractAddress);
-    }
-    
-
-    function isAuthorizedBinder(address binder) external view returns (bool) {
-        return authorizedBinders[binder];
     }
     
 

@@ -21,6 +21,7 @@ contract PDAGame is
 
     address public operationAddress;
     address public dappAddress;
+    address public gameOperator;
     // TODO
     /*uint256 public constant GAME_TYPE_100 = 100 * 10**18;
     uint256 public constant GAME_TYPE_200 = 200 * 10**18;
@@ -29,7 +30,7 @@ contract PDAGame is
     uint256 public constant GAME_TYPE_200 = 2 * 10**15;
     uint256 public constant GAME_TYPE_300 = 3 * 10**15;
 
-    uint256 public constant PLAYERS_PER_GAME = 21;
+    uint256 public constant PLAYERS_PER_GAME = 11;
     /*uint256 public constant GAME_TIMEOUT = 24 hours;*/
     uint256 public constant GAME_TIMEOUT = 30 minutes; //TODO
 
@@ -126,6 +127,8 @@ contract PDAGame is
             games[gameIdCounter] = game;
             emit GameCreated(gameIdCounter, betAmount);
         } else if (game.players.length >= PLAYERS_PER_GAME) {
+            require(game.finished || game.refunded, "Current game not finished yet");
+            
             currentGameIndex[betAmount]++;
             currentIndex = currentGameIndex[betAmount];
             
@@ -154,7 +157,8 @@ contract PDAGame is
         }
     }
 
-    function declareWinner(uint256 gameId, address winner) external onlyOwner nonReentrant {
+    function declareWinner(uint256 gameId, address winner) external nonReentrant {
+        require(msg.sender == gameOperator, "Only game operator can declare winner");
         Game storage game = games[gameId];
         require(game.gameId == gameId, "Game not found");
         require(!game.finished, "Game already finished");
@@ -183,7 +187,7 @@ contract PDAGame is
         Game storage game = games[gameId];
         uint256 totalPrize = game.betAmount * PLAYERS_PER_GAME;
 
-        uint256 nonWinnerShare = (totalPrize * 1) / 100;
+        uint256 nonWinnerShare = (totalPrize * 2) / 100;
         for (uint256 i = 0; i < game.players.length; i++) {
             if (game.players[i] != winner) {
                 require(IERC20(USDT).transfer(game.players[i], nonWinnerShare), "Non-winner transfer failed");
@@ -334,8 +338,12 @@ contract PDAGame is
         require(_dappAddress != address(0), "Invalid dapp address");
         dappAddress = _dappAddress;
     }
-    
 
+    function setGameOperator(address _gameOperator) external onlyOwner {
+        require(_gameOperator != address(0), "Invalid game operator address");
+        gameOperator = _gameOperator;
+    }
+    
     function emergencyWithdraw(address token, uint256 amount) external onlyOwner {
         require(IERC20(token).transfer(owner(), amount), "Transfer failed");
     }

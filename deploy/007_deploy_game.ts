@@ -21,7 +21,6 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
     const operationAddress = '0xb680ad3b50143500a785388fa0a9dd084697ea5e';
     const dappAddress = deployer;
 
-
     // 获取合约工厂
     const PDAGame = (await ethers.getContractFactory('PDAGame'))as unknown as ContractFactory;
 
@@ -41,6 +40,7 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
       }
     );
 
+    // 只有在新部署时才处理交易回执
     let receipt: any = undefined;
     const tx = game.deploymentTransaction();
     if (tx) {

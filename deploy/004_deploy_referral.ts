@@ -20,10 +20,6 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
 
   console.log('\n✅ PDAReferral deployed successfully!');
   console.log(`Address: ${referral.address}`);
-
-  const referralContract = await ethers.getContractAt('PDAReferral', referral.address);
-  await referralContract.addAuthorizedBinder('0x1AfA2bFA88a90AC0E51A20ABD556E05574d33e6c');
-  console.log('set authorizedBinder success');
 };
 
 func.tags = ['PDAReferral', 'referral'];

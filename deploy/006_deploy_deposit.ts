@@ -24,22 +24,42 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
     // 获取合约工厂
     const PDADeposit = (await ethers.getContractFactory('PDADeposit'))as unknown as ContractFactory;
 
-    // 部署可升级合约（UUPS）
-    console.log('   Deploying proxy...');
-    const deposit = await upgrades.deployProxy(
+    // 检查是否已经部署
+    let deposit;
+    let proxyAddress;
+    
+    try {
+      const existingDeployment = await deployments.get('PDADeposit');
+      proxyAddress = existingDeployment.address;
+      
+      console.log('   Existing proxy found, importing...');
+      // 使用 forceImport 导入已存在的代理
+      await upgrades.forceImport(proxyAddress, PDADeposit, { kind: 'uups' });
+      deposit = await ethers.getContractAt('PDADeposit', proxyAddress);
+      console.log('   ✅ Proxy imported successfully');
+      console.log(`   Proxy Address: ${proxyAddress}`);
+      
+      // 如果只是导入，直接返回
+      return true;
+    } catch (e) {
+      // 如果不存在，则部署新的代理
+      console.log('   No existing proxy found, deploying new proxy...');
+      deposit = await upgrades.deployProxy(
         PDADeposit,
-      [
-        referralDeployment.address,
-        liquidityManagerDeployment.address,
-        operationAddress,
-        dappAddress
-      ],
-      {
-        kind: 'uups',
-        initializer: 'initialize',
-      }
-    );
+        [
+          referralDeployment.address,
+          liquidityManagerDeployment.address,
+          operationAddress,
+          dappAddress
+        ],
+        {
+          kind: 'uups',
+          initializer: 'initialize',
+        }
+      );
+    }
 
+    // 只有在新部署时才处理交易回执
     let receipt: any = undefined;
     const tx = deposit.deploymentTransaction();
     if (tx) {
@@ -58,7 +78,7 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
     }
 
     await deposit.waitForDeployment();
-    const proxyAddress = await deposit.getAddress();
+    proxyAddress = await deposit.getAddress();
     const implementation = await upgrades.erc1967.getImplementationAddress(proxyAddress);
 
     console.log('✅ PDADeposit deployment completed!');
