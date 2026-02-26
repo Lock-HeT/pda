@@ -34,8 +34,10 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
       return;
     }
 
-    const operationAddress = '0xb680ad3b50143500a785388fa0a9dd084697ea5e';
+    //TODO
+    const operationAddress = '0xc53DDE6CEc19907182E129A1771dc35690c21890';
     const dappAddress = '0xb680ad3b50143500a785388fa0a9dd084697ea5e';
+    const gameOperateAddress = '0xb680ad3b50143500a785388fa0a9dd084697ea5e';
 
     // 获取合约工厂
     const PDAGame = (await ethers.getContractFactory('PDAGame'))as unknown as ContractFactory;
@@ -55,7 +57,8 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
         referralAddress,
         liquidityManagerAddress,
         operationAddress,
-        dappAddress
+        dappAddress,
+        gameOperateAddress
       ],
       {
         kind: 'uups',

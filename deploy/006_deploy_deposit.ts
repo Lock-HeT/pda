@@ -18,8 +18,9 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
     const referralDeployment = await deployments.get('PDAReferral');
     const liquidityManagerDeployment = await deployments.get('PDALiquidityManager');
 
-    const operationAddress = '0xb680ad3b50143500a785388fa0a9dd084697ea5e';
-    const dappAddress = deployer;
+    //TODO: 这里的地址需要替换成实际的地址
+    const operationAddress = '0xc53DDE6CEc19907182E129A1771dc35690c21890';
+    const dappAddress = '0xb680ad3b50143500a785388fa0a9dd084697ea5e';
 
     // 获取合约工厂
     const PDADeposit = (await ethers.getContractFactory('PDADeposit'))as unknown as ContractFactory;
