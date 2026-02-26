@@ -6,7 +6,7 @@ async function main() {
     console.log('🚀 Setting Excluded From Fee...\n');
 
     const tokenAddress =  "0x55d398326f99059fF775485246999027B3197955";
-    const contractAddress = "0xc9a8490A9dA360CCcBa514235220B34Be901DAD9";
+    const contractAddress = "0xB94a38B0512F076B762F260DCe2e262330db2662";
 
     const [signer] = await ethers.getSigners();
     console.log(`   Signer: ${signer.address}`);

@@ -67,12 +67,25 @@
       "kind": "uups"
     },
     {
-      "address": "0x3c24DC1fcb6B7267dDBF50B9811142E9Fe4810C0",
-      "txHash": "0xe3ab015dc410e4627e70ac3db1c39fcb6987924df37e82501a96435470cb64f9",
+      "address": "0x82D6728dDB481C710bfb4941E6e89C9A31f2da42",
+      "txHash": "0x4f4fa0afbad5b42e20cfacc8632c6c80271fc976384d67eb47694f971c8cbbc1",
+      "kind": "uups"
+    },
+    {
+      "address": "0xB1559A4aaa2D674DC33B0948AC2051d7C9bF2C3F",
+      "txHash": "0x6114907959f2526bf57cb3c7bd882109eb42ac411b0937993c31c948823c35f2",
       "kind": "uups"
     },
     {
       "address": "0x584BA07262dFb25589aAa9ec8793f61727b2C92F",
+      "kind": "uups"
+    },
+    {
+      "address": "0xB94a38B0512F076B762F260DCe2e262330db2662",
+      "kind": "uups"
+    },
+    {
+      "address": "0x3c24DC1fcb6B7267dDBF50B9811142E9Fe4810C0",
       "kind": "uups"
     }
   ],
@@ -366,7 +379,7 @@
             "label": "referralContract",
             "offset": 0,
             "slot": "0",
-            "type": "t_contract(IPDAReferral)13426",
+            "type": "t_contract(IPDAReferral)13456",
             "contract": "PDADeposit",
             "src": "contracts\\PDADeposit.sol:26"
           },
@@ -374,7 +387,7 @@
             "label": "liquidityManager",
             "offset": 0,
             "slot": "1",
-            "type": "t_contract(IPDALiquidityManager)13351",
+            "type": "t_contract(IPDALiquidityManager)13381",
             "contract": "PDADeposit",
             "src": "contracts\\PDADeposit.sol:28"
           },
@@ -470,11 +483,11 @@
             "label": "uint64",
             "numberOfBytes": "8"
           },
-          "t_contract(IPDALiquidityManager)13351": {
+          "t_contract(IPDALiquidityManager)13381": {
             "label": "contract IPDALiquidityManager",
             "numberOfBytes": "20"
           },
-          "t_contract(IPDAReferral)13426": {
+          "t_contract(IPDAReferral)13456": {
             "label": "contract IPDAReferral",
             "numberOfBytes": "20"
           },
@@ -1378,6 +1391,2204 @@
       "allAddresses": [
         "0xc62DeE10990bE255F478609D865dB1Ce3273ec50",
         "0x1c9C3799c2EC2DC1145592B07c951cB0D45aaF1A"
+      ]
+    },
+    "27b151440cb8247bd6f5f0ca436c1f25733237ae791611993e1519a67873055d": {
+      "address": "0x1c9C3799c2EC2DC1145592B07c951cB0D45aaF1A",
+      "layout": {
+        "solcVersion": "0.8.22",
+        "storage": [
+          {
+            "label": "referralContract",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_contract(IPDAReferral)3057",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:18"
+          },
+          {
+            "label": "liquidityManager",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_contract(IPDALiquidityManager)2982",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:20"
+          },
+          {
+            "label": "operationAddress",
+            "offset": 0,
+            "slot": "2",
+            "type": "t_address",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:22"
+          },
+          {
+            "label": "dappAddress",
+            "offset": 0,
+            "slot": "3",
+            "type": "t_address",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:23"
+          },
+          {
+            "label": "gameOperator",
+            "offset": 0,
+            "slot": "4",
+            "type": "t_address",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:24"
+          },
+          {
+            "label": "gameIdCounter",
+            "offset": 0,
+            "slot": "5",
+            "type": "t_uint256",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:48"
+          },
+          {
+            "label": "games",
+            "offset": 0,
+            "slot": "6",
+            "type": "t_mapping(t_uint256,t_struct(Game)1632_storage)",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:49"
+          },
+          {
+            "label": "gamesByType",
+            "offset": 0,
+            "slot": "7",
+            "type": "t_mapping(t_uint256,t_mapping(t_uint256,t_struct(Game)1632_storage))",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:50"
+          },
+          {
+            "label": "currentGameIndex",
+            "offset": 0,
+            "slot": "8",
+            "type": "t_mapping(t_uint256,t_uint256)",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:51"
+          },
+          {
+            "label": "userGames",
+            "offset": 0,
+            "slot": "9",
+            "type": "t_mapping(t_address,t_array(t_uint256)dyn_storage)",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:53"
+          },
+          {
+            "label": "gameTypes",
+            "offset": 0,
+            "slot": "10",
+            "type": "t_array(t_uint256)3_storage",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:55"
+          }
+        ],
+        "types": {
+          "t_address": {
+            "label": "address",
+            "numberOfBytes": "20"
+          },
+          "t_bool": {
+            "label": "bool",
+            "numberOfBytes": "1"
+          },
+          "t_struct(InitializableStorage)73_storage": {
+            "label": "struct Initializable.InitializableStorage",
+            "members": [
+              {
+                "label": "_initialized",
+                "type": "t_uint64",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "_initializing",
+                "type": "t_bool",
+                "offset": 8,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_struct(OwnableStorage)13_storage": {
+            "label": "struct OwnableUpgradeable.OwnableStorage",
+            "members": [
+              {
+                "label": "_owner",
+                "type": "t_address",
+                "offset": 0,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_struct(ReentrancyGuardStorage)226_storage": {
+            "label": "struct ReentrancyGuardUpgradeable.ReentrancyGuardStorage",
+            "members": [
+              {
+                "label": "_status",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_uint256": {
+            "label": "uint256",
+            "numberOfBytes": "32"
+          },
+          "t_uint64": {
+            "label": "uint64",
+            "numberOfBytes": "8"
+          },
+          "t_array(t_address)dyn_storage": {
+            "label": "address[]",
+            "numberOfBytes": "32"
+          },
+          "t_array(t_uint256)3_storage": {
+            "label": "uint256[3]",
+            "numberOfBytes": "96"
+          },
+          "t_array(t_uint256)dyn_storage": {
+            "label": "uint256[]",
+            "numberOfBytes": "32"
+          },
+          "t_contract(IPDALiquidityManager)2982": {
+            "label": "contract IPDALiquidityManager",
+            "numberOfBytes": "20"
+          },
+          "t_contract(IPDAReferral)3057": {
+            "label": "contract IPDAReferral",
+            "numberOfBytes": "20"
+          },
+          "t_mapping(t_address,t_array(t_uint256)dyn_storage)": {
+            "label": "mapping(address => uint256[])",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_uint256,t_mapping(t_uint256,t_struct(Game)1632_storage))": {
+            "label": "mapping(uint256 => mapping(uint256 => struct PDAGame.Game))",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_uint256,t_struct(Game)1632_storage)": {
+            "label": "mapping(uint256 => struct PDAGame.Game)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_uint256,t_uint256)": {
+            "label": "mapping(uint256 => uint256)",
+            "numberOfBytes": "32"
+          },
+          "t_struct(Game)1632_storage": {
+            "label": "struct PDAGame.Game",
+            "members": [
+              {
+                "label": "gameId",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "betAmount",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "1"
+              },
+              {
+                "label": "players",
+                "type": "t_array(t_address)dyn_storage",
+                "offset": 0,
+                "slot": "2"
+              },
+              {
+                "label": "startTime",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "3"
+              },
+              {
+                "label": "endTime",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "4"
+              },
+              {
+                "label": "finished",
+                "type": "t_bool",
+                "offset": 0,
+                "slot": "5"
+              },
+              {
+                "label": "refunded",
+                "type": "t_bool",
+                "offset": 1,
+                "slot": "5"
+              },
+              {
+                "label": "winner",
+                "type": "t_address",
+                "offset": 2,
+                "slot": "5"
+              }
+            ],
+            "numberOfBytes": "192"
+          }
+        },
+        "namespaces": {
+          "erc7201:openzeppelin.storage.ReentrancyGuard": [
+            {
+              "contract": "ReentrancyGuardUpgradeable",
+              "label": "_status",
+              "type": "t_uint256",
+              "src": "@openzeppelin\\contracts-upgradeable\\utils\\ReentrancyGuardUpgradeable.sol:43",
+              "offset": 0,
+              "slot": "0"
+            }
+          ],
+          "erc7201:openzeppelin.storage.Ownable": [
+            {
+              "contract": "OwnableUpgradeable",
+              "label": "_owner",
+              "type": "t_address",
+              "src": "@openzeppelin\\contracts-upgradeable\\access\\OwnableUpgradeable.sol:24",
+              "offset": 0,
+              "slot": "0"
+            }
+          ],
+          "erc7201:openzeppelin.storage.Initializable": [
+            {
+              "contract": "Initializable",
+              "label": "_initialized",
+              "type": "t_uint64",
+              "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:69",
+              "offset": 0,
+              "slot": "0"
+            },
+            {
+              "contract": "Initializable",
+              "label": "_initializing",
+              "type": "t_bool",
+              "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:73",
+              "offset": 8,
+              "slot": "0"
+            }
+          ]
+        }
+      },
+      "allAddresses": [
+        "0x1c9C3799c2EC2DC1145592B07c951cB0D45aaF1A",
+        "0x235908b34A4a2a364091779d55e9942d6C933555"
+      ]
+    },
+    "0f1a951e55240cd2be854f517a251ffda9d32620bc498f35b60d2b91f4bc4100": {
+      "address": "0x235908b34A4a2a364091779d55e9942d6C933555",
+      "layout": {
+        "solcVersion": "0.8.22",
+        "storage": [
+          {
+            "label": "referralContract",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_contract(IPDAReferral)3235",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:18"
+          },
+          {
+            "label": "liquidityManager",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_contract(IPDALiquidityManager)3160",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:20"
+          },
+          {
+            "label": "operationAddress",
+            "offset": 0,
+            "slot": "2",
+            "type": "t_address",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:22"
+          },
+          {
+            "label": "dappAddress",
+            "offset": 0,
+            "slot": "3",
+            "type": "t_address",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:23"
+          },
+          {
+            "label": "gameOperator",
+            "offset": 0,
+            "slot": "4",
+            "type": "t_address",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:24"
+          },
+          {
+            "label": "gameIdCounter",
+            "offset": 0,
+            "slot": "5",
+            "type": "t_uint256",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:48"
+          },
+          {
+            "label": "games",
+            "offset": 0,
+            "slot": "6",
+            "type": "t_mapping(t_uint256,t_struct(Game)1632_storage)",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:49"
+          },
+          {
+            "label": "gamesByType",
+            "offset": 0,
+            "slot": "7",
+            "type": "t_mapping(t_uint256,t_mapping(t_uint256,t_struct(Game)1632_storage))",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:50"
+          },
+          {
+            "label": "currentGameIndex",
+            "offset": 0,
+            "slot": "8",
+            "type": "t_mapping(t_uint256,t_uint256)",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:51"
+          },
+          {
+            "label": "userGames",
+            "offset": 0,
+            "slot": "9",
+            "type": "t_mapping(t_address,t_array(t_uint256)dyn_storage)",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:53"
+          },
+          {
+            "label": "gameTypes",
+            "offset": 0,
+            "slot": "10",
+            "type": "t_array(t_uint256)3_storage",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:55"
+          }
+        ],
+        "types": {
+          "t_address": {
+            "label": "address",
+            "numberOfBytes": "20"
+          },
+          "t_bool": {
+            "label": "bool",
+            "numberOfBytes": "1"
+          },
+          "t_struct(InitializableStorage)73_storage": {
+            "label": "struct Initializable.InitializableStorage",
+            "members": [
+              {
+                "label": "_initialized",
+                "type": "t_uint64",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "_initializing",
+                "type": "t_bool",
+                "offset": 8,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_struct(OwnableStorage)13_storage": {
+            "label": "struct OwnableUpgradeable.OwnableStorage",
+            "members": [
+              {
+                "label": "_owner",
+                "type": "t_address",
+                "offset": 0,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_struct(ReentrancyGuardStorage)226_storage": {
+            "label": "struct ReentrancyGuardUpgradeable.ReentrancyGuardStorage",
+            "members": [
+              {
+                "label": "_status",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_uint256": {
+            "label": "uint256",
+            "numberOfBytes": "32"
+          },
+          "t_uint64": {
+            "label": "uint64",
+            "numberOfBytes": "8"
+          },
+          "t_array(t_address)dyn_storage": {
+            "label": "address[]",
+            "numberOfBytes": "32"
+          },
+          "t_array(t_uint256)3_storage": {
+            "label": "uint256[3]",
+            "numberOfBytes": "96"
+          },
+          "t_array(t_uint256)dyn_storage": {
+            "label": "uint256[]",
+            "numberOfBytes": "32"
+          },
+          "t_contract(IPDALiquidityManager)3160": {
+            "label": "contract IPDALiquidityManager",
+            "numberOfBytes": "20"
+          },
+          "t_contract(IPDAReferral)3235": {
+            "label": "contract IPDAReferral",
+            "numberOfBytes": "20"
+          },
+          "t_mapping(t_address,t_array(t_uint256)dyn_storage)": {
+            "label": "mapping(address => uint256[])",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_uint256,t_mapping(t_uint256,t_struct(Game)1632_storage))": {
+            "label": "mapping(uint256 => mapping(uint256 => struct PDAGame.Game))",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_uint256,t_struct(Game)1632_storage)": {
+            "label": "mapping(uint256 => struct PDAGame.Game)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_uint256,t_uint256)": {
+            "label": "mapping(uint256 => uint256)",
+            "numberOfBytes": "32"
+          },
+          "t_struct(Game)1632_storage": {
+            "label": "struct PDAGame.Game",
+            "members": [
+              {
+                "label": "gameId",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "betAmount",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "1"
+              },
+              {
+                "label": "players",
+                "type": "t_array(t_address)dyn_storage",
+                "offset": 0,
+                "slot": "2"
+              },
+              {
+                "label": "startTime",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "3"
+              },
+              {
+                "label": "endTime",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "4"
+              },
+              {
+                "label": "finished",
+                "type": "t_bool",
+                "offset": 0,
+                "slot": "5"
+              },
+              {
+                "label": "refunded",
+                "type": "t_bool",
+                "offset": 1,
+                "slot": "5"
+              },
+              {
+                "label": "winner",
+                "type": "t_address",
+                "offset": 2,
+                "slot": "5"
+              }
+            ],
+            "numberOfBytes": "192"
+          }
+        },
+        "namespaces": {
+          "erc7201:openzeppelin.storage.ReentrancyGuard": [
+            {
+              "contract": "ReentrancyGuardUpgradeable",
+              "label": "_status",
+              "type": "t_uint256",
+              "src": "@openzeppelin\\contracts-upgradeable\\utils\\ReentrancyGuardUpgradeable.sol:43",
+              "offset": 0,
+              "slot": "0"
+            }
+          ],
+          "erc7201:openzeppelin.storage.Ownable": [
+            {
+              "contract": "OwnableUpgradeable",
+              "label": "_owner",
+              "type": "t_address",
+              "src": "@openzeppelin\\contracts-upgradeable\\access\\OwnableUpgradeable.sol:24",
+              "offset": 0,
+              "slot": "0"
+            }
+          ],
+          "erc7201:openzeppelin.storage.Initializable": [
+            {
+              "contract": "Initializable",
+              "label": "_initialized",
+              "type": "t_uint64",
+              "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:69",
+              "offset": 0,
+              "slot": "0"
+            },
+            {
+              "contract": "Initializable",
+              "label": "_initializing",
+              "type": "t_bool",
+              "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:73",
+              "offset": 8,
+              "slot": "0"
+            }
+          ]
+        }
+      },
+      "allAddresses": [
+        "0x235908b34A4a2a364091779d55e9942d6C933555",
+        "0xB7f988Ef084aE94e7DC366F0231191dbECc63a8E"
+      ]
+    },
+    "663b959201f4b2c85aa7be61b4e60249210da5af52b3cb2242ed1b17ae532927": {
+      "address": "0x807F52EaEeFEC56b5Eda6f27d4208368f359e214",
+      "txHash": "0xb10b35d7ad68b20e52edf340b8e73e2300193ebcbbd66f3c14159af3f109fe94",
+      "layout": {
+        "solcVersion": "0.8.22",
+        "storage": [
+          {
+            "label": "referralContract",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_contract(IPDAReferral)3158",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:18"
+          },
+          {
+            "label": "liquidityManager",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_contract(IPDALiquidityManager)3083",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:20"
+          },
+          {
+            "label": "operationAddress",
+            "offset": 0,
+            "slot": "2",
+            "type": "t_address",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:22"
+          },
+          {
+            "label": "dappAddress",
+            "offset": 0,
+            "slot": "3",
+            "type": "t_address",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:23"
+          },
+          {
+            "label": "gameOperator",
+            "offset": 0,
+            "slot": "4",
+            "type": "t_address",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:24"
+          },
+          {
+            "label": "gameIdCounter",
+            "offset": 0,
+            "slot": "5",
+            "type": "t_uint256",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:48"
+          },
+          {
+            "label": "games",
+            "offset": 0,
+            "slot": "6",
+            "type": "t_mapping(t_uint256,t_struct(Game)1632_storage)",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:49"
+          },
+          {
+            "label": "gamesByType",
+            "offset": 0,
+            "slot": "7",
+            "type": "t_mapping(t_uint256,t_mapping(t_uint256,t_struct(Game)1632_storage))",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:50"
+          },
+          {
+            "label": "currentGameIndex",
+            "offset": 0,
+            "slot": "8",
+            "type": "t_mapping(t_uint256,t_uint256)",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:51"
+          },
+          {
+            "label": "userGames",
+            "offset": 0,
+            "slot": "9",
+            "type": "t_mapping(t_address,t_array(t_uint256)dyn_storage)",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:53"
+          },
+          {
+            "label": "gameTypes",
+            "offset": 0,
+            "slot": "10",
+            "type": "t_array(t_uint256)3_storage",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:55"
+          }
+        ],
+        "types": {
+          "t_address": {
+            "label": "address",
+            "numberOfBytes": "20"
+          },
+          "t_bool": {
+            "label": "bool",
+            "numberOfBytes": "1"
+          },
+          "t_struct(InitializableStorage)73_storage": {
+            "label": "struct Initializable.InitializableStorage",
+            "members": [
+              {
+                "label": "_initialized",
+                "type": "t_uint64",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "_initializing",
+                "type": "t_bool",
+                "offset": 8,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_struct(OwnableStorage)13_storage": {
+            "label": "struct OwnableUpgradeable.OwnableStorage",
+            "members": [
+              {
+                "label": "_owner",
+                "type": "t_address",
+                "offset": 0,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_struct(ReentrancyGuardStorage)226_storage": {
+            "label": "struct ReentrancyGuardUpgradeable.ReentrancyGuardStorage",
+            "members": [
+              {
+                "label": "_status",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_uint256": {
+            "label": "uint256",
+            "numberOfBytes": "32"
+          },
+          "t_uint64": {
+            "label": "uint64",
+            "numberOfBytes": "8"
+          },
+          "t_array(t_address)dyn_storage": {
+            "label": "address[]",
+            "numberOfBytes": "32"
+          },
+          "t_array(t_uint256)3_storage": {
+            "label": "uint256[3]",
+            "numberOfBytes": "96"
+          },
+          "t_array(t_uint256)dyn_storage": {
+            "label": "uint256[]",
+            "numberOfBytes": "32"
+          },
+          "t_contract(IPDALiquidityManager)3083": {
+            "label": "contract IPDALiquidityManager",
+            "numberOfBytes": "20"
+          },
+          "t_contract(IPDAReferral)3158": {
+            "label": "contract IPDAReferral",
+            "numberOfBytes": "20"
+          },
+          "t_mapping(t_address,t_array(t_uint256)dyn_storage)": {
+            "label": "mapping(address => uint256[])",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_uint256,t_mapping(t_uint256,t_struct(Game)1632_storage))": {
+            "label": "mapping(uint256 => mapping(uint256 => struct PDAGame.Game))",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_uint256,t_struct(Game)1632_storage)": {
+            "label": "mapping(uint256 => struct PDAGame.Game)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_uint256,t_uint256)": {
+            "label": "mapping(uint256 => uint256)",
+            "numberOfBytes": "32"
+          },
+          "t_struct(Game)1632_storage": {
+            "label": "struct PDAGame.Game",
+            "members": [
+              {
+                "label": "gameId",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "betAmount",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "1"
+              },
+              {
+                "label": "players",
+                "type": "t_array(t_address)dyn_storage",
+                "offset": 0,
+                "slot": "2"
+              },
+              {
+                "label": "startTime",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "3"
+              },
+              {
+                "label": "endTime",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "4"
+              },
+              {
+                "label": "finished",
+                "type": "t_bool",
+                "offset": 0,
+                "slot": "5"
+              },
+              {
+                "label": "refunded",
+                "type": "t_bool",
+                "offset": 1,
+                "slot": "5"
+              },
+              {
+                "label": "winner",
+                "type": "t_address",
+                "offset": 2,
+                "slot": "5"
+              }
+            ],
+            "numberOfBytes": "192"
+          }
+        },
+        "namespaces": {
+          "erc7201:openzeppelin.storage.ReentrancyGuard": [
+            {
+              "contract": "ReentrancyGuardUpgradeable",
+              "label": "_status",
+              "type": "t_uint256",
+              "src": "@openzeppelin\\contracts-upgradeable\\utils\\ReentrancyGuardUpgradeable.sol:43",
+              "offset": 0,
+              "slot": "0"
+            }
+          ],
+          "erc7201:openzeppelin.storage.Ownable": [
+            {
+              "contract": "OwnableUpgradeable",
+              "label": "_owner",
+              "type": "t_address",
+              "src": "@openzeppelin\\contracts-upgradeable\\access\\OwnableUpgradeable.sol:24",
+              "offset": 0,
+              "slot": "0"
+            }
+          ],
+          "erc7201:openzeppelin.storage.Initializable": [
+            {
+              "contract": "Initializable",
+              "label": "_initialized",
+              "type": "t_uint64",
+              "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:69",
+              "offset": 0,
+              "slot": "0"
+            },
+            {
+              "contract": "Initializable",
+              "label": "_initializing",
+              "type": "t_bool",
+              "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:73",
+              "offset": 8,
+              "slot": "0"
+            }
+          ]
+        }
+      }
+    },
+    "ade4e206b663bcf75d1773d9f614a45805cf59c4db8a2648facc8c3c29191206": {
+      "address": "0x390ef1296FCcCE64e6f67925250A3A2dAc7b5Cbd",
+      "txHash": "0xd01530ab6359009149a2870c11d793125f57db545fc7ea0686649c1d8e9b55dc",
+      "layout": {
+        "solcVersion": "0.8.22",
+        "storage": [
+          {
+            "label": "referralContract",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_contract(IPDAReferral)3158",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:18"
+          },
+          {
+            "label": "liquidityManager",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_contract(IPDALiquidityManager)3083",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:20"
+          },
+          {
+            "label": "operationAddress",
+            "offset": 0,
+            "slot": "2",
+            "type": "t_address",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:22"
+          },
+          {
+            "label": "dappAddress",
+            "offset": 0,
+            "slot": "3",
+            "type": "t_address",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:23"
+          },
+          {
+            "label": "gameOperator",
+            "offset": 0,
+            "slot": "4",
+            "type": "t_address",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:24"
+          },
+          {
+            "label": "gameIdCounter",
+            "offset": 0,
+            "slot": "5",
+            "type": "t_uint256",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:48"
+          },
+          {
+            "label": "games",
+            "offset": 0,
+            "slot": "6",
+            "type": "t_mapping(t_uint256,t_struct(Game)1632_storage)",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:49"
+          },
+          {
+            "label": "gamesByType",
+            "offset": 0,
+            "slot": "7",
+            "type": "t_mapping(t_uint256,t_mapping(t_uint256,t_struct(Game)1632_storage))",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:50"
+          },
+          {
+            "label": "currentGameIndex",
+            "offset": 0,
+            "slot": "8",
+            "type": "t_mapping(t_uint256,t_uint256)",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:51"
+          },
+          {
+            "label": "userGames",
+            "offset": 0,
+            "slot": "9",
+            "type": "t_mapping(t_address,t_array(t_uint256)dyn_storage)",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:53"
+          },
+          {
+            "label": "gameTypes",
+            "offset": 0,
+            "slot": "10",
+            "type": "t_array(t_uint256)3_storage",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:55"
+          }
+        ],
+        "types": {
+          "t_address": {
+            "label": "address",
+            "numberOfBytes": "20"
+          },
+          "t_bool": {
+            "label": "bool",
+            "numberOfBytes": "1"
+          },
+          "t_struct(InitializableStorage)73_storage": {
+            "label": "struct Initializable.InitializableStorage",
+            "members": [
+              {
+                "label": "_initialized",
+                "type": "t_uint64",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "_initializing",
+                "type": "t_bool",
+                "offset": 8,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_struct(OwnableStorage)13_storage": {
+            "label": "struct OwnableUpgradeable.OwnableStorage",
+            "members": [
+              {
+                "label": "_owner",
+                "type": "t_address",
+                "offset": 0,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_struct(ReentrancyGuardStorage)226_storage": {
+            "label": "struct ReentrancyGuardUpgradeable.ReentrancyGuardStorage",
+            "members": [
+              {
+                "label": "_status",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_uint256": {
+            "label": "uint256",
+            "numberOfBytes": "32"
+          },
+          "t_uint64": {
+            "label": "uint64",
+            "numberOfBytes": "8"
+          },
+          "t_array(t_address)dyn_storage": {
+            "label": "address[]",
+            "numberOfBytes": "32"
+          },
+          "t_array(t_uint256)3_storage": {
+            "label": "uint256[3]",
+            "numberOfBytes": "96"
+          },
+          "t_array(t_uint256)dyn_storage": {
+            "label": "uint256[]",
+            "numberOfBytes": "32"
+          },
+          "t_contract(IPDALiquidityManager)3083": {
+            "label": "contract IPDALiquidityManager",
+            "numberOfBytes": "20"
+          },
+          "t_contract(IPDAReferral)3158": {
+            "label": "contract IPDAReferral",
+            "numberOfBytes": "20"
+          },
+          "t_mapping(t_address,t_array(t_uint256)dyn_storage)": {
+            "label": "mapping(address => uint256[])",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_uint256,t_mapping(t_uint256,t_struct(Game)1632_storage))": {
+            "label": "mapping(uint256 => mapping(uint256 => struct PDAGame.Game))",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_uint256,t_struct(Game)1632_storage)": {
+            "label": "mapping(uint256 => struct PDAGame.Game)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_uint256,t_uint256)": {
+            "label": "mapping(uint256 => uint256)",
+            "numberOfBytes": "32"
+          },
+          "t_struct(Game)1632_storage": {
+            "label": "struct PDAGame.Game",
+            "members": [
+              {
+                "label": "gameId",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "betAmount",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "1"
+              },
+              {
+                "label": "players",
+                "type": "t_array(t_address)dyn_storage",
+                "offset": 0,
+                "slot": "2"
+              },
+              {
+                "label": "startTime",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "3"
+              },
+              {
+                "label": "endTime",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "4"
+              },
+              {
+                "label": "finished",
+                "type": "t_bool",
+                "offset": 0,
+                "slot": "5"
+              },
+              {
+                "label": "refunded",
+                "type": "t_bool",
+                "offset": 1,
+                "slot": "5"
+              },
+              {
+                "label": "winner",
+                "type": "t_address",
+                "offset": 2,
+                "slot": "5"
+              }
+            ],
+            "numberOfBytes": "192"
+          }
+        },
+        "namespaces": {
+          "erc7201:openzeppelin.storage.ReentrancyGuard": [
+            {
+              "contract": "ReentrancyGuardUpgradeable",
+              "label": "_status",
+              "type": "t_uint256",
+              "src": "@openzeppelin\\contracts-upgradeable\\utils\\ReentrancyGuardUpgradeable.sol:43",
+              "offset": 0,
+              "slot": "0"
+            }
+          ],
+          "erc7201:openzeppelin.storage.Ownable": [
+            {
+              "contract": "OwnableUpgradeable",
+              "label": "_owner",
+              "type": "t_address",
+              "src": "@openzeppelin\\contracts-upgradeable\\access\\OwnableUpgradeable.sol:24",
+              "offset": 0,
+              "slot": "0"
+            }
+          ],
+          "erc7201:openzeppelin.storage.Initializable": [
+            {
+              "contract": "Initializable",
+              "label": "_initialized",
+              "type": "t_uint64",
+              "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:69",
+              "offset": 0,
+              "slot": "0"
+            },
+            {
+              "contract": "Initializable",
+              "label": "_initializing",
+              "type": "t_bool",
+              "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:73",
+              "offset": 8,
+              "slot": "0"
+            }
+          ]
+        }
+      }
+    },
+    "b39d81d04eaaaa2daf2a87d05659f3351084510e9a35bad64e27825ab6c1320d": {
+      "address": "0xB7f988Ef084aE94e7DC366F0231191dbECc63a8E",
+      "layout": {
+        "solcVersion": "0.8.22",
+        "storage": [
+          {
+            "label": "referralContract",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_contract(IPDAReferral)3160",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:18"
+          },
+          {
+            "label": "liquidityManager",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_contract(IPDALiquidityManager)3085",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:20"
+          },
+          {
+            "label": "operationAddress",
+            "offset": 0,
+            "slot": "2",
+            "type": "t_address",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:22"
+          },
+          {
+            "label": "dappAddress",
+            "offset": 0,
+            "slot": "3",
+            "type": "t_address",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:23"
+          },
+          {
+            "label": "gameOperator",
+            "offset": 0,
+            "slot": "4",
+            "type": "t_address",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:24"
+          },
+          {
+            "label": "gameIdCounter",
+            "offset": 0,
+            "slot": "5",
+            "type": "t_uint256",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:48"
+          },
+          {
+            "label": "games",
+            "offset": 0,
+            "slot": "6",
+            "type": "t_mapping(t_uint256,t_struct(Game)1632_storage)",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:49"
+          },
+          {
+            "label": "gamesByType",
+            "offset": 0,
+            "slot": "7",
+            "type": "t_mapping(t_uint256,t_mapping(t_uint256,t_struct(Game)1632_storage))",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:50"
+          },
+          {
+            "label": "currentGameIndex",
+            "offset": 0,
+            "slot": "8",
+            "type": "t_mapping(t_uint256,t_uint256)",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:51"
+          },
+          {
+            "label": "userGames",
+            "offset": 0,
+            "slot": "9",
+            "type": "t_mapping(t_address,t_array(t_uint256)dyn_storage)",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:53"
+          },
+          {
+            "label": "gameTypes",
+            "offset": 0,
+            "slot": "10",
+            "type": "t_array(t_uint256)3_storage",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:55"
+          }
+        ],
+        "types": {
+          "t_address": {
+            "label": "address",
+            "numberOfBytes": "20"
+          },
+          "t_bool": {
+            "label": "bool",
+            "numberOfBytes": "1"
+          },
+          "t_struct(InitializableStorage)73_storage": {
+            "label": "struct Initializable.InitializableStorage",
+            "members": [
+              {
+                "label": "_initialized",
+                "type": "t_uint64",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "_initializing",
+                "type": "t_bool",
+                "offset": 8,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_struct(OwnableStorage)13_storage": {
+            "label": "struct OwnableUpgradeable.OwnableStorage",
+            "members": [
+              {
+                "label": "_owner",
+                "type": "t_address",
+                "offset": 0,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_struct(ReentrancyGuardStorage)226_storage": {
+            "label": "struct ReentrancyGuardUpgradeable.ReentrancyGuardStorage",
+            "members": [
+              {
+                "label": "_status",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_uint256": {
+            "label": "uint256",
+            "numberOfBytes": "32"
+          },
+          "t_uint64": {
+            "label": "uint64",
+            "numberOfBytes": "8"
+          },
+          "t_array(t_address)dyn_storage": {
+            "label": "address[]",
+            "numberOfBytes": "32"
+          },
+          "t_array(t_uint256)3_storage": {
+            "label": "uint256[3]",
+            "numberOfBytes": "96"
+          },
+          "t_array(t_uint256)dyn_storage": {
+            "label": "uint256[]",
+            "numberOfBytes": "32"
+          },
+          "t_contract(IPDALiquidityManager)3085": {
+            "label": "contract IPDALiquidityManager",
+            "numberOfBytes": "20"
+          },
+          "t_contract(IPDAReferral)3160": {
+            "label": "contract IPDAReferral",
+            "numberOfBytes": "20"
+          },
+          "t_mapping(t_address,t_array(t_uint256)dyn_storage)": {
+            "label": "mapping(address => uint256[])",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_uint256,t_mapping(t_uint256,t_struct(Game)1632_storage))": {
+            "label": "mapping(uint256 => mapping(uint256 => struct PDAGame.Game))",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_uint256,t_struct(Game)1632_storage)": {
+            "label": "mapping(uint256 => struct PDAGame.Game)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_uint256,t_uint256)": {
+            "label": "mapping(uint256 => uint256)",
+            "numberOfBytes": "32"
+          },
+          "t_struct(Game)1632_storage": {
+            "label": "struct PDAGame.Game",
+            "members": [
+              {
+                "label": "gameId",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "betAmount",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "1"
+              },
+              {
+                "label": "players",
+                "type": "t_array(t_address)dyn_storage",
+                "offset": 0,
+                "slot": "2"
+              },
+              {
+                "label": "startTime",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "3"
+              },
+              {
+                "label": "endTime",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "4"
+              },
+              {
+                "label": "finished",
+                "type": "t_bool",
+                "offset": 0,
+                "slot": "5"
+              },
+              {
+                "label": "refunded",
+                "type": "t_bool",
+                "offset": 1,
+                "slot": "5"
+              },
+              {
+                "label": "winner",
+                "type": "t_address",
+                "offset": 2,
+                "slot": "5"
+              }
+            ],
+            "numberOfBytes": "192"
+          }
+        },
+        "namespaces": {
+          "erc7201:openzeppelin.storage.ReentrancyGuard": [
+            {
+              "contract": "ReentrancyGuardUpgradeable",
+              "label": "_status",
+              "type": "t_uint256",
+              "src": "@openzeppelin\\contracts-upgradeable\\utils\\ReentrancyGuardUpgradeable.sol:43",
+              "offset": 0,
+              "slot": "0"
+            }
+          ],
+          "erc7201:openzeppelin.storage.Ownable": [
+            {
+              "contract": "OwnableUpgradeable",
+              "label": "_owner",
+              "type": "t_address",
+              "src": "@openzeppelin\\contracts-upgradeable\\access\\OwnableUpgradeable.sol:24",
+              "offset": 0,
+              "slot": "0"
+            }
+          ],
+          "erc7201:openzeppelin.storage.Initializable": [
+            {
+              "contract": "Initializable",
+              "label": "_initialized",
+              "type": "t_uint64",
+              "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:69",
+              "offset": 0,
+              "slot": "0"
+            },
+            {
+              "contract": "Initializable",
+              "label": "_initializing",
+              "type": "t_bool",
+              "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:73",
+              "offset": 8,
+              "slot": "0"
+            }
+          ]
+        }
+      },
+      "allAddresses": [
+        "0xB7f988Ef084aE94e7DC366F0231191dbECc63a8E",
+        "0xD9feeF171642c5077bb842DB97AC0f11221FF80F"
+      ]
+    },
+    "7361878f6926041098914fba13f234be42be8f42a96f8ea2a4cc707dc32fba81": {
+      "address": "0xD9feeF171642c5077bb842DB97AC0f11221FF80F",
+      "layout": {
+        "solcVersion": "0.8.22",
+        "storage": [
+          {
+            "label": "referralContract",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_contract(IPDAReferral)3151",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:18"
+          },
+          {
+            "label": "liquidityManager",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_contract(IPDALiquidityManager)3076",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:20"
+          },
+          {
+            "label": "operationAddress",
+            "offset": 0,
+            "slot": "2",
+            "type": "t_address",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:22"
+          },
+          {
+            "label": "dappAddress",
+            "offset": 0,
+            "slot": "3",
+            "type": "t_address",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:23"
+          },
+          {
+            "label": "gameOperator",
+            "offset": 0,
+            "slot": "4",
+            "type": "t_address",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:24"
+          },
+          {
+            "label": "gameIdCounter",
+            "offset": 0,
+            "slot": "5",
+            "type": "t_uint256",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:48"
+          },
+          {
+            "label": "games",
+            "offset": 0,
+            "slot": "6",
+            "type": "t_mapping(t_uint256,t_struct(Game)1632_storage)",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:49"
+          },
+          {
+            "label": "gamesByType",
+            "offset": 0,
+            "slot": "7",
+            "type": "t_mapping(t_uint256,t_mapping(t_uint256,t_struct(Game)1632_storage))",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:50"
+          },
+          {
+            "label": "currentGameIndex",
+            "offset": 0,
+            "slot": "8",
+            "type": "t_mapping(t_uint256,t_uint256)",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:51"
+          },
+          {
+            "label": "userGames",
+            "offset": 0,
+            "slot": "9",
+            "type": "t_mapping(t_address,t_array(t_uint256)dyn_storage)",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:53"
+          },
+          {
+            "label": "gameTypes",
+            "offset": 0,
+            "slot": "10",
+            "type": "t_array(t_uint256)3_storage",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:55"
+          }
+        ],
+        "types": {
+          "t_address": {
+            "label": "address",
+            "numberOfBytes": "20"
+          },
+          "t_bool": {
+            "label": "bool",
+            "numberOfBytes": "1"
+          },
+          "t_struct(InitializableStorage)73_storage": {
+            "label": "struct Initializable.InitializableStorage",
+            "members": [
+              {
+                "label": "_initialized",
+                "type": "t_uint64",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "_initializing",
+                "type": "t_bool",
+                "offset": 8,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_struct(OwnableStorage)13_storage": {
+            "label": "struct OwnableUpgradeable.OwnableStorage",
+            "members": [
+              {
+                "label": "_owner",
+                "type": "t_address",
+                "offset": 0,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_struct(ReentrancyGuardStorage)226_storage": {
+            "label": "struct ReentrancyGuardUpgradeable.ReentrancyGuardStorage",
+            "members": [
+              {
+                "label": "_status",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_uint256": {
+            "label": "uint256",
+            "numberOfBytes": "32"
+          },
+          "t_uint64": {
+            "label": "uint64",
+            "numberOfBytes": "8"
+          },
+          "t_array(t_address)dyn_storage": {
+            "label": "address[]",
+            "numberOfBytes": "32"
+          },
+          "t_array(t_uint256)3_storage": {
+            "label": "uint256[3]",
+            "numberOfBytes": "96"
+          },
+          "t_array(t_uint256)dyn_storage": {
+            "label": "uint256[]",
+            "numberOfBytes": "32"
+          },
+          "t_contract(IPDALiquidityManager)3076": {
+            "label": "contract IPDALiquidityManager",
+            "numberOfBytes": "20"
+          },
+          "t_contract(IPDAReferral)3151": {
+            "label": "contract IPDAReferral",
+            "numberOfBytes": "20"
+          },
+          "t_mapping(t_address,t_array(t_uint256)dyn_storage)": {
+            "label": "mapping(address => uint256[])",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_uint256,t_mapping(t_uint256,t_struct(Game)1632_storage))": {
+            "label": "mapping(uint256 => mapping(uint256 => struct PDAGame.Game))",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_uint256,t_struct(Game)1632_storage)": {
+            "label": "mapping(uint256 => struct PDAGame.Game)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_uint256,t_uint256)": {
+            "label": "mapping(uint256 => uint256)",
+            "numberOfBytes": "32"
+          },
+          "t_struct(Game)1632_storage": {
+            "label": "struct PDAGame.Game",
+            "members": [
+              {
+                "label": "gameId",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "betAmount",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "1"
+              },
+              {
+                "label": "players",
+                "type": "t_array(t_address)dyn_storage",
+                "offset": 0,
+                "slot": "2"
+              },
+              {
+                "label": "startTime",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "3"
+              },
+              {
+                "label": "endTime",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "4"
+              },
+              {
+                "label": "finished",
+                "type": "t_bool",
+                "offset": 0,
+                "slot": "5"
+              },
+              {
+                "label": "refunded",
+                "type": "t_bool",
+                "offset": 1,
+                "slot": "5"
+              },
+              {
+                "label": "winner",
+                "type": "t_address",
+                "offset": 2,
+                "slot": "5"
+              }
+            ],
+            "numberOfBytes": "192"
+          }
+        },
+        "namespaces": {
+          "erc7201:openzeppelin.storage.ReentrancyGuard": [
+            {
+              "contract": "ReentrancyGuardUpgradeable",
+              "label": "_status",
+              "type": "t_uint256",
+              "src": "@openzeppelin\\contracts-upgradeable\\utils\\ReentrancyGuardUpgradeable.sol:43",
+              "offset": 0,
+              "slot": "0"
+            }
+          ],
+          "erc7201:openzeppelin.storage.Ownable": [
+            {
+              "contract": "OwnableUpgradeable",
+              "label": "_owner",
+              "type": "t_address",
+              "src": "@openzeppelin\\contracts-upgradeable\\access\\OwnableUpgradeable.sol:24",
+              "offset": 0,
+              "slot": "0"
+            }
+          ],
+          "erc7201:openzeppelin.storage.Initializable": [
+            {
+              "contract": "Initializable",
+              "label": "_initialized",
+              "type": "t_uint64",
+              "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:69",
+              "offset": 0,
+              "slot": "0"
+            },
+            {
+              "contract": "Initializable",
+              "label": "_initializing",
+              "type": "t_bool",
+              "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:73",
+              "offset": 8,
+              "slot": "0"
+            }
+          ]
+        }
+      },
+      "allAddresses": [
+        "0xD9feeF171642c5077bb842DB97AC0f11221FF80F",
+        "0x9340586734E8E402700DDFdF20faDb76b5Ae551B",
+        "0x390ef1296FCcCE64e6f67925250A3A2dAc7b5Cbd",
+        "0x8F1222E1d6087cCb06067499ff971881416A5c3C"
+      ]
+    },
+    "05e4ea2345bb3bc13049c71c02e52ded7873917383526a7d3dbb767959091570": {
+      "address": "0x9340586734E8E402700DDFdF20faDb76b5Ae551B",
+      "layout": {
+        "solcVersion": "0.8.22",
+        "storage": [
+          {
+            "label": "referralContract",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_contract(IPDAReferral)3144",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:18"
+          },
+          {
+            "label": "liquidityManager",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_contract(IPDALiquidityManager)3069",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:20"
+          },
+          {
+            "label": "operationAddress",
+            "offset": 0,
+            "slot": "2",
+            "type": "t_address",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:22"
+          },
+          {
+            "label": "dappAddress",
+            "offset": 0,
+            "slot": "3",
+            "type": "t_address",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:23"
+          },
+          {
+            "label": "gameOperator",
+            "offset": 0,
+            "slot": "4",
+            "type": "t_address",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:24"
+          },
+          {
+            "label": "gameIdCounter",
+            "offset": 0,
+            "slot": "5",
+            "type": "t_uint256",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:48"
+          },
+          {
+            "label": "games",
+            "offset": 0,
+            "slot": "6",
+            "type": "t_mapping(t_uint256,t_struct(Game)1632_storage)",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:49"
+          },
+          {
+            "label": "gamesByType",
+            "offset": 0,
+            "slot": "7",
+            "type": "t_mapping(t_uint256,t_mapping(t_uint256,t_struct(Game)1632_storage))",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:50"
+          },
+          {
+            "label": "currentGameIndex",
+            "offset": 0,
+            "slot": "8",
+            "type": "t_mapping(t_uint256,t_uint256)",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:51"
+          },
+          {
+            "label": "userGames",
+            "offset": 0,
+            "slot": "9",
+            "type": "t_mapping(t_address,t_array(t_uint256)dyn_storage)",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:53"
+          },
+          {
+            "label": "gameTypes",
+            "offset": 0,
+            "slot": "10",
+            "type": "t_array(t_uint256)3_storage",
+            "contract": "PDAGame",
+            "src": "contracts\\PDAGame.sol:55"
+          }
+        ],
+        "types": {
+          "t_address": {
+            "label": "address",
+            "numberOfBytes": "20"
+          },
+          "t_bool": {
+            "label": "bool",
+            "numberOfBytes": "1"
+          },
+          "t_struct(InitializableStorage)73_storage": {
+            "label": "struct Initializable.InitializableStorage",
+            "members": [
+              {
+                "label": "_initialized",
+                "type": "t_uint64",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "_initializing",
+                "type": "t_bool",
+                "offset": 8,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_struct(OwnableStorage)13_storage": {
+            "label": "struct OwnableUpgradeable.OwnableStorage",
+            "members": [
+              {
+                "label": "_owner",
+                "type": "t_address",
+                "offset": 0,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_struct(ReentrancyGuardStorage)226_storage": {
+            "label": "struct ReentrancyGuardUpgradeable.ReentrancyGuardStorage",
+            "members": [
+              {
+                "label": "_status",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_uint256": {
+            "label": "uint256",
+            "numberOfBytes": "32"
+          },
+          "t_uint64": {
+            "label": "uint64",
+            "numberOfBytes": "8"
+          },
+          "t_array(t_address)dyn_storage": {
+            "label": "address[]",
+            "numberOfBytes": "32"
+          },
+          "t_array(t_uint256)3_storage": {
+            "label": "uint256[3]",
+            "numberOfBytes": "96"
+          },
+          "t_array(t_uint256)dyn_storage": {
+            "label": "uint256[]",
+            "numberOfBytes": "32"
+          },
+          "t_contract(IPDALiquidityManager)3069": {
+            "label": "contract IPDALiquidityManager",
+            "numberOfBytes": "20"
+          },
+          "t_contract(IPDAReferral)3144": {
+            "label": "contract IPDAReferral",
+            "numberOfBytes": "20"
+          },
+          "t_mapping(t_address,t_array(t_uint256)dyn_storage)": {
+            "label": "mapping(address => uint256[])",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_uint256,t_mapping(t_uint256,t_struct(Game)1632_storage))": {
+            "label": "mapping(uint256 => mapping(uint256 => struct PDAGame.Game))",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_uint256,t_struct(Game)1632_storage)": {
+            "label": "mapping(uint256 => struct PDAGame.Game)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_uint256,t_uint256)": {
+            "label": "mapping(uint256 => uint256)",
+            "numberOfBytes": "32"
+          },
+          "t_struct(Game)1632_storage": {
+            "label": "struct PDAGame.Game",
+            "members": [
+              {
+                "label": "gameId",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "betAmount",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "1"
+              },
+              {
+                "label": "players",
+                "type": "t_array(t_address)dyn_storage",
+                "offset": 0,
+                "slot": "2"
+              },
+              {
+                "label": "startTime",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "3"
+              },
+              {
+                "label": "endTime",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "4"
+              },
+              {
+                "label": "finished",
+                "type": "t_bool",
+                "offset": 0,
+                "slot": "5"
+              },
+              {
+                "label": "refunded",
+                "type": "t_bool",
+                "offset": 1,
+                "slot": "5"
+              },
+              {
+                "label": "winner",
+                "type": "t_address",
+                "offset": 2,
+                "slot": "5"
+              }
+            ],
+            "numberOfBytes": "192"
+          }
+        },
+        "namespaces": {
+          "erc7201:openzeppelin.storage.ReentrancyGuard": [
+            {
+              "contract": "ReentrancyGuardUpgradeable",
+              "label": "_status",
+              "type": "t_uint256",
+              "src": "@openzeppelin\\contracts-upgradeable\\utils\\ReentrancyGuardUpgradeable.sol:43",
+              "offset": 0,
+              "slot": "0"
+            }
+          ],
+          "erc7201:openzeppelin.storage.Ownable": [
+            {
+              "contract": "OwnableUpgradeable",
+              "label": "_owner",
+              "type": "t_address",
+              "src": "@openzeppelin\\contracts-upgradeable\\access\\OwnableUpgradeable.sol:24",
+              "offset": 0,
+              "slot": "0"
+            }
+          ],
+          "erc7201:openzeppelin.storage.Initializable": [
+            {
+              "contract": "Initializable",
+              "label": "_initialized",
+              "type": "t_uint64",
+              "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:69",
+              "offset": 0,
+              "slot": "0"
+            },
+            {
+              "contract": "Initializable",
+              "label": "_initializing",
+              "type": "t_bool",
+              "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:73",
+              "offset": 8,
+              "slot": "0"
+            }
+          ]
+        }
+      },
+      "allAddresses": [
+        "0x9340586734E8E402700DDFdF20faDb76b5Ae551B",
+        "0xF7Fc1A97b193Da4Ff7e341B5529eA41D14726547"
+      ]
+    },
+    "5fdf5a24cf38600a78a797e57149f78f4f51d9435ec13dd1104a803709f4d524": {
+      "address": "0x29E71c9e4c9B9114961f70D3E9790Cb5275CD9bD",
+      "layout": {
+        "solcVersion": "0.8.22",
+        "storage": [
+          {
+            "label": "referralContract",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_contract(IPDAReferral)7242",
+            "contract": "PDADeposit",
+            "src": "contracts\\PDADeposit.sol:26"
+          },
+          {
+            "label": "liquidityManager",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_contract(IPDALiquidityManager)7167",
+            "contract": "PDADeposit",
+            "src": "contracts\\PDADeposit.sol:28"
+          },
+          {
+            "label": "operationAddress",
+            "offset": 0,
+            "slot": "2",
+            "type": "t_address",
+            "contract": "PDADeposit",
+            "src": "contracts\\PDADeposit.sol:31"
+          },
+          {
+            "label": "dappAddress",
+            "offset": 0,
+            "slot": "3",
+            "type": "t_address",
+            "contract": "PDADeposit",
+            "src": "contracts\\PDADeposit.sol:31"
+          },
+          {
+            "label": "totalDeposited",
+            "offset": 0,
+            "slot": "4",
+            "type": "t_mapping(t_address,t_uint256)",
+            "contract": "PDADeposit",
+            "src": "contracts\\PDADeposit.sol:37"
+          },
+          {
+            "label": "depositCount",
+            "offset": 0,
+            "slot": "5",
+            "type": "t_mapping(t_address,t_uint256)",
+            "contract": "PDADeposit",
+            "src": "contracts\\PDADeposit.sol:39"
+          }
+        ],
+        "types": {
+          "t_address": {
+            "label": "address",
+            "numberOfBytes": "20"
+          },
+          "t_bool": {
+            "label": "bool",
+            "numberOfBytes": "1"
+          },
+          "t_struct(InitializableStorage)73_storage": {
+            "label": "struct Initializable.InitializableStorage",
+            "members": [
+              {
+                "label": "_initialized",
+                "type": "t_uint64",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "_initializing",
+                "type": "t_bool",
+                "offset": 8,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_struct(OwnableStorage)13_storage": {
+            "label": "struct OwnableUpgradeable.OwnableStorage",
+            "members": [
+              {
+                "label": "_owner",
+                "type": "t_address",
+                "offset": 0,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_struct(ReentrancyGuardStorage)226_storage": {
+            "label": "struct ReentrancyGuardUpgradeable.ReentrancyGuardStorage",
+            "members": [
+              {
+                "label": "_status",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_uint256": {
+            "label": "uint256",
+            "numberOfBytes": "32"
+          },
+          "t_uint64": {
+            "label": "uint64",
+            "numberOfBytes": "8"
+          },
+          "t_contract(IPDALiquidityManager)7167": {
+            "label": "contract IPDALiquidityManager",
+            "numberOfBytes": "20"
+          },
+          "t_contract(IPDAReferral)7242": {
+            "label": "contract IPDAReferral",
+            "numberOfBytes": "20"
+          },
+          "t_mapping(t_address,t_uint256)": {
+            "label": "mapping(address => uint256)",
+            "numberOfBytes": "32"
+          }
+        },
+        "namespaces": {
+          "erc7201:openzeppelin.storage.ReentrancyGuard": [
+            {
+              "contract": "ReentrancyGuardUpgradeable",
+              "label": "_status",
+              "type": "t_uint256",
+              "src": "@openzeppelin\\contracts-upgradeable\\utils\\ReentrancyGuardUpgradeable.sol:43",
+              "offset": 0,
+              "slot": "0"
+            }
+          ],
+          "erc7201:openzeppelin.storage.Ownable": [
+            {
+              "contract": "OwnableUpgradeable",
+              "label": "_owner",
+              "type": "t_address",
+              "src": "@openzeppelin\\contracts-upgradeable\\access\\OwnableUpgradeable.sol:24",
+              "offset": 0,
+              "slot": "0"
+            }
+          ],
+          "erc7201:openzeppelin.storage.Initializable": [
+            {
+              "contract": "Initializable",
+              "label": "_initialized",
+              "type": "t_uint64",
+              "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:69",
+              "offset": 0,
+              "slot": "0"
+            },
+            {
+              "contract": "Initializable",
+              "label": "_initializing",
+              "type": "t_bool",
+              "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:73",
+              "offset": 8,
+              "slot": "0"
+            }
+          ]
+        }
+      },
+      "allAddresses": [
+        "0x29E71c9e4c9B9114961f70D3E9790Cb5275CD9bD",
+        "0xd2F7Ebcea08Cd17A3fDff375902cBAE157034Bb5"
       ]
     }
   }

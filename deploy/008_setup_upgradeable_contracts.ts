@@ -60,7 +60,5 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
 };
 
 func.tags = ['setup-upgradeable'];
-func.dependencies = ['PDAReferral', 'PDALiquidityManager', 'PDADeposit', 'PDAGame'];
-func.runAtTheEnd = true;
 
 export default func;

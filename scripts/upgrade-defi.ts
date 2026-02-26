@@ -2,14 +2,14 @@ import { ethers, upgrades } from 'hardhat';
 
 async function main() {
   console.log('\n========================================');
-  console.log('Upgrading PDAGameUpgradeable Contract');
+  console.log('Upgrading Defi Contract');
   console.log('========================================\n');
 
   // 获取当前代理地址（从部署记录中获取）
-  const PROXY_ADDRESS = process.env.GAME_PROXY_ADDRESS || '0xB94a38B0512F076B762F260DCe2e262330db2662';
+  const PROXY_ADDRESS = process.env.GAME_PROXY_ADDRESS || '0x3c24DC1fcb6B7267dDBF50B9811142E9Fe4810C0';
   
   if (!PROXY_ADDRESS) {
-    console.error('❌ Please set GAME_PROXY_ADDRESS environment variable');
+    console.error('❌ Please set PDA_DEPOSIT_PROXY_ADDRESS environment variable');
     process.exit(1);
   }
 
@@ -22,12 +22,12 @@ async function main() {
   console.log('');
 
   // 获取新的合约工厂
-  const PDAGameV2 = await ethers.getContractFactory("PDAGame");
+  const deposit = await ethers.getContractFactory("PDADeposit");
 
   // 首先尝试导入现有的代理（如果未注册）
   console.log('Importing existing proxy...');
   try {
-    await upgrades.forceImport(PROXY_ADDRESS, PDAGameV2 as any, { kind: 'uups' });
+    await upgrades.forceImport(PROXY_ADDRESS, deposit as any, { kind: 'uups' });
     console.log('✅ Proxy imported successfully');
   } catch (error: any) {
     console.log('⚠️  Proxy already imported or error:', error.message);
@@ -37,7 +37,7 @@ async function main() {
   // 验证升级兼容性
   console.log('Validating upgrade...');
   try {
-    await upgrades.validateUpgrade(PROXY_ADDRESS, PDAGameV2 as any, { kind: 'uups' });
+    await upgrades.validateUpgrade(PROXY_ADDRESS, deposit as any, { kind: 'uups' });
     console.log('✅ Upgrade validation passed');
   } catch (error: any) {
     console.error('❌ Upgrade validation failed:', error.message);
@@ -48,7 +48,7 @@ async function main() {
 
   // 执行升级
   console.log('Upgrading contract...');
-  const upgraded = await upgrades.upgradeProxy(PROXY_ADDRESS, PDAGameV2 as any, { 
+  const upgraded = await upgrades.upgradeProxy(PROXY_ADDRESS, deposit as any, {
     kind: 'uups',
     redeployImplementation: 'always'  // 强制重新部署实现合约
   });
@@ -72,23 +72,15 @@ async function main() {
 
   // 验证升级后的合约
   console.log('Verifying upgraded contract...');
-  const game = await ethers.getContractAt('PDAGame', PROXY_ADDRESS);
+  const pdaDeposit = await ethers.getContractAt('PDADeposit', PROXY_ADDRESS);
   
   try {
-    const owner = await game.owner();
+    const owner = await pdaDeposit.owner();
     console.log(`   Owner: ${owner}`);
     
-    const usdt = await game.USDT();
-    console.log(`   USDT: ${usdt}`);
-    
-    const gameType100 = await game.GAME_TYPE_100();
-    console.log(`   Game Type 100: ${ethers.formatUnits(gameType100, 18)} USDT`);
-    
-    const playersPerGame = await game.PLAYERS_PER_GAME();
-    console.log(`   Players Per Game: ${playersPerGame}`);
-    
-    const gameOperator = await game.gameOperator();
-    console.log(`   Game Operator: ${gameOperator}`);
+    const USDT = await pdaDeposit.USDT()
+    console.log(`   USDT: ${USDT}`);
+
     
     console.log('✅ Contract verification passed');
   } catch (error) {

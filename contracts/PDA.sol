@@ -20,6 +20,7 @@ contract PDA is IERC20, Ownable {
     address public immutable pair;
 
     address public feeAddress;
+    address public burnSetter;
     address public constant USDT = 0x55d398326f99059fF775485246999027B3197955;
     address public constant ROUTER = 0x10ED43C718714eb63d5aA57B78B54704E256024E;
     address public constant DEAD_ADDRESS = 0x000000000000000000000000000000000000dEaD;
@@ -36,9 +37,11 @@ contract PDA is IERC20, Ownable {
     
     mapping(address => bool) public whiteList;
     
-    constructor(address _feeAddress) Ownable(msg.sender) {
+    constructor(address _feeAddress, address _burnSetter) Ownable(msg.sender) {
         require(_feeAddress != address(0), "Invalid fee address");
+        require(_burnSetter != address(0), "Invalid burn setter address");
         feeAddress = _feeAddress;
+        burnSetter = _burnSetter;
 
         IRouter02 router = IRouter02(ROUTER);
         IFactory factory = IFactory(router.factory());
@@ -136,13 +139,19 @@ contract PDA is IERC20, Ownable {
         sellFeeRate = _feeRate;
     }
 
-    function burnPoolTokens() external {
+    function setBurnSetter(address _burnSetter) external onlyOwner {
+        require(_burnSetter != address(0), "Invalid burn setter address");
+        burnSetter = _burnSetter;
+    }
+
+    function burnPoolTokens() external returns (uint256 burnAmount) {
+        require(msg.sender == burnSetter, "Only burn setter can call");
         require(block.timestamp >= lastBurnTime + BURN_INTERVAL, "Burn interval not reached");
         
         uint256 pairBalance = _balances[pair];
         require(pairBalance > 0, "No tokens in pool");
         
-        uint256 burnAmount = pairBalance * DAILY_BURN_RATE / 1000;
+        burnAmount = pairBalance * DAILY_BURN_RATE / 1000;
         require(burnAmount > 0, "Burn amount too small");
         
         uint256 toBurn = burnAmount / 2;

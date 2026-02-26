@@ -123,33 +123,30 @@ contract PDADeposit is
             return 0;
         }
         
-        uint256 activeLevel = 0;
-        
-        for (uint256 i = 0; i < 30 && current != address(0); i++) {
+
+        for (uint256 i = 1; i <= 30 && current != address(0); i++) {
             if (referralContract.isActiveUser(current)) {
-                activeLevel++;
-                
                 uint256 currentMaxLevel = referralContract.getMaxLevel(current);
 
-                if (activeLevel <= currentMaxLevel) {
+                if (i <= currentMaxLevel) {
                     uint256 commission = 0;
                     
-                    if (activeLevel == 1) {
+                    if (i == 1) {
                         commission = (amount * 4) / 100;
-                    } else if (activeLevel == 2) {
+                    } else if (i == 2) {
                         commission = (amount * 2) / 100;
-                    } else if (activeLevel >= 3 && activeLevel <= 10) {
+                    } else if (i >= 3 && i <= 10) {
                         commission = (amount * 1) / 100;
-                    } else if (activeLevel >= 11 && activeLevel <= 20) {
+                    } else if (i >= 11 && i <= 20) {
                         commission = (amount * 6) / 1000;
-                    } else if (activeLevel >= 21 && activeLevel <= 30) {
+                    } else if (i >= 21 && i <= 30) {
                         commission = (amount * 5) / 1000;
                     }
                     
                     if (commission > 0) {
                         require(IERC20(USDT).transfer(current, commission), "Commission transfer failed");
                         totalCommission += commission;
-                        emit CommissionPaid(current, commission, uint8(activeLevel));
+                        emit CommissionPaid(current, commission, uint8(i));
                     }
                 }
             }

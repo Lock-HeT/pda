@@ -22,6 +22,6 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   console.log(`Address: ${referral.address}`);
 };
 
-func.tags = ['PDAReferral', 'referral'];
+func.tags = ['PDAReferral'];
 
 export default func;

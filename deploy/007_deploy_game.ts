@@ -15,22 +15,45 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
 
   try {
     // 获取已部署的合约地址
-    const referralDeployment = await deployments.get('PDAReferral');
-    const liquidityManagerDeployment = await deployments.get('PDALiquidityManager');
+    let referralAddress: string;
+    let liquidityManagerAddress: string;
+    
+    try {
+      const referralDeployment = await deployments.get('PDAReferral');
+      referralAddress = referralDeployment.address;
+    } catch (error) {
+      console.log('⚠️  Using referral address from env/fallback:');
+      return;
+    }
+    
+    try {
+      const liquidityManagerDeployment = await deployments.get('PDALiquidityManager');
+      liquidityManagerAddress = liquidityManagerDeployment.address;
+    } catch (error) {
+      console.log('⚠️  Using liquidity manager address from env/fallback:');
+      return;
+    }
 
     const operationAddress = '0xb680ad3b50143500a785388fa0a9dd084697ea5e';
-    const dappAddress = deployer;
+    const dappAddress = '0xb680ad3b50143500a785388fa0a9dd084697ea5e';
 
     // 获取合约工厂
     const PDAGame = (await ethers.getContractFactory('PDAGame'))as unknown as ContractFactory;
+
+    console.log('Deployment parameters:');
+    console.log('  Referral Address:', referralAddress);
+    console.log('  Liquidity Manager Address:', liquidityManagerAddress);
+    console.log('  Operation Address:', operationAddress);
+    console.log('  Dapp Address:', dappAddress);
+    console.log('');
 
     // 部署可升级合约（UUPS）
     console.log('   Deploying proxy...');
     const game = await upgrades.deployProxy(
       PDAGame,
       [
-        referralDeployment.address,
-        liquidityManagerDeployment.address,
+        referralAddress,
+        liquidityManagerAddress,
         operationAddress,
         dappAddress
       ],
@@ -125,6 +148,5 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
 };
 
 func.tags = ['PDAGame'];
-func.dependencies = ['PDAReferral', 'PDALiquidityManager'];
 
 export default func;

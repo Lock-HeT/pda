@@ -114,46 +114,65 @@ contract PDAGame is
         );
         
         uint256 currentIndex = currentGameIndex[betAmount];
-        Game storage game = gamesByType[betAmount][currentIndex];
+        Game storage currentGame = gamesByType[betAmount][currentIndex];
         
-        if (game.players.length == 0) {
+        uint256 activeGameId;
+        
+        if (currentGame.players.length == 0) {
             gameIdCounter++;
-            game.gameId = gameIdCounter;
+            activeGameId = gameIdCounter;
+
+            Game storage game = games[activeGameId];
+            game.gameId = activeGameId;
             game.betAmount = betAmount;
             game.startTime = block.timestamp;
             game.finished = false;
             game.refunded = false;
+
+            currentGame.gameId = activeGameId;
+            currentGame.betAmount = betAmount;
+            currentGame.startTime = block.timestamp;
+            currentGame.finished = false;
+            currentGame.refunded = false;
             
-            games[gameIdCounter] = game;
-            emit GameCreated(gameIdCounter, betAmount);
-        } else if (game.players.length >= PLAYERS_PER_GAME) {
-            require(game.finished || game.refunded, "Current game not finished yet");
-            
+            emit GameCreated(activeGameId, betAmount);
+        } else if (currentGame.players.length >= PLAYERS_PER_GAME) {
             currentGameIndex[betAmount]++;
             currentIndex = currentGameIndex[betAmount];
             
             gameIdCounter++;
+            activeGameId = gameIdCounter;
+
+            Game storage game = games[activeGameId];
+            game.gameId = activeGameId;
+            game.betAmount = betAmount;
+            game.startTime = block.timestamp;
+            game.finished = false;
+            game.refunded = false;
+
             Game storage newGame = gamesByType[betAmount][currentIndex];
-            newGame.gameId = gameIdCounter;
+            newGame.gameId = activeGameId;
             newGame.betAmount = betAmount;
             newGame.startTime = block.timestamp;
             newGame.finished = false;
             newGame.refunded = false;
             
-            games[gameIdCounter] = newGame;
-            game = newGame;
-            emit GameCreated(gameIdCounter, betAmount);
+            emit GameCreated(activeGameId, betAmount);
+        } else {
+            activeGameId = currentGame.gameId;
         }
         
         referralContract.activateUser(msg.sender);
+
+        games[activeGameId].players.push(msg.sender);
+        gamesByType[betAmount][currentIndex].players.push(msg.sender);
+        userGames[msg.sender].push(activeGameId);
         
-        game.players.push(msg.sender);
-        userGames[msg.sender].push(game.gameId);
+        emit PlayerJoined(activeGameId, msg.sender, games[activeGameId].players.length - 1);
         
-        emit PlayerJoined(game.gameId, msg.sender, game.players.length - 1);
-        
-        if (game.players.length == PLAYERS_PER_GAME) {
-            game.endTime = block.timestamp;
+        if (games[activeGameId].players.length == PLAYERS_PER_GAME) {
+            games[activeGameId].endTime = block.timestamp;
+            gamesByType[betAmount][currentIndex].endTime = block.timestamp;
         }
     }
 
@@ -185,9 +204,9 @@ contract PDAGame is
 
     function _distributePrize(uint256 gameId, address winner) internal {
         Game storage game = games[gameId];
-        uint256 totalPrize = game.betAmount * PLAYERS_PER_GAME;
+        uint256 totalPrize = game.betAmount;
 
-        uint256 nonWinnerShare = (totalPrize * 2) / 100;
+        uint256 nonWinnerShare = game.betAmount + ((totalPrize * 2) / 100);
         for (uint256 i = 0; i < game.players.length; i++) {
             if (game.players[i] != winner) {
                 require(IERC20(USDT).transfer(game.players[i], nonWinnerShare), "Non-winner transfer failed");
@@ -217,24 +236,20 @@ contract PDAGame is
             return 0;
         }
         
-        uint256 activeLevel = 0;
-        
-        for (uint256 i = 0; i < 30 && current != address(0); i++) {
+        for (uint256 i = 1; i <= 30 && current != address(0); i++) {
             if (referralContract.isActiveUser(current)) {
-                activeLevel++;
-                
                 uint256 currentMaxLevel = referralContract.getMaxLevel(current);
 
-                if (activeLevel <= currentMaxLevel) {
+                if (i <= currentMaxLevel) {
                     uint256 commission = 0;
                     
-                    if (activeLevel == 1) {
+                    if (i == 1) {
                         commission = (totalPrize * 2) / 100;
-                    } else if (activeLevel == 2) {
+                    } else if (i == 2) {
                         commission = (totalPrize * 1) / 100;
-                    } else if (activeLevel >= 3 && activeLevel <= 10) {
+                    } else if (i >= 3 && i <= 10) {
                         commission = (totalPrize * 3) / 1000;
-                    } else if (activeLevel >= 11 && activeLevel <= 30) {
+                    } else if (i >= 11 && i <= 30) {
                         commission = (totalPrize * 13) / 10000;
                     }
                     
@@ -300,6 +315,12 @@ contract PDAGame is
             game.winner
         );
     }
+
+    function getGamePlayers(uint256 gameId) external view returns (uint256) {
+        Game storage game = games[gameId];
+        return game.players.length;
+    }
+
 
     function getCurrentGame(uint256 betAmount) external view returns (
         uint256 gameId,
