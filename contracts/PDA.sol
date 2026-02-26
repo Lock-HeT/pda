@@ -19,7 +19,10 @@ contract PDA is IERC20, Ownable {
 
     address public immutable pair;
 
-    address public feeAddress;
+    address public burnAddress;
+    address public operationAddress;
+    address public deviceAddress;
+
     address public burnSetter;
     address public constant USDT = 0x55d398326f99059fF775485246999027B3197955;
     address public constant ROUTER = 0x10ED43C718714eb63d5aA57B78B54704E256024E;
@@ -29,7 +32,9 @@ contract PDA is IERC20, Ownable {
     bool public buyStatus = false;
     bool public sellStatus = true;
 
-    uint256 public sellFeeRate = 50;
+    uint256 public sellOperationFeeRate = 20;
+    uint256 public sellDeviceFeeRate = 30;
+
 
     uint256 public constant DAILY_BURN_RATE = 20;
     uint256 public constant BURN_INTERVAL = 1 days;
@@ -37,10 +42,14 @@ contract PDA is IERC20, Ownable {
     
     mapping(address => bool) public whiteList;
     
-    constructor(address _feeAddress, address _burnSetter) Ownable(msg.sender) {
-        require(_feeAddress != address(0), "Invalid fee address");
+    constructor(address _burnAddress, address _operationAddress, address _deviceAddress,  address _burnSetter) Ownable(msg.sender) {
+        require(burnAddress != address(0), "Invalid burn address");
+        require(operationAddress != address(0), "Invalid operation address");
+        require(deviceAddress != address(0), "Invalid device address");
         require(_burnSetter != address(0), "Invalid burn setter address");
-        feeAddress = _feeAddress;
+        burnAddress = _burnAddress;
+        operationAddress = _operationAddress;
+        deviceAddress = _deviceAddress;
         burnSetter = _burnSetter;
 
         IRouter02 router = IRouter02(ROUTER);
@@ -95,9 +104,24 @@ contract PDA is IERC20, Ownable {
         return true;
     }
 
-    function setFeeAddress(address _feeAddress) external onlyOwner {
-        require(_feeAddress != address(0), "Invalid receive wallet");
-        feeAddress = _feeAddress;
+    function setBurnAddress(address _burnAddress) external onlyOwner {
+        require(_burnAddress != address(0), "Invalid receive wallet");
+        burnAddress = _burnAddress;
+    }
+
+    function setOperationAddress(address _operationAddress) external onlyOwner {
+        require(_operationAddress != address(0), "Invalid receive wallet");
+        operationAddress = _operationAddress;
+    }
+
+    function setDeviceAddress(address _deviceAddress) external onlyOwner {
+        require(_deviceAddress != address(0), "Invalid receive wallet");
+        deviceAddress = _deviceAddress;
+    }
+
+    function setBurnSetter(address _burnSetter) external onlyOwner {
+        require(_burnSetter != address(0), "Invalid burn setter address");
+        burnSetter = _burnSetter;
     }
 
     function addWhiteList(address user) external onlyOwner {
@@ -134,14 +158,14 @@ contract PDA is IERC20, Ownable {
         sellStatus = _status;
     }
 
-    function setSellFeeRate(uint256 _feeRate) external onlyOwner {
-        require(_feeRate <= 1000, "Fee rate cannot exceed 100%");
-        sellFeeRate = _feeRate;
+    function setSellOperationFeeRate(uint256 _sellOperationFeeRate) external onlyOwner {
+        require(_sellOperationFeeRate <= 1000, "Fee rate cannot exceed 100%");
+        sellOperationFeeRate = _sellOperationFeeRate;
     }
 
-    function setBurnSetter(address _burnSetter) external onlyOwner {
-        require(_burnSetter != address(0), "Invalid burn setter address");
-        burnSetter = _burnSetter;
+    function setSellDeviceFeeRate(uint256 _sellDeviceFeeRate) external onlyOwner {
+        require(_sellDeviceFeeRate <= 1000, "Fee rate cannot exceed 100%");
+        sellDeviceFeeRate = _sellDeviceFeeRate;
     }
 
     function burnPoolTokens() external returns (uint256 burnAmount) {
@@ -165,8 +189,8 @@ contract PDA is IERC20, Ownable {
         }
         
         if (toFeeAddress > 0) {
-            _balances[feeAddress] += toFeeAddress;
-            emit Transfer(pair, feeAddress, toFeeAddress);
+            _balances[burnAddress] += toFeeAddress;
+            emit Transfer(pair, burnAddress, toFeeAddress);
         }
         lastBurnTime = block.timestamp;
         IPair(pair).sync();
@@ -204,12 +228,19 @@ contract PDA is IERC20, Ownable {
             if (!whiteList[sender]) {
                 if(_isAddLiquidity(transferAmount) <= 0) {
                     require(sellStatus, "Access denied: can't sell PDA");
-                    uint256 sellFee = amount * sellFeeRate / 1000;
-                    transferAmount = amount - sellFee;
+                    uint256 sellOperationFee = amount * sellOperationFeeRate / 1000;
+                    transferAmount = amount - sellOperationFee;
 
-                    if (sellFee > 0) {
-                        _balances[feeAddress] += sellFee;
-                        emit Transfer(sender, feeAddress, sellFee);
+                    if (sellOperationFee > 0) {
+                        _balances[operationAddress] += sellOperationFee;
+                        emit Transfer(sender, operationAddress, sellOperationFee);
+                    }
+
+                    uint256 sellDeviceFee = amount * sellDeviceFeeRate / 1000;
+                    transferAmount -= sellDeviceFee;
+                    if (sellDeviceFee > 0) {
+                        _balances[deviceAddress] += sellDeviceFee;
+                        emit Transfer(sender, deviceAddress, sellDeviceFee);
                     }
                 }
             }

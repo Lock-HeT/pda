@@ -72,12 +72,14 @@ contract PDAGame is
         address _referralContract,
         address _liquidityManager,
         address _operationAddress,
-        address _dappAddress
+        address _dappAddress,
+        address _gameOperator
     ) external initializer {
         require(_referralContract != address(0), "Invalid referral contract");
         require(_liquidityManager != address(0), "Invalid liquidity manager");
         require(_operationAddress != address(0), "Invalid operation address");
         require(_dappAddress != address(0), "Invalid dapp address");
+        require(_gameOperator != address(0), "Invalid game operator address");
         
         __Ownable_init(_msgSender());
         __UUPSUpgradeable_init();
@@ -87,6 +89,7 @@ contract PDAGame is
         liquidityManager = IPDALiquidityManager(_liquidityManager);
         operationAddress = _operationAddress;
         dappAddress = _dappAddress;
+        gameOperator = _gameOperator;
 
         gameTypes[0] = GAME_TYPE_100;
         gameTypes[1] = GAME_TYPE_200;
@@ -162,8 +165,6 @@ contract PDAGame is
             activeGameId = currentGame.gameId;
         }
         
-        referralContract.activateUser(msg.sender);
-
         games[activeGameId].players.push(msg.sender);
         gamesByType[betAmount][currentIndex].players.push(msg.sender);
         userGames[msg.sender].push(activeGameId);
@@ -198,7 +199,8 @@ contract PDAGame is
         game.endTime = block.timestamp;
         
         _distributePrize(gameId, winner);
-        
+
+        referralContract.activateUser(winner);
         emit GameFinished(gameId, winner);
     }
 

@@ -98,20 +98,16 @@ contract PDADeposit is
     }
 
     function _distributeDeposit(address user, uint256 amount) internal {
-        uint256 remaining = amount;
 
-        uint256 commissionAmount = _distributeCommission(user, amount);
-        remaining -= commissionAmount;
+        _distributeCommission(user, amount);
 
         uint256 operationAmount = (amount * 5) / 100;
         require(IERC20(USDT).transfer(operationAddress, operationAmount), "Operation transfer failed");
-        remaining -= operationAmount;
 
         uint256 dappAmount = (amount * 10) / 100;
         require(IERC20(USDT).transfer(dappAddress, dappAmount), "Dapp transfer failed");
-        remaining -= dappAmount;
 
-        uint256 liquidityAmount = remaining;
+        uint256 liquidityAmount = (amount * 60) / 100;
         _addLiquidity(user, liquidityAmount);
     }
 

@@ -13,12 +13,16 @@ contract PDAReferral is Ownable {
 
     mapping(address => bool) public authorizedContracts;
 
+    address public activeUserManager;
+
     event ReferrerBound(address indexed user, address indexed referrer, address indexed binder);
     event UserActivated(address indexed user);
     event AuthorizedContractAdded(address indexed contractAddress);
     event AuthorizedContractRemoved(address indexed contractAddress);
     
-    constructor() Ownable(msg.sender) {}
+    constructor(address _activeUserManager) Ownable(msg.sender) {
+        activeUserManager = _activeUserManager;
+    }
 
     function batchBindReferrer(address[] calldata users, address[] calldata referrers) external {
         require(users.length == referrers.length, "Array length mismatch");
@@ -29,13 +33,13 @@ contract PDAReferral is Ownable {
             }
         }
     }
-    
 
     function _bindReferrer(address user, address _referrer, address binder) internal {
         require(referrer[user] == address(0), "Already bound");
         require(_referrer != address(0), "Invalid referrer");
         require(_referrer != user, "Cannot refer yourself");
         require(referrer[_referrer] != user, "Circular reference");
+        require(isActiveUser[_referrer], "Referrer must be active");
 
         address current = _referrer;
         for (uint256 i = 0; i < 30 && current != address(0); i++) {
@@ -68,6 +72,23 @@ contract PDAReferral is Ownable {
                 activeReferralCount[currentReferrer]++;
             }
         }
+    }
+
+    function setActiveUser(address user) external {
+        require(msg.sender == activeUserManager, "Not authorized to set active user");
+        if (!isActiveUser[user]) {
+            isActiveUser[user] = true;
+            emit UserActivated(user);
+
+            address currentReferrer = referrer[user];
+            if (currentReferrer != address(0)) {
+                activeReferralCount[currentReferrer]++;
+            }
+        }
+    }
+
+    function setActiveUserManager(address manager) external onlyOwner {
+        activeUserManager = manager;
     }
     
 
