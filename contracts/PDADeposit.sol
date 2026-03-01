@@ -181,6 +181,11 @@ contract PDADeposit is
         dappAddress = _dappAddress;
     }
 
+    function setLiquidityManager(address _liquidityManager) external onlyOwner {
+        require(_liquidityManager != address(0), "Invalid liquidity manager address");
+        liquidityManager = IPDALiquidityManager(_liquidityManager);
+    }
+
     function emergencyWithdraw(address token, uint256 amount) external onlyOwner {
         require(IERC20(token).transfer(owner(), amount), "Transfer failed");
     }

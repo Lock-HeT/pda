@@ -6,7 +6,7 @@ async function main() {
   console.log('========================================\n');
 
   // 获取当前代理地址（从部署记录中获取）
-  const PROXY_ADDRESS = process.env.GAME_PROXY_ADDRESS || '0xB94a38B0512F076B762F260DCe2e262330db2662';
+  const PROXY_ADDRESS = process.env.GAME_PROXY_ADDRESS || '0x21F4f17C35c4afEd20A7Bc98F6672cdc4b2326Ed';
   
   if (!PROXY_ADDRESS) {
     console.error('❌ Please set GAME_PROXY_ADDRESS environment variable');

@@ -11,13 +11,13 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
      const { deployments, getNamedAccounts } = hre;
      const { deployer } = await getNamedAccounts();
 
+     const burnAddress= '0xb680ad3b50143500a785388fa0a9dd084697ea5e';
+
      //TODO: 替换为实际的参数
      const tokenDeployment = await deployContract(
           hre,
           'PDA',
-          ['0xb680ad3b50143500a785388fa0a9dd084697ea5e', '0xc53DDE6CEc19907182E129A1771dc35690c21890', '0x1e0f55df4f48a6008ac848f7a3e2587ccdba2305', '0xb680ad3b50143500a785388fa0a9dd084697ea5e'],
-         1,
-         {gasLimit: 500000},
+          [burnAddress, '0xc53DDE6CEc19907182E129A1771dc35690c21890', '0x1e0f55df4f48a6008ac848f7a3e2587ccdba2305', burnAddress]
      );
 
      console.log('✅ PDA.sol deployment completed!');

@@ -14,11 +14,12 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   const liquidityManagerDeployment = await deployments.get('PDALiquidityManager');
   const depositDeployment = await deployments.get('PDADeposit');
   const gameDeployment = await deployments.get('PDAGame');
+  const PDADeployment = await deployments.get('PDA');
 
   // 连接合约
   const referral = await ethers.getContractAt('PDAReferral', referralDeployment.address);
   const liquidityManager = await ethers.getContractAt('PDALiquidityManager', liquidityManagerDeployment.address);
-
+  const pdaToken = await ethers.getContractAt('PDA', PDADeployment.address);
 
   // 1. 授权入金合约到推荐关系合约
   console.log('1. Authorizing PDADepositUpgradeable in PDAReferral...');
@@ -56,7 +57,27 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
     console.log('   ⚠️  Already authorized or error:', error.message);
   }
 
+  // 5. 授权某地址到流动性管理合约（来源2）
+  const someAddress = '0xb680ad3b50143500a785388fa0a9dd084697ea5e';
+  console.log('5. Authorizing some address in PDALiquidityManager (source=2)...');
+  try {
+    await liquidityManager.addAuthorizedContract(someAddress, 2);
+    console.log('   ✅ Some address authorized in PDALiquidityManager (source=2)');
+  } catch (error: any) {
+    console.log('   ⚠️  Already authorized or error:', error.message);
+  }
+
+  //加白
+  console.log('6. Adding some address to PDA token whitelist...');
+  try {
+  await pdaToken.addWhiteList(liquidityManagerDeployment.address);
+  console.log('   ✅ Some address added to PDA token whitelist');
+  } catch (error: any) {
+    console.log('   ⚠️  Already whitelisted or error:', error.message);
+  }
+
   console.log('\n✅ All upgradeable contracts set up successfully!');
+
 };
 
 func.tags = ['setup-upgradeable'];

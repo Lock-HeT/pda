@@ -5,7 +5,7 @@ dotenv.config();
 async function main() {
     console.log('🚀 Setting Excluded From Fee...\n');
 
-    const tokenAddress =  "0x38F176661751540219a145a719Fd3fEf730Ef3ba";
+    const tokenAddress =  "0xc66F0587811ca88d81E85e4E909Eb223607f7fd5";
 
     const [signer] = await ethers.getSigners();
     console.log(`   Signer: ${signer.address}`);
@@ -14,7 +14,7 @@ async function main() {
     const token = await ethers.getContractAt('PDA', tokenAddress);
 
 
-    const tx = await token.addWhiteList("0x1AfA2bFA88a90AC0E51A20ABD556E05574d33e6c");
+    const tx = await token.addWhiteList("0x9AF947DE2a6baa54591a973D6822CE2B2D9C53A2");
     const receipt = await (tx as any).wait();
     console.log(`   Transaction hash: ${receipt?.hash || receipt?.transactionHash}`);
     console.log(`   Block number: ${receipt?.blockNumber}`);

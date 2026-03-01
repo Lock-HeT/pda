@@ -6,7 +6,7 @@ async function main() {
   console.log('========================================\n');
 
   // 获取当前代理地址（从部署记录中获取）
-  const PROXY_ADDRESS = process.env.GAME_PROXY_ADDRESS || '0x3c24DC1fcb6B7267dDBF50B9811142E9Fe4810C0';
+  const PROXY_ADDRESS = process.env.GAME_PROXY_ADDRESS || '0x0C737142078366C627F37B978933b26ed4fC784F';
   
   if (!PROXY_ADDRESS) {
     console.error('❌ Please set PDA_DEPOSIT_PROXY_ADDRESS environment variable');

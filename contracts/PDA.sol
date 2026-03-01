@@ -43,9 +43,9 @@ contract PDA is IERC20, Ownable {
     mapping(address => bool) public whiteList;
     
     constructor(address _burnAddress, address _operationAddress, address _deviceAddress,  address _burnSetter) Ownable(msg.sender) {
-        require(burnAddress != address(0), "Invalid burn address");
-        require(operationAddress != address(0), "Invalid operation address");
-        require(deviceAddress != address(0), "Invalid device address");
+        require(_burnAddress != address(0), "Invalid burn address");
+        require(_operationAddress != address(0), "Invalid operation address");
+        require(_deviceAddress != address(0), "Invalid device address");
         require(_burnSetter != address(0), "Invalid burn setter address");
         burnAddress = _burnAddress;
         operationAddress = _operationAddress;

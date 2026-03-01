@@ -21,6 +21,7 @@ contract PDAReferral is Ownable {
     event AuthorizedContractRemoved(address indexed contractAddress);
     
     constructor(address _activeUserManager) Ownable(msg.sender) {
+        require(_activeUserManager != address(0), "Invalid active user manager");
         activeUserManager = _activeUserManager;
     }
 

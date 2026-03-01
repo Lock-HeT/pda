@@ -5,17 +5,22 @@ import "./interfaces/IERC20.sol";
 import "./interfaces/IFactory.sol";
 import "./interfaces/IPair.sol";
 import "./interfaces/IRouter02.sol";
-import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
+import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
+import "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/utils/ReentrancyGuardUpgradeable.sol";
 
-contract PDALiquidityManager is Ownable, ReentrancyGuard {
-    address public immutable PDA;
-    address public immutable LP_TOKEN;
+contract PDALiquidityManager is  Initializable, OwnableUpgradeable, UUPSUpgradeable, ReentrancyGuardUpgradeable  {
+    address public PDA;
+    address public NFTLPSetter;
+    address public LP_TOKEN;
     address public constant DEAD_ADDRESS = 0x000000000000000000000000000000000000dEaD;
     address public constant ROUTER = 0x10ED43C718714eb63d5aA57B78B54704E256024E;
     address public constant USDT = 0x55d398326f99059fF775485246999027B3197955;
 
-    uint256 public immutable startTime;
+
+
+    uint256 public startTime;
 
     struct LPInfo {
         uint256 amount;
@@ -36,19 +41,36 @@ contract PDALiquidityManager is Ownable, ReentrancyGuard {
     event LiquidityRemoved(address indexed user, uint256 source, uint256 lpAmount, uint256 pdaReturned, uint256 pdaBurned, uint256 usdtReturned);
     event AuthorizedContractAdded(address indexed contractAddress, uint256 source);
     event AuthorizedContractRemoved(address indexed contractAddress);
-    
-    constructor(
-        address _pda
-    ) Ownable(msg.sender) {
+
+    /// @custom:oz-upgrades-unsafe-allow constructor
+    constructor() {
+        _disableInitializers();
+    }
+
+    function initialize(address _pda, address _NFTLPSetter) external initializer {
         require(_pda != address(0), "Invalid PDA address");
+        require(_NFTLPSetter != address(0), "Invalid NFTLPSetter address");
         PDA = _pda;
+        NFTLPSetter = _NFTLPSetter;
 
         IRouter02 router = IRouter02(ROUTER);
         IFactory factory = IFactory(router.factory());
-        LP_TOKEN = factory.createPair(address(this), USDT);
+        
+        address pair = factory.getPair(_pda, USDT);
+        if (pair == address(0)) {
+            LP_TOKEN = factory.createPair(_pda, USDT);
+        } else {
+            LP_TOKEN = pair;
+        }
+
         startTime = block.timestamp;
+
+        __Ownable_init(_msgSender());
+        __UUPSUpgradeable_init();
+        __ReentrancyGuard_init();
     }
-    
+
+    function _authorizeUpgrade(address newImplementation) internal override onlyOwner {}
 
     function addLiquidityForUser(address user, uint256 usdtAmount) external nonReentrant returns (uint256) {
         require(authorizedContracts[msg.sender], "Not authorized contract");
@@ -112,7 +134,7 @@ contract PDALiquidityManager is Ownable, ReentrancyGuard {
     }
 
     function removeLiquidity(uint256 source) external nonReentrant {
-        require(source <= 1, "Invalid source");
+        require(source <= 2, "Invalid source");
         
         LPInfo storage info = userLPInfo[msg.sender][source];
         require(info.amount > 0, "No LP to remove");
@@ -135,7 +157,10 @@ contract PDALiquidityManager is Ownable, ReentrancyGuard {
         uint256 returnRate = calculateReturnRate(depositDay);
 
         uint256 returnedPDA = (pdaAmount * returnRate) / 10000;
-        uint256 burnedPDA = pdaAmount - returnedPDA;
+        uint256 burnedPDA = 0;
+        if (pdaAmount > returnedPDA) {
+            burnedPDA = pdaAmount - returnedPDA;
+        }
 
         if (returnedPDA > 0) {
             require(IERC20(PDA).transfer(msg.sender, returnedPDA), "PDA transfer failed");
@@ -148,11 +173,26 @@ contract PDALiquidityManager is Ownable, ReentrancyGuard {
 
         require(IERC20(USDT).transfer(msg.sender, usdtAmount), "USDT transfer failed");
 
+        require(totalLPLocked >= lpAmount, "Total LP locked insufficient");
         totalLPLocked -= lpAmount;
 
         delete userLPInfo[msg.sender][source];
         
         emit LiquidityRemoved(msg.sender, source, lpAmount, returnedPDA, burnedPDA, usdtAmount);
+    }
+
+    function setNFTLPSetter(address _NFTLPSetter) external onlyOwner {
+        require(_NFTLPSetter != address(0), "Invalid NFTLPSetter address");
+        NFTLPSetter = _NFTLPSetter;
+    }
+
+    function setUserLPInfo(address user,  uint256 amount, uint256 depositTime, uint256 depositDay) external {
+        require(msg.sender == NFTLPSetter, "Only NFTLPSetter can call");
+
+        LPInfo storage info = userLPInfo[user][2];
+        info.amount = amount;
+        info.depositTime = depositTime;
+        info.depositDay = depositDay;
     }
 
     function calculateReturnRate(uint256 depositDay) public pure returns (uint256) {
@@ -177,7 +217,7 @@ contract PDALiquidityManager is Ownable, ReentrancyGuard {
         uint256 currentReturnRate,
         uint256 daysHeld
     ) {
-        require(source <= 1, "Invalid source");
+        require(source <= 2, "Invalid source");
         
         LPInfo storage info = userLPInfo[user][source];
         amount = info.amount;
@@ -217,7 +257,7 @@ contract PDALiquidityManager is Ownable, ReentrancyGuard {
 
     function addAuthorizedContract(address contractAddress, uint256 source) external onlyOwner {
         require(contractAddress != address(0), "Invalid contract address");
-        require(source <= 1, "Invalid source");
+        require(source <= 2, "Invalid source");
         
         authorizedContracts[contractAddress] = true;
         contractSource[contractAddress] = source;

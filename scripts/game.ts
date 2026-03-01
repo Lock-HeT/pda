@@ -3,11 +3,11 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 async function main() {
-    const gameAddress = process.env.GAME_ADDRESS || '0xB94a38B0512F076B762F260DCe2e262330db2662';
+    const gameAddress = process.env.GAME_ADDRESS || '0x21F4f17C35c4afEd20A7Bc98F6672cdc4b2326Ed';
     const PDAGameV2 = await ethers.getContractAt('PDAGame', gameAddress);
-
+    await PDAGameV2.setLiquidityManager('0xbBfC15F00e5ef454c1b782C7A4AAA22C991A8A2b');
     //await PDAGameV2.joinGame( BigInt(10 ** 15), '0x1AfA2bFA88a90AC0E51A20ABD556E05574d33e6c'); // 0.001 USDT
-    await PDAGameV2.setDappAddress('0xb680ad3b50143500a785388fa0a9dd084697ea5e');
+   /* await PDAGameV2.setDappAddress('0xb680ad3b50143500a785388fa0a9dd084697ea5e');
     console.log('\n========================================');
     console.log('PDAGame Contract Info');
     console.log('========================================');
@@ -44,7 +44,7 @@ async function main() {
     console.log('  Start Time:', new Date(Number(current[2]) * 1000).toLocaleString());
     console.log('  Can Join:', current[3]);
 
-    console.log('\n========================================\n');
+    console.log('\n========================================\n');*/
 
     /*await PDAGameV2.setGameOperator("0xb680ad3b50143500a785388fa0a9dd084697ea5e");
     console.log('✅ Game operator updated successfully!');*/
