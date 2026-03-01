@@ -231,16 +231,22 @@ contract PDALiquidityManager is  Initializable, OwnableUpgradeable, UUPSUpgradea
         uint256 depositAmount,
         uint256 depositReturnRate,
         uint256 gameAmount,
-        uint256 gameReturnRate
+        uint256 gameReturnRate,
+        uint256 nftAmount,
+        uint256 nftReturnRate
     ) {
         LPInfo storage depositInfo = userLPInfo[user][0];
         LPInfo storage gameInfo = userLPInfo[user][1];
+        LPInfo storage nftInfo = userLPInfo[user][2];
         
         depositAmount = depositInfo.amount;
         depositReturnRate = depositInfo.amount > 0 ? calculateReturnRate(depositInfo.depositDay) : 0;
         
         gameAmount = gameInfo.amount;
         gameReturnRate = gameInfo.amount > 0 ? calculateReturnRate(gameInfo.depositDay) : 0;
+
+        nftAmount = nftInfo.amount;
+        nftReturnRate = nftInfo.amount > 0 ? calculateReturnRate(nftInfo.depositDay) : 0;
     }
 
     function getContractStats() external view returns (
