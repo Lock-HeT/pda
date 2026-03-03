@@ -1,5 +1,5 @@
 {
-  "address": "0x87f0b38235c830b77021e9161b335c242A940659",
+  "address": "0xCfE162536Ce1C9363E45c9DF355244942682eABB",
   "abi": [
     {
       "inputs": [],
@@ -807,14 +807,14 @@
       "type": "function"
     }
   ],
-  "transactionHash": "0x183b7581b64913c3f846f8dfe86b626960867fdf50fea49b79eb2cb700733332",
+  "transactionHash": "0xa2957b533ba3d8355c57f26eaea62394a5c72ccdca0fc039b64dbd388d9edfbd",
   "receipt": {
     "from": "0x8DA841a675CC5daa7829aaEFd9dD683204912935",
-    "transactionIndex": 52,
+    "transactionIndex": 69,
     "gasUsed": "300871",
-    "blockHash": "0x0ecc8961e073d816e875000407c208c45fe0c5bcc6d649d065ef6df782947b63",
-    "transactionHash": "0x183b7581b64913c3f846f8dfe86b626960867fdf50fea49b79eb2cb700733332",
-    "blockNumber": 84271592,
+    "blockHash": "0x867c4a6ed3acc69f21d8f08a6d6245ca03e28bfc00c320250682d9ff97b183e2",
+    "transactionHash": "0xa2957b533ba3d8355c57f26eaea62394a5c72ccdca0fc039b64dbd388d9edfbd",
+    "blockNumber": 84265124,
     "cumulativeGasUsed": "300871"
   },
   "numDeployments": 1,

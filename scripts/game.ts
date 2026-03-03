@@ -3,9 +3,11 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 async function main() {
-    const gameAddress = process.env.GAME_ADDRESS || '0x21F4f17C35c4afEd20A7Bc98F6672cdc4b2326Ed';
+    const gameAddress = process.env.GAME_ADDRESS || '0x13fCFAE736c9cfb58ae4b4895D98cC4E3F5bABE1';
     const PDAGameV2 = await ethers.getContractAt('PDAGame', gameAddress);
-    await PDAGameV2.setLiquidityManager('0xbBfC15F00e5ef454c1b782C7A4AAA22C991A8A2b');
+    //await PDAGameV2.setGameTypes(BigInt(10 ** 16), BigInt(2 * 10 ** 16), BigInt(3 * 10 ** 16) );
+    const data = await PDAGameV2.gameTypes(0);
+    console.log('Game Type 0:', ethers.formatUnits(data, 18), 'USDT');
     //await PDAGameV2.joinGame( BigInt(10 ** 15), '0x1AfA2bFA88a90AC0E51A20ABD556E05574d33e6c'); // 0.001 USDT
    /* await PDAGameV2.setDappAddress('0xb680ad3b50143500a785388fa0a9dd084697ea5e');
     console.log('\n========================================');
