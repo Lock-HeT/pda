@@ -24,17 +24,12 @@ contract PDAGame is
     address public commissionReceiver;
     address public gameOperator;
     
-    // TODO
-    /*uint256 public constant GAME_TYPE_100 = 100 * 10**18;
+    uint256 public constant GAME_TYPE_100 = 100 * 10**18;
     uint256 public constant GAME_TYPE_200 = 200 * 10**18;
-    uint256 public constant GAME_TYPE_300 = 300 * 10**18;*/
-    uint256 public constant GAME_TYPE_100 = 10**16;
-    uint256 public constant GAME_TYPE_200 = 2 * 10**16;
-    uint256 public constant GAME_TYPE_300 = 3 * 10**16;
+    uint256 public constant GAME_TYPE_300 = 300 * 10**18;
 
     uint256 public constant PLAYERS_PER_GAME = 11;
-    /*uint256 public constant GAME_TIMEOUT = 24 hours;*/
-    uint256 public constant GAME_TIMEOUT = 30 minutes; //TODO
+    uint256 public constant GAME_TIMEOUT = 24 hours;
 
     struct Game {
         uint256 gameId;

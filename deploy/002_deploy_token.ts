@@ -13,18 +13,16 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
 
      const burnAddress= '0xb680ad3b50143500a785388fa0a9dd084697ea5e';
 
-     //TODO: 替换为实际的参数
      const tokenDeployment = await deployContract(
           hre,
           'PDA',
-          [burnAddress, '0xc53DDE6CEc19907182E129A1771dc35690c21890', '0x1e0f55df4f48a6008ac848f7a3e2587ccdba2305', burnAddress]
+          [burnAddress, '0xc8DF60C860Cf7A440852cAf91f9a39bA3c362378', '0x1e0f55df4f48a6008ac848f7a3e2587ccdba2305', burnAddress]
      );
 
      console.log('✅ PDA.sol deployment completed!');
      console.log(`   PDA Address: ${tokenDeployment.address}`);
 
-     // TODO: 添加白名单地址
-     const whiteAddress = '0x1AfA2bFA88a90AC0E51A20ABD556E05574d33e6c';
+     const whiteAddress = '0xc53DDE6CEc19907182E129A1771dc35690c21890';
      const pdaContract = await hre.ethers.getContractAt('PDA', tokenDeployment.address);
      const tx = await pdaContract.addWhiteList(whiteAddress);
      const receipt = await (tx as any).wait();

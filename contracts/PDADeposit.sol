@@ -28,11 +28,8 @@ contract PDADeposit is
     address public dappAddress;
     address public commissionReceiver;
     
-    // TODO
-   /* uint256 public constant MIN_DEPOSIT = 100 * 10**18;
-    uint256 public constant MAX_DEPOSIT = 1000 * 10**18;*/
-    uint256 public constant MIN_DEPOSIT = 10**15;
-    uint256 public constant MAX_DEPOSIT = 10**16;
+    uint256 public constant MIN_DEPOSIT = 100 * 10**18;
+    uint256 public constant MAX_DEPOSIT = 1000 * 10**18;
 
     mapping(address => uint256) public totalDeposited;
     mapping(address => uint256) public depositCount;
