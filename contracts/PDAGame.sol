@@ -21,7 +21,9 @@ contract PDAGame is
 
     address public operationAddress;
     address public dappAddress;
+    address public commissionReceiver;
     address public gameOperator;
+    
     // TODO
     /*uint256 public constant GAME_TYPE_100 = 100 * 10**18;
     uint256 public constant GAME_TYPE_200 = 200 * 10**18;
@@ -73,13 +75,16 @@ contract PDAGame is
         address _liquidityManager,
         address _operationAddress,
         address _dappAddress,
-        address _gameOperator
+        address _gameOperator,
+        address _commissionReceiver
     ) external initializer {
         require(_referralContract != address(0), "Invalid referral contract");
         require(_liquidityManager != address(0), "Invalid liquidity manager");
         require(_operationAddress != address(0), "Invalid operation address");
         require(_dappAddress != address(0), "Invalid dapp address");
         require(_gameOperator != address(0), "Invalid game operator address");
+        require(_commissionReceiver != address(0), "Invalid commission receiver address");
+
         
         __Ownable_init(_msgSender());
         __UUPSUpgradeable_init();
@@ -90,6 +95,7 @@ contract PDAGame is
         operationAddress = _operationAddress;
         dappAddress = _dappAddress;
         gameOperator = _gameOperator;
+        commissionReceiver = _commissionReceiver;
 
         gameTypes[0] = GAME_TYPE_100;
         gameTypes[1] = GAME_TYPE_200;
@@ -177,44 +183,39 @@ contract PDAGame is
         }
     }
 
-    function declareWinner(uint256 gameId, address winner) external nonReentrant {
+    function declareWinner(uint256 gameId, uint256 winnerNumber) external nonReentrant {
         require(msg.sender == gameOperator, "Only game operator can declare winner");
         Game storage game = games[gameId];
         require(game.gameId == gameId, "Game not found");
         require(!game.finished, "Game already finished");
         require(!game.refunded, "Game already refunded");
         require(game.players.length == PLAYERS_PER_GAME, "Game not full");
-        
-        bool isPlayer = false;
-        for (uint256 i = 0; i < game.players.length; i++) {
-            if (game.players[i] == winner) {
-                isPlayer = true;
-                break;
-            }
-        }
-        require(isPlayer, "Winner must be a player");
-        
+        require(winnerNumber < PLAYERS_PER_GAME, "Invalid winner number");
+
+        address winner = game.players[winnerNumber];
+
         game.finished = true;
         game.winner = winner;
         game.endTime = block.timestamp;
         
-        _distributePrize(gameId, winner);
+        _distributePrize(gameId, winnerNumber);
 
         referralContract.activateUser(winner);
         emit GameFinished(gameId, winner);
     }
 
-    function _distributePrize(uint256 gameId, address winner) internal {
+    function _distributePrize(uint256 gameId, uint256 winnerNumber) internal {
         Game storage game = games[gameId];
         uint256 totalPrize = game.betAmount;
 
         uint256 nonWinnerShare = game.betAmount + ((totalPrize * 2) / 100);
         for (uint256 i = 0; i < game.players.length; i++) {
-            if (game.players[i] != winner) {
+            if (i != winnerNumber) {
                 require(IERC20(USDT).transfer(game.players[i], nonWinnerShare), "Non-winner transfer failed");
                 emit PrizePaid(gameId, game.players[i], nonWinnerShare, "Non-winner share");
             }
         }
+        address winner = game.players[winnerNumber];
 
         _distributeCommission(gameId, winner, totalPrize);
 
@@ -231,39 +232,45 @@ contract PDAGame is
     }
 
     function _distributeCommission(uint256 gameId, address winner, uint256 totalPrize) internal returns (uint256) {
+
         uint256 totalCommission = 0;
+        uint256 totalCommissionPool = (totalPrize * 8) / 100;
         address current = referralContract.referrer(winner);
         
-        if (current == address(0)) {
-            return 0;
-        }
-        
-        for (uint256 i = 1; i <= 30 && current != address(0); i++) {
-            if (referralContract.isActiveUser(current)) {
-                uint256 currentMaxLevel = referralContract.getMaxLevel(current);
+        if (current != address(0)) {
+            for (uint256 i = 1; i <= 30 && current != address(0); i++) {
+                if (referralContract.isActiveUser(current)) {
+                    uint256 currentMaxLevel = referralContract.getMaxLevel(current);
 
-                if (i <= currentMaxLevel) {
-                    uint256 commission = 0;
-                    
-                    if (i == 1) {
-                        commission = (totalPrize * 2) / 100;
-                    } else if (i == 2) {
-                        commission = (totalPrize * 1) / 100;
-                    } else if (i >= 3 && i <= 10) {
-                        commission = (totalPrize * 3) / 1000;
-                    } else if (i >= 11 && i <= 30) {
-                        commission = (totalPrize * 13) / 10000;
-                    }
-                    
-                    if (commission > 0) {
-                        require(IERC20(USDT).transfer(current, commission), "Commission transfer failed");
-                        totalCommission += commission;
-                        emit PrizePaid(gameId, current, commission, "Upline commission");
+                    if (i <= currentMaxLevel) {
+                        uint256 commission = 0;
+                        
+                        if (i == 1) {
+                            commission = (totalPrize * 2) / 100;
+                        } else if (i == 2) {
+                            commission = (totalPrize * 1) / 100;
+                        } else if (i >= 3 && i <= 10) {
+                            commission = (totalPrize * 3) / 1000;
+                        } else if (i >= 11 && i <= 30) {
+                            commission = (totalPrize * 13) / 10000;
+                        }
+                        
+                        if (commission > 0) {
+                            require(IERC20(USDT).transfer(current, commission), "Commission transfer failed");
+                            totalCommission += commission;
+                            emit PrizePaid(gameId, current, commission, "Upline commission");
+                        }
                     }
                 }
+                
+                current = referralContract.referrer(current);
             }
-            
-            current = referralContract.referrer(current);
+        }
+ 
+        if (totalCommission < totalCommissionPool) {
+            uint256 remainingCommission = totalCommissionPool - totalCommission;
+            require(IERC20(USDT).transfer(commissionReceiver, remainingCommission), "Remaining commission transfer failed");
+            emit PrizePaid(gameId, commissionReceiver, remainingCommission, "Remaining commission");
         }
         
         return totalCommission;
@@ -360,6 +367,11 @@ contract PDAGame is
     function setDappAddress(address _dappAddress) external onlyOwner {
         require(_dappAddress != address(0), "Invalid dapp address");
         dappAddress = _dappAddress;
+    }
+
+    function setCommissionReceiver(address _commissionReceiver) external onlyOwner {
+        require(_commissionReceiver != address(0), "Invalid commission receiver address");
+        commissionReceiver = _commissionReceiver;
     }
 
     function setGameOperator(address _gameOperator) external onlyOwner {

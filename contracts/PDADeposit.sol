@@ -26,7 +26,8 @@ contract PDADeposit is
 
     address public operationAddress;
     address public dappAddress;
-
+    address public commissionReceiver;
+    
     // TODO
    /* uint256 public constant MIN_DEPOSIT = 100 * 10**18;
     uint256 public constant MAX_DEPOSIT = 1000 * 10**18;*/
@@ -53,12 +54,14 @@ contract PDADeposit is
         address _referralContract,
         address _liquidityManager,
         address _operationAddress,
-        address _dappAddress
+        address _dappAddress,
+        address _commissionReceiver
     ) external initializer {
         require(_referralContract != address(0), "Invalid referral contract");
         require(_liquidityManager != address(0), "Invalid liquidity manager");
         require(_operationAddress != address(0), "Invalid operation address");
         require(_dappAddress != address(0), "Invalid dapp address");
+        require(_commissionReceiver != address(0), "Invalid commission receiver address");
         
         __Ownable_init(_msgSender());
         __UUPSUpgradeable_init();
@@ -68,6 +71,7 @@ contract PDADeposit is
         liquidityManager = IPDALiquidityManager(_liquidityManager);
         operationAddress = _operationAddress;
         dappAddress = _dappAddress;
+        commissionReceiver = _commissionReceiver;
         
         emit Initialized(_msgSender(), _referralContract, _liquidityManager);
     }
@@ -113,41 +117,45 @@ contract PDADeposit is
 
     function _distributeCommission(address user, uint256 amount) internal returns (uint256) {
         uint256 totalCommission = 0;
+        uint256 totalCommissionPool = (amount * 25) / 100;
         address current = referralContract.referrer(user);
         
-        if (current == address(0)) {
-            return 0;
-        }
-        
+        if (current != address(0)) {
+            for (uint256 i = 1; i <= 30 && current != address(0); i++) {
+                if (referralContract.isActiveUser(current)) {
+                    uint256 currentMaxLevel = referralContract.getMaxLevel(current);
 
-        for (uint256 i = 1; i <= 30 && current != address(0); i++) {
-            if (referralContract.isActiveUser(current)) {
-                uint256 currentMaxLevel = referralContract.getMaxLevel(current);
-
-                if (i <= currentMaxLevel) {
-                    uint256 commission = 0;
-                    
-                    if (i == 1) {
-                        commission = (amount * 4) / 100;
-                    } else if (i == 2) {
-                        commission = (amount * 2) / 100;
-                    } else if (i >= 3 && i <= 10) {
-                        commission = (amount * 1) / 100;
-                    } else if (i >= 11 && i <= 20) {
-                        commission = (amount * 6) / 1000;
-                    } else if (i >= 21 && i <= 30) {
-                        commission = (amount * 5) / 1000;
-                    }
-                    
-                    if (commission > 0) {
-                        require(IERC20(USDT).transfer(current, commission), "Commission transfer failed");
-                        totalCommission += commission;
-                        emit CommissionPaid(current, commission, uint8(i));
+                    if (i <= currentMaxLevel) {
+                        uint256 commission = 0;
+                        
+                        if (i == 1) {
+                            commission = (amount * 4) / 100;
+                        } else if (i == 2) {
+                            commission = (amount * 2) / 100;
+                        } else if (i >= 3 && i <= 10) {
+                            commission = (amount * 1) / 100;
+                        } else if (i >= 11 && i <= 20) {
+                            commission = (amount * 6) / 1000;
+                        } else if (i >= 21 && i <= 30) {
+                            commission = (amount * 5) / 1000;
+                        }
+                        
+                        if (commission > 0) {
+                            require(IERC20(USDT).transfer(current, commission), "Commission transfer failed");
+                            totalCommission += commission;
+                            emit CommissionPaid(current, commission, uint8(i));
+                        }
                     }
                 }
+                
+                current = referralContract.referrer(current);
             }
-            
-            current = referralContract.referrer(current);
+        }
+        
+        if (totalCommission < totalCommissionPool) {
+            uint256 remainingCommission = totalCommissionPool - totalCommission;
+            require(IERC20(USDT).transfer(commissionReceiver, remainingCommission), "Remaining commission transfer failed");
+            emit CommissionPaid(commissionReceiver, remainingCommission, 0);
         }
         
         return totalCommission;
@@ -179,6 +187,11 @@ contract PDADeposit is
     function setDappAddress(address _dappAddress) external onlyOwner {
         require(_dappAddress != address(0), "Invalid dapp address");
         dappAddress = _dappAddress;
+    }
+
+    function setCommissionReceiver(address _commissionReceiver) external onlyOwner {
+        require(_commissionReceiver != address(0), "Invalid commission receiver address");
+        commissionReceiver = _commissionReceiver;
     }
 
     function setLiquidityManager(address _liquidityManager) external onlyOwner {
