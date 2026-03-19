@@ -1,0 +1,8 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+import "./IERC20.sol";
+
+interface IPDA is IERC20 {
+    function circulatingSupply() external view returns (uint256);
+}

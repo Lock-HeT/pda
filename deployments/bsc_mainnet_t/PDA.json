@@ -1,0 +1,1045 @@
+{
+  "address": "0x7e617ed1F46d61F87bF050180a501379816D09be",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_burnAddress",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "_operationAddress",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "_deviceAddress",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "_burnSetter",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        }
+      ],
+      "name": "OwnableInvalidOwner",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "OwnableUnauthorizedAccount",
+      "type": "error"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "spender",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "value",
+          "type": "uint256"
+        }
+      ],
+      "name": "Approval",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "previousOwner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "OwnershipTransferred",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "from",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "to",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "value",
+          "type": "uint256"
+        }
+      ],
+      "name": "Transfer",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "BURN_INTERVAL",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "DAILY_BURN_RATE",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "DEAD_ADDRESS",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "MIN_TOTAL_SUPPLY",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "ROUTER",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "USDT",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        }
+      ],
+      "name": "addWhiteList",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "spender",
+          "type": "address"
+        }
+      ],
+      "name": "allowance",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "spender",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "approve",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "balanceOf",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address[]",
+          "name": "users",
+          "type": "address[]"
+        }
+      ],
+      "name": "batchAddWhiteList",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address[]",
+          "name": "users",
+          "type": "address[]"
+        }
+      ],
+      "name": "batchRemoveWhiteList",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "burnAddress",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "burnPoolTokens",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "burnAmount",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "burnSetter",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "buyStatus",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "circulatingSupply",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "decimals",
+      "outputs": [
+        {
+          "internalType": "uint8",
+          "name": "",
+          "type": "uint8"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "deviceAddress",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        }
+      ],
+      "name": "isWhiteListed",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "lastBurnTime",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "name",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "operationAddress",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "pair",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        }
+      ],
+      "name": "removeWhiteList",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "renounceOwnership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "sellDeviceFeeRate",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "sellOperationFeeRate",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "sellStatus",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_burnAddress",
+          "type": "address"
+        }
+      ],
+      "name": "setBurnAddress",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_burnSetter",
+          "type": "address"
+        }
+      ],
+      "name": "setBurnSetter",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bool",
+          "name": "_status",
+          "type": "bool"
+        }
+      ],
+      "name": "setBuyStatus",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_deviceAddress",
+          "type": "address"
+        }
+      ],
+      "name": "setDeviceAddress",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_operationAddress",
+          "type": "address"
+        }
+      ],
+      "name": "setOperationAddress",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_sellDeviceFeeRate",
+          "type": "uint256"
+        }
+      ],
+      "name": "setSellDeviceFeeRate",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_sellOperationFeeRate",
+          "type": "uint256"
+        }
+      ],
+      "name": "setSellOperationFeeRate",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bool",
+          "name": "_status",
+          "type": "bool"
+        }
+      ],
+      "name": "setSellStatus",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "symbol",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "totalSupply",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "recipient",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "transfer",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "sender",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "recipient",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "transferFrom",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "transferOwnership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "whiteList",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "transactionHash": "0x1811d32ece0aac71670bbb469a39d1dfc608e291969ffdb30eb45deaa50f1193",
+  "receipt": {
+    "to": null,
+    "from": "0x46F82c7Ae2b94BDC3aa8Cc35f833c950A0Ee14c4",
+    "contractAddress": "0x7e617ed1F46d61F87bF050180a501379816D09be",
+    "transactionIndex": 68,
+    "gasUsed": "5372833",
+    "logsBloom": "0x00000000000000000000000000000000000000010000002000800000000000001000000000000000000000000000000000000000000000000000000000000000000000000000004000000008000000000001000000000000000000000000000000000000020000000000000000000800000000000000008000000010000000400040002000000000000820000800000000000000000000000000000000000000000000000800000000000000000000000000000000000000000000000000000000400002000000000000000000000040000000000000008000000001000020000000000100000000080002000000000000000000000000000000000000000000",
+    "blockHash": "0x2fee68be07457535d099a206d885c1349744a19cff7e8c201742663830f52d1b",
+    "transactionHash": "0x1811d32ece0aac71670bbb469a39d1dfc608e291969ffdb30eb45deaa50f1193",
+    "logs": [
+      {
+        "transactionIndex": 68,
+        "blockNumber": 87432881,
+        "transactionHash": "0x1811d32ece0aac71670bbb469a39d1dfc608e291969ffdb30eb45deaa50f1193",
+        "address": "0x7e617ed1F46d61F87bF050180a501379816D09be",
+        "topics": [
+          "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0",
+          "0x0000000000000000000000000000000000000000000000000000000000000000",
+          "0x00000000000000000000000046f82c7ae2b94bdc3aa8cc35f833c950a0ee14c4"
+        ],
+        "data": "0x",
+        "logIndex": 282,
+        "blockHash": "0x2fee68be07457535d099a206d885c1349744a19cff7e8c201742663830f52d1b"
+      },
+      {
+        "transactionIndex": 68,
+        "blockNumber": 87432881,
+        "transactionHash": "0x1811d32ece0aac71670bbb469a39d1dfc608e291969ffdb30eb45deaa50f1193",
+        "address": "0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73",
+        "topics": [
+          "0x0d3648bd0f6ba80134a33ba9275ac585d9d315f0ad8355cddefde31afa28d0e9",
+          "0x00000000000000000000000055d398326f99059ff775485246999027b3197955",
+          "0x0000000000000000000000007e617ed1f46d61f87bf050180a501379816d09be"
+        ],
+        "data": "0x00000000000000000000000085a4284ba12c07100ce92774517ce58707e4df780000000000000000000000000000000000000000000000000000000000257741",
+        "logIndex": 283,
+        "blockHash": "0x2fee68be07457535d099a206d885c1349744a19cff7e8c201742663830f52d1b"
+      },
+      {
+        "transactionIndex": 68,
+        "blockNumber": 87432881,
+        "transactionHash": "0x1811d32ece0aac71670bbb469a39d1dfc608e291969ffdb30eb45deaa50f1193",
+        "address": "0x7e617ed1F46d61F87bF050180a501379816D09be",
+        "topics": [
+          "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef",
+          "0x0000000000000000000000000000000000000000000000000000000000000000",
+          "0x00000000000000000000000046f82c7ae2b94bdc3aa8cc35f833c950a0ee14c4"
+        ],
+        "data": "0x000000000000000000000000000000000000000000adb53acfa41aee12000000",
+        "logIndex": 284,
+        "blockHash": "0x2fee68be07457535d099a206d885c1349744a19cff7e8c201742663830f52d1b"
+      }
+    ],
+    "blockNumber": 87432881,
+    "cumulativeGasUsed": "15988941",
+    "status": 1,
+    "byzantium": true
+  },
+  "args": [
+    "0xb680ad3b50143500a785388fa0a9dd084697ea5e",
+    "0xc8DF60C860Cf7A440852cAf91f9a39bA3c362378",
+    "0x1e0f55df4f48a6008ac848f7a3e2587ccdba2305",
+    "0xb680ad3b50143500a785388fa0a9dd084697ea5e"
+  ],
+  "numDeployments": 1,
+  "solcInputHash": "2550da43530aeeb65626c796005e135e",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.22+commit.4fc1097e\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_burnAddress\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_operationAddress\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_deviceAddress\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"_burnSetter\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"}],\"name\":\"OwnableInvalidOwner\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"OwnableUnauthorizedAccount\",\"type\":\"error\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"Approval\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"from\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"to\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"value\",\"type\":\"uint256\"}],\"name\":\"Transfer\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"BURN_INTERVAL\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"DAILY_BURN_RATE\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"DEAD_ADDRESS\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"MIN_TOTAL_SUPPLY\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"ROUTER\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"USDT\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"}],\"name\":\"addWhiteList\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\"}],\"name\":\"allowance\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"spender\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"approve\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"balanceOf\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address[]\",\"name\":\"users\",\"type\":\"address[]\"}],\"name\":\"batchAddWhiteList\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address[]\",\"name\":\"users\",\"type\":\"address[]\"}],\"name\":\"batchRemoveWhiteList\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"burnAddress\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"burnPoolTokens\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"burnAmount\",\"type\":\"uint256\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"burnSetter\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"buyStatus\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"circulatingSupply\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"decimals\",\"outputs\":[{\"internalType\":\"uint8\",\"name\":\"\",\"type\":\"uint8\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"deviceAddress\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"}],\"name\":\"isWhiteListed\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"lastBurnTime\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"name\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"operationAddress\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"pair\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"}],\"name\":\"removeWhiteList\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"renounceOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"sellDeviceFeeRate\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"sellOperationFeeRate\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"sellStatus\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_burnAddress\",\"type\":\"address\"}],\"name\":\"setBurnAddress\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_burnSetter\",\"type\":\"address\"}],\"name\":\"setBurnSetter\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bool\",\"name\":\"_status\",\"type\":\"bool\"}],\"name\":\"setBuyStatus\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_deviceAddress\",\"type\":\"address\"}],\"name\":\"setDeviceAddress\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_operationAddress\",\"type\":\"address\"}],\"name\":\"setOperationAddress\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_sellDeviceFeeRate\",\"type\":\"uint256\"}],\"name\":\"setSellDeviceFeeRate\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_sellOperationFeeRate\",\"type\":\"uint256\"}],\"name\":\"setSellOperationFeeRate\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bool\",\"name\":\"_status\",\"type\":\"bool\"}],\"name\":\"setSellStatus\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"symbol\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"totalSupply\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"recipient\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"transfer\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"},{\"internalType\":\"address\",\"name\":\"recipient\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"transferFrom\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"whiteList\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"errors\":{\"OwnableInvalidOwner(address)\":[{\"details\":\"The owner is not a valid owner account. (eg. `address(0)`)\"}],\"OwnableUnauthorizedAccount(address)\":[{\"details\":\"The caller account is not authorized to perform an operation.\"}]},\"kind\":\"dev\",\"methods\":{\"owner()\":{\"details\":\"Returns the address of the current owner.\"},\"renounceOwnership()\":{\"details\":\"Leaves the contract without owner. It will not be possible to call `onlyOwner` functions. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby disabling any functionality that is only available to the owner.\"},\"transferOwnership(address)\":{\"details\":\"Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.\"}},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/PDA.sol\":\"PDA\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"none\",\"useLiteralContent\":true},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[],\"viaIR\":true},\"sources\":{\"@openzeppelin/contracts/access/Ownable.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n// OpenZeppelin Contracts (last updated v5.0.0) (access/Ownable.sol)\\n\\npragma solidity ^0.8.20;\\n\\nimport {Context} from \\\"../utils/Context.sol\\\";\\n\\n/**\\n * @dev Contract module which provides a basic access control mechanism, where\\n * there is an account (an owner) that can be granted exclusive access to\\n * specific functions.\\n *\\n * The initial owner is set to the address provided by the deployer. This can\\n * later be changed with {transferOwnership}.\\n *\\n * This module is used through inheritance. It will make available the modifier\\n * `onlyOwner`, which can be applied to your functions to restrict their use to\\n * the owner.\\n */\\nabstract contract Ownable is Context {\\n    address private _owner;\\n\\n    /**\\n     * @dev The caller account is not authorized to perform an operation.\\n     */\\n    error OwnableUnauthorizedAccount(address account);\\n\\n    /**\\n     * @dev The owner is not a valid owner account. (eg. `address(0)`)\\n     */\\n    error OwnableInvalidOwner(address owner);\\n\\n    event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);\\n\\n    /**\\n     * @dev Initializes the contract setting the address provided by the deployer as the initial owner.\\n     */\\n    constructor(address initialOwner) {\\n        if (initialOwner == address(0)) {\\n            revert OwnableInvalidOwner(address(0));\\n        }\\n        _transferOwnership(initialOwner);\\n    }\\n\\n    /**\\n     * @dev Throws if called by any account other than the owner.\\n     */\\n    modifier onlyOwner() {\\n        _checkOwner();\\n        _;\\n    }\\n\\n    /**\\n     * @dev Returns the address of the current owner.\\n     */\\n    function owner() public view virtual returns (address) {\\n        return _owner;\\n    }\\n\\n    /**\\n     * @dev Throws if the sender is not the owner.\\n     */\\n    function _checkOwner() internal view virtual {\\n        if (owner() != _msgSender()) {\\n            revert OwnableUnauthorizedAccount(_msgSender());\\n        }\\n    }\\n\\n    /**\\n     * @dev Leaves the contract without owner. It will not be possible to call\\n     * `onlyOwner` functions. Can only be called by the current owner.\\n     *\\n     * NOTE: Renouncing ownership will leave the contract without an owner,\\n     * thereby disabling any functionality that is only available to the owner.\\n     */\\n    function renounceOwnership() public virtual onlyOwner {\\n        _transferOwnership(address(0));\\n    }\\n\\n    /**\\n     * @dev Transfers ownership of the contract to a new account (`newOwner`).\\n     * Can only be called by the current owner.\\n     */\\n    function transferOwnership(address newOwner) public virtual onlyOwner {\\n        if (newOwner == address(0)) {\\n            revert OwnableInvalidOwner(address(0));\\n        }\\n        _transferOwnership(newOwner);\\n    }\\n\\n    /**\\n     * @dev Transfers ownership of the contract to a new account (`newOwner`).\\n     * Internal function without access restriction.\\n     */\\n    function _transferOwnership(address newOwner) internal virtual {\\n        address oldOwner = _owner;\\n        _owner = newOwner;\\n        emit OwnershipTransferred(oldOwner, newOwner);\\n    }\\n}\\n\",\"keccak256\":\"0xff6d0bb2e285473e5311d9d3caacb525ae3538a80758c10649a4d61029b017bb\",\"license\":\"MIT\"},\"@openzeppelin/contracts/utils/Context.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n// OpenZeppelin Contracts (last updated v5.0.1) (utils/Context.sol)\\n\\npragma solidity ^0.8.20;\\n\\n/**\\n * @dev Provides information about the current execution context, including the\\n * sender of the transaction and its data. While these are generally available\\n * via msg.sender and msg.data, they should not be accessed in such a direct\\n * manner, since when dealing with meta-transactions the account sending and\\n * paying for execution may not be the actual sender (as far as an application\\n * is concerned).\\n *\\n * This contract is only required for intermediate, library-like contracts.\\n */\\nabstract contract Context {\\n    function _msgSender() internal view virtual returns (address) {\\n        return msg.sender;\\n    }\\n\\n    function _msgData() internal view virtual returns (bytes calldata) {\\n        return msg.data;\\n    }\\n\\n    function _contextSuffixLength() internal view virtual returns (uint256) {\\n        return 0;\\n    }\\n}\\n\",\"keccak256\":\"0x493033a8d1b176a037b2cc6a04dad01a5c157722049bbecf632ca876224dd4b2\",\"license\":\"MIT\"},\"@openzeppelin/contracts/utils/Panic.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n// OpenZeppelin Contracts (last updated v5.1.0) (utils/Panic.sol)\\n\\npragma solidity ^0.8.20;\\n\\n/**\\n * @dev Helper library for emitting standardized panic codes.\\n *\\n * ```solidity\\n * contract Example {\\n *      using Panic for uint256;\\n *\\n *      // Use any of the declared internal constants\\n *      function foo() { Panic.GENERIC.panic(); }\\n *\\n *      // Alternatively\\n *      function foo() { Panic.panic(Panic.GENERIC); }\\n * }\\n * ```\\n *\\n * Follows the list from https://github.com/ethereum/solidity/blob/v0.8.24/libsolutil/ErrorCodes.h[libsolutil].\\n *\\n * _Available since v5.1._\\n */\\n// slither-disable-next-line unused-state\\nlibrary Panic {\\n    /// @dev generic / unspecified error\\n    uint256 internal constant GENERIC = 0x00;\\n    /// @dev used by the assert() builtin\\n    uint256 internal constant ASSERT = 0x01;\\n    /// @dev arithmetic underflow or overflow\\n    uint256 internal constant UNDER_OVERFLOW = 0x11;\\n    /// @dev division or modulo by zero\\n    uint256 internal constant DIVISION_BY_ZERO = 0x12;\\n    /// @dev enum conversion error\\n    uint256 internal constant ENUM_CONVERSION_ERROR = 0x21;\\n    /// @dev invalid encoding in storage\\n    uint256 internal constant STORAGE_ENCODING_ERROR = 0x22;\\n    /// @dev empty array pop\\n    uint256 internal constant EMPTY_ARRAY_POP = 0x31;\\n    /// @dev array out of bounds access\\n    uint256 internal constant ARRAY_OUT_OF_BOUNDS = 0x32;\\n    /// @dev resource error (too large allocation or too large array)\\n    uint256 internal constant RESOURCE_ERROR = 0x41;\\n    /// @dev calling invalid internal function\\n    uint256 internal constant INVALID_INTERNAL_FUNCTION = 0x51;\\n\\n    /// @dev Reverts with a panic code. Recommended to use with\\n    /// the internal constants with predefined codes.\\n    function panic(uint256 code) internal pure {\\n        assembly (\\\"memory-safe\\\") {\\n            mstore(0x00, 0x4e487b71)\\n            mstore(0x20, code)\\n            revert(0x1c, 0x24)\\n        }\\n    }\\n}\\n\",\"keccak256\":\"0xf7fe324703a64fc51702311dc51562d5cb1497734f074e4f483bfb6717572d7a\",\"license\":\"MIT\"},\"@openzeppelin/contracts/utils/math/Math.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n// OpenZeppelin Contracts (last updated v5.3.0) (utils/math/Math.sol)\\n\\npragma solidity ^0.8.20;\\n\\nimport {Panic} from \\\"../Panic.sol\\\";\\nimport {SafeCast} from \\\"./SafeCast.sol\\\";\\n\\n/**\\n * @dev Standard math utilities missing in the Solidity language.\\n */\\nlibrary Math {\\n    enum Rounding {\\n        Floor, // Toward negative infinity\\n        Ceil, // Toward positive infinity\\n        Trunc, // Toward zero\\n        Expand // Away from zero\\n    }\\n\\n    /**\\n     * @dev Return the 512-bit addition of two uint256.\\n     *\\n     * The result is stored in two 256 variables such that sum = high * 2\\u00b2\\u2075\\u2076 + low.\\n     */\\n    function add512(uint256 a, uint256 b) internal pure returns (uint256 high, uint256 low) {\\n        assembly (\\\"memory-safe\\\") {\\n            low := add(a, b)\\n            high := lt(low, a)\\n        }\\n    }\\n\\n    /**\\n     * @dev Return the 512-bit multiplication of two uint256.\\n     *\\n     * The result is stored in two 256 variables such that product = high * 2\\u00b2\\u2075\\u2076 + low.\\n     */\\n    function mul512(uint256 a, uint256 b) internal pure returns (uint256 high, uint256 low) {\\n        // 512-bit multiply [high low] = x * y. Compute the product mod 2\\u00b2\\u2075\\u2076 and mod 2\\u00b2\\u2075\\u2076 - 1, then use\\n        // the Chinese Remainder Theorem to reconstruct the 512 bit result. The result is stored in two 256\\n        // variables such that product = high * 2\\u00b2\\u2075\\u2076 + low.\\n        assembly (\\\"memory-safe\\\") {\\n            let mm := mulmod(a, b, not(0))\\n            low := mul(a, b)\\n            high := sub(sub(mm, low), lt(mm, low))\\n        }\\n    }\\n\\n    /**\\n     * @dev Returns the addition of two unsigned integers, with a success flag (no overflow).\\n     */\\n    function tryAdd(uint256 a, uint256 b) internal pure returns (bool success, uint256 result) {\\n        unchecked {\\n            uint256 c = a + b;\\n            success = c >= a;\\n            result = c * SafeCast.toUint(success);\\n        }\\n    }\\n\\n    /**\\n     * @dev Returns the subtraction of two unsigned integers, with a success flag (no overflow).\\n     */\\n    function trySub(uint256 a, uint256 b) internal pure returns (bool success, uint256 result) {\\n        unchecked {\\n            uint256 c = a - b;\\n            success = c <= a;\\n            result = c * SafeCast.toUint(success);\\n        }\\n    }\\n\\n    /**\\n     * @dev Returns the multiplication of two unsigned integers, with a success flag (no overflow).\\n     */\\n    function tryMul(uint256 a, uint256 b) internal pure returns (bool success, uint256 result) {\\n        unchecked {\\n            uint256 c = a * b;\\n            assembly (\\\"memory-safe\\\") {\\n                // Only true when the multiplication doesn't overflow\\n                // (c / a == b) || (a == 0)\\n                success := or(eq(div(c, a), b), iszero(a))\\n            }\\n            // equivalent to: success ? c : 0\\n            result = c * SafeCast.toUint(success);\\n        }\\n    }\\n\\n    /**\\n     * @dev Returns the division of two unsigned integers, with a success flag (no division by zero).\\n     */\\n    function tryDiv(uint256 a, uint256 b) internal pure returns (bool success, uint256 result) {\\n        unchecked {\\n            success = b > 0;\\n            assembly (\\\"memory-safe\\\") {\\n                // The `DIV` opcode returns zero when the denominator is 0.\\n                result := div(a, b)\\n            }\\n        }\\n    }\\n\\n    /**\\n     * @dev Returns the remainder of dividing two unsigned integers, with a success flag (no division by zero).\\n     */\\n    function tryMod(uint256 a, uint256 b) internal pure returns (bool success, uint256 result) {\\n        unchecked {\\n            success = b > 0;\\n            assembly (\\\"memory-safe\\\") {\\n                // The `MOD` opcode returns zero when the denominator is 0.\\n                result := mod(a, b)\\n            }\\n        }\\n    }\\n\\n    /**\\n     * @dev Unsigned saturating addition, bounds to `2\\u00b2\\u2075\\u2076 - 1` instead of overflowing.\\n     */\\n    function saturatingAdd(uint256 a, uint256 b) internal pure returns (uint256) {\\n        (bool success, uint256 result) = tryAdd(a, b);\\n        return ternary(success, result, type(uint256).max);\\n    }\\n\\n    /**\\n     * @dev Unsigned saturating subtraction, bounds to zero instead of overflowing.\\n     */\\n    function saturatingSub(uint256 a, uint256 b) internal pure returns (uint256) {\\n        (, uint256 result) = trySub(a, b);\\n        return result;\\n    }\\n\\n    /**\\n     * @dev Unsigned saturating multiplication, bounds to `2\\u00b2\\u2075\\u2076 - 1` instead of overflowing.\\n     */\\n    function saturatingMul(uint256 a, uint256 b) internal pure returns (uint256) {\\n        (bool success, uint256 result) = tryMul(a, b);\\n        return ternary(success, result, type(uint256).max);\\n    }\\n\\n    /**\\n     * @dev Branchless ternary evaluation for `a ? b : c`. Gas costs are constant.\\n     *\\n     * IMPORTANT: This function may reduce bytecode size and consume less gas when used standalone.\\n     * However, the compiler may optimize Solidity ternary operations (i.e. `a ? b : c`) to only compute\\n     * one branch when needed, making this function more expensive.\\n     */\\n    function ternary(bool condition, uint256 a, uint256 b) internal pure returns (uint256) {\\n        unchecked {\\n            // branchless ternary works because:\\n            // b ^ (a ^ b) == a\\n            // b ^ 0 == b\\n            return b ^ ((a ^ b) * SafeCast.toUint(condition));\\n        }\\n    }\\n\\n    /**\\n     * @dev Returns the largest of two numbers.\\n     */\\n    function max(uint256 a, uint256 b) internal pure returns (uint256) {\\n        return ternary(a > b, a, b);\\n    }\\n\\n    /**\\n     * @dev Returns the smallest of two numbers.\\n     */\\n    function min(uint256 a, uint256 b) internal pure returns (uint256) {\\n        return ternary(a < b, a, b);\\n    }\\n\\n    /**\\n     * @dev Returns the average of two numbers. The result is rounded towards\\n     * zero.\\n     */\\n    function average(uint256 a, uint256 b) internal pure returns (uint256) {\\n        // (a + b) / 2 can overflow.\\n        return (a & b) + (a ^ b) / 2;\\n    }\\n\\n    /**\\n     * @dev Returns the ceiling of the division of two numbers.\\n     *\\n     * This differs from standard division with `/` in that it rounds towards infinity instead\\n     * of rounding towards zero.\\n     */\\n    function ceilDiv(uint256 a, uint256 b) internal pure returns (uint256) {\\n        if (b == 0) {\\n            // Guarantee the same behavior as in a regular Solidity division.\\n            Panic.panic(Panic.DIVISION_BY_ZERO);\\n        }\\n\\n        // The following calculation ensures accurate ceiling division without overflow.\\n        // Since a is non-zero, (a - 1) / b will not overflow.\\n        // The largest possible result occurs when (a - 1) / b is type(uint256).max,\\n        // but the largest value we can obtain is type(uint256).max - 1, which happens\\n        // when a = type(uint256).max and b = 1.\\n        unchecked {\\n            return SafeCast.toUint(a > 0) * ((a - 1) / b + 1);\\n        }\\n    }\\n\\n    /**\\n     * @dev Calculates floor(x * y / denominator) with full precision. Throws if result overflows a uint256 or\\n     * denominator == 0.\\n     *\\n     * Original credit to Remco Bloemen under MIT license (https://xn--2-umb.com/21/muldiv) with further edits by\\n     * Uniswap Labs also under MIT license.\\n     */\\n    function mulDiv(uint256 x, uint256 y, uint256 denominator) internal pure returns (uint256 result) {\\n        unchecked {\\n            (uint256 high, uint256 low) = mul512(x, y);\\n\\n            // Handle non-overflow cases, 256 by 256 division.\\n            if (high == 0) {\\n                // Solidity will revert if denominator == 0, unlike the div opcode on its own.\\n                // The surrounding unchecked block does not change this fact.\\n                // See https://docs.soliditylang.org/en/latest/control-structures.html#checked-or-unchecked-arithmetic.\\n                return low / denominator;\\n            }\\n\\n            // Make sure the result is less than 2\\u00b2\\u2075\\u2076. Also prevents denominator == 0.\\n            if (denominator <= high) {\\n                Panic.panic(ternary(denominator == 0, Panic.DIVISION_BY_ZERO, Panic.UNDER_OVERFLOW));\\n            }\\n\\n            ///////////////////////////////////////////////\\n            // 512 by 256 division.\\n            ///////////////////////////////////////////////\\n\\n            // Make division exact by subtracting the remainder from [high low].\\n            uint256 remainder;\\n            assembly (\\\"memory-safe\\\") {\\n                // Compute remainder using mulmod.\\n                remainder := mulmod(x, y, denominator)\\n\\n                // Subtract 256 bit number from 512 bit number.\\n                high := sub(high, gt(remainder, low))\\n                low := sub(low, remainder)\\n            }\\n\\n            // Factor powers of two out of denominator and compute largest power of two divisor of denominator.\\n            // Always >= 1. See https://cs.stackexchange.com/q/138556/92363.\\n\\n            uint256 twos = denominator & (0 - denominator);\\n            assembly (\\\"memory-safe\\\") {\\n                // Divide denominator by twos.\\n                denominator := div(denominator, twos)\\n\\n                // Divide [high low] by twos.\\n                low := div(low, twos)\\n\\n                // Flip twos such that it is 2\\u00b2\\u2075\\u2076 / twos. If twos is zero, then it becomes one.\\n                twos := add(div(sub(0, twos), twos), 1)\\n            }\\n\\n            // Shift in bits from high into low.\\n            low |= high * twos;\\n\\n            // Invert denominator mod 2\\u00b2\\u2075\\u2076. Now that denominator is an odd number, it has an inverse modulo 2\\u00b2\\u2075\\u2076 such\\n            // that denominator * inv \\u2261 1 mod 2\\u00b2\\u2075\\u2076. Compute the inverse by starting with a seed that is correct for\\n            // four bits. That is, denominator * inv \\u2261 1 mod 2\\u2074.\\n            uint256 inverse = (3 * denominator) ^ 2;\\n\\n            // Use the Newton-Raphson iteration to improve the precision. Thanks to Hensel's lifting lemma, this also\\n            // works in modular arithmetic, doubling the correct bits in each step.\\n            inverse *= 2 - denominator * inverse; // inverse mod 2\\u2078\\n            inverse *= 2 - denominator * inverse; // inverse mod 2\\u00b9\\u2076\\n            inverse *= 2 - denominator * inverse; // inverse mod 2\\u00b3\\u00b2\\n            inverse *= 2 - denominator * inverse; // inverse mod 2\\u2076\\u2074\\n            inverse *= 2 - denominator * inverse; // inverse mod 2\\u00b9\\u00b2\\u2078\\n            inverse *= 2 - denominator * inverse; // inverse mod 2\\u00b2\\u2075\\u2076\\n\\n            // Because the division is now exact we can divide by multiplying with the modular inverse of denominator.\\n            // This will give us the correct result modulo 2\\u00b2\\u2075\\u2076. Since the preconditions guarantee that the outcome is\\n            // less than 2\\u00b2\\u2075\\u2076, this is the final result. We don't need to compute the high bits of the result and high\\n            // is no longer required.\\n            result = low * inverse;\\n            return result;\\n        }\\n    }\\n\\n    /**\\n     * @dev Calculates x * y / denominator with full precision, following the selected rounding direction.\\n     */\\n    function mulDiv(uint256 x, uint256 y, uint256 denominator, Rounding rounding) internal pure returns (uint256) {\\n        return mulDiv(x, y, denominator) + SafeCast.toUint(unsignedRoundsUp(rounding) && mulmod(x, y, denominator) > 0);\\n    }\\n\\n    /**\\n     * @dev Calculates floor(x * y >> n) with full precision. Throws if result overflows a uint256.\\n     */\\n    function mulShr(uint256 x, uint256 y, uint8 n) internal pure returns (uint256 result) {\\n        unchecked {\\n            (uint256 high, uint256 low) = mul512(x, y);\\n            if (high >= 1 << n) {\\n                Panic.panic(Panic.UNDER_OVERFLOW);\\n            }\\n            return (high << (256 - n)) | (low >> n);\\n        }\\n    }\\n\\n    /**\\n     * @dev Calculates x * y >> n with full precision, following the selected rounding direction.\\n     */\\n    function mulShr(uint256 x, uint256 y, uint8 n, Rounding rounding) internal pure returns (uint256) {\\n        return mulShr(x, y, n) + SafeCast.toUint(unsignedRoundsUp(rounding) && mulmod(x, y, 1 << n) > 0);\\n    }\\n\\n    /**\\n     * @dev Calculate the modular multiplicative inverse of a number in Z/nZ.\\n     *\\n     * If n is a prime, then Z/nZ is a field. In that case all elements are inversible, except 0.\\n     * If n is not a prime, then Z/nZ is not a field, and some elements might not be inversible.\\n     *\\n     * If the input value is not inversible, 0 is returned.\\n     *\\n     * NOTE: If you know for sure that n is (big) a prime, it may be cheaper to use Fermat's little theorem and get the\\n     * inverse using `Math.modExp(a, n - 2, n)`. See {invModPrime}.\\n     */\\n    function invMod(uint256 a, uint256 n) internal pure returns (uint256) {\\n        unchecked {\\n            if (n == 0) return 0;\\n\\n            // The inverse modulo is calculated using the Extended Euclidean Algorithm (iterative version)\\n            // Used to compute integers x and y such that: ax + ny = gcd(a, n).\\n            // When the gcd is 1, then the inverse of a modulo n exists and it's x.\\n            // ax + ny = 1\\n            // ax = 1 + (-y)n\\n            // ax \\u2261 1 (mod n) # x is the inverse of a modulo n\\n\\n            // If the remainder is 0 the gcd is n right away.\\n            uint256 remainder = a % n;\\n            uint256 gcd = n;\\n\\n            // Therefore the initial coefficients are:\\n            // ax + ny = gcd(a, n) = n\\n            // 0a + 1n = n\\n            int256 x = 0;\\n            int256 y = 1;\\n\\n            while (remainder != 0) {\\n                uint256 quotient = gcd / remainder;\\n\\n                (gcd, remainder) = (\\n                    // The old remainder is the next gcd to try.\\n                    remainder,\\n                    // Compute the next remainder.\\n                    // Can't overflow given that (a % gcd) * (gcd // (a % gcd)) <= gcd\\n                    // where gcd is at most n (capped to type(uint256).max)\\n                    gcd - remainder * quotient\\n                );\\n\\n                (x, y) = (\\n                    // Increment the coefficient of a.\\n                    y,\\n                    // Decrement the coefficient of n.\\n                    // Can overflow, but the result is casted to uint256 so that the\\n                    // next value of y is \\\"wrapped around\\\" to a value between 0 and n - 1.\\n                    x - y * int256(quotient)\\n                );\\n            }\\n\\n            if (gcd != 1) return 0; // No inverse exists.\\n            return ternary(x < 0, n - uint256(-x), uint256(x)); // Wrap the result if it's negative.\\n        }\\n    }\\n\\n    /**\\n     * @dev Variant of {invMod}. More efficient, but only works if `p` is known to be a prime greater than `2`.\\n     *\\n     * From https://en.wikipedia.org/wiki/Fermat%27s_little_theorem[Fermat's little theorem], we know that if p is\\n     * prime, then `a**(p-1) \\u2261 1 mod p`. As a consequence, we have `a * a**(p-2) \\u2261 1 mod p`, which means that\\n     * `a**(p-2)` is the modular multiplicative inverse of a in Fp.\\n     *\\n     * NOTE: this function does NOT check that `p` is a prime greater than `2`.\\n     */\\n    function invModPrime(uint256 a, uint256 p) internal view returns (uint256) {\\n        unchecked {\\n            return Math.modExp(a, p - 2, p);\\n        }\\n    }\\n\\n    /**\\n     * @dev Returns the modular exponentiation of the specified base, exponent and modulus (b ** e % m)\\n     *\\n     * Requirements:\\n     * - modulus can't be zero\\n     * - underlying staticcall to precompile must succeed\\n     *\\n     * IMPORTANT: The result is only valid if the underlying call succeeds. When using this function, make\\n     * sure the chain you're using it on supports the precompiled contract for modular exponentiation\\n     * at address 0x05 as specified in https://eips.ethereum.org/EIPS/eip-198[EIP-198]. Otherwise,\\n     * the underlying function will succeed given the lack of a revert, but the result may be incorrectly\\n     * interpreted as 0.\\n     */\\n    function modExp(uint256 b, uint256 e, uint256 m) internal view returns (uint256) {\\n        (bool success, uint256 result) = tryModExp(b, e, m);\\n        if (!success) {\\n            Panic.panic(Panic.DIVISION_BY_ZERO);\\n        }\\n        return result;\\n    }\\n\\n    /**\\n     * @dev Returns the modular exponentiation of the specified base, exponent and modulus (b ** e % m).\\n     * It includes a success flag indicating if the operation succeeded. Operation will be marked as failed if trying\\n     * to operate modulo 0 or if the underlying precompile reverted.\\n     *\\n     * IMPORTANT: The result is only valid if the success flag is true. When using this function, make sure the chain\\n     * you're using it on supports the precompiled contract for modular exponentiation at address 0x05 as specified in\\n     * https://eips.ethereum.org/EIPS/eip-198[EIP-198]. Otherwise, the underlying function will succeed given the lack\\n     * of a revert, but the result may be incorrectly interpreted as 0.\\n     */\\n    function tryModExp(uint256 b, uint256 e, uint256 m) internal view returns (bool success, uint256 result) {\\n        if (m == 0) return (false, 0);\\n        assembly (\\\"memory-safe\\\") {\\n            let ptr := mload(0x40)\\n            // | Offset    | Content    | Content (Hex)                                                      |\\n            // |-----------|------------|--------------------------------------------------------------------|\\n            // | 0x00:0x1f | size of b  | 0x0000000000000000000000000000000000000000000000000000000000000020 |\\n            // | 0x20:0x3f | size of e  | 0x0000000000000000000000000000000000000000000000000000000000000020 |\\n            // | 0x40:0x5f | size of m  | 0x0000000000000000000000000000000000000000000000000000000000000020 |\\n            // | 0x60:0x7f | value of b | 0x<.............................................................b> |\\n            // | 0x80:0x9f | value of e | 0x<.............................................................e> |\\n            // | 0xa0:0xbf | value of m | 0x<.............................................................m> |\\n            mstore(ptr, 0x20)\\n            mstore(add(ptr, 0x20), 0x20)\\n            mstore(add(ptr, 0x40), 0x20)\\n            mstore(add(ptr, 0x60), b)\\n            mstore(add(ptr, 0x80), e)\\n            mstore(add(ptr, 0xa0), m)\\n\\n            // Given the result < m, it's guaranteed to fit in 32 bytes,\\n            // so we can use the memory scratch space located at offset 0.\\n            success := staticcall(gas(), 0x05, ptr, 0xc0, 0x00, 0x20)\\n            result := mload(0x00)\\n        }\\n    }\\n\\n    /**\\n     * @dev Variant of {modExp} that supports inputs of arbitrary length.\\n     */\\n    function modExp(bytes memory b, bytes memory e, bytes memory m) internal view returns (bytes memory) {\\n        (bool success, bytes memory result) = tryModExp(b, e, m);\\n        if (!success) {\\n            Panic.panic(Panic.DIVISION_BY_ZERO);\\n        }\\n        return result;\\n    }\\n\\n    /**\\n     * @dev Variant of {tryModExp} that supports inputs of arbitrary length.\\n     */\\n    function tryModExp(\\n        bytes memory b,\\n        bytes memory e,\\n        bytes memory m\\n    ) internal view returns (bool success, bytes memory result) {\\n        if (_zeroBytes(m)) return (false, new bytes(0));\\n\\n        uint256 mLen = m.length;\\n\\n        // Encode call args in result and move the free memory pointer\\n        result = abi.encodePacked(b.length, e.length, mLen, b, e, m);\\n\\n        assembly (\\\"memory-safe\\\") {\\n            let dataPtr := add(result, 0x20)\\n            // Write result on top of args to avoid allocating extra memory.\\n            success := staticcall(gas(), 0x05, dataPtr, mload(result), dataPtr, mLen)\\n            // Overwrite the length.\\n            // result.length > returndatasize() is guaranteed because returndatasize() == m.length\\n            mstore(result, mLen)\\n            // Set the memory pointer after the returned data.\\n            mstore(0x40, add(dataPtr, mLen))\\n        }\\n    }\\n\\n    /**\\n     * @dev Returns whether the provided byte array is zero.\\n     */\\n    function _zeroBytes(bytes memory byteArray) private pure returns (bool) {\\n        for (uint256 i = 0; i < byteArray.length; ++i) {\\n            if (byteArray[i] != 0) {\\n                return false;\\n            }\\n        }\\n        return true;\\n    }\\n\\n    /**\\n     * @dev Returns the square root of a number. If the number is not a perfect square, the value is rounded\\n     * towards zero.\\n     *\\n     * This method is based on Newton's method for computing square roots; the algorithm is restricted to only\\n     * using integer operations.\\n     */\\n    function sqrt(uint256 a) internal pure returns (uint256) {\\n        unchecked {\\n            // Take care of easy edge cases when a == 0 or a == 1\\n            if (a <= 1) {\\n                return a;\\n            }\\n\\n            // In this function, we use Newton's method to get a root of `f(x) := x\\u00b2 - a`. It involves building a\\n            // sequence x_n that converges toward sqrt(a). For each iteration x_n, we also define the error between\\n            // the current value as `\\u03b5_n = | x_n - sqrt(a) |`.\\n            //\\n            // For our first estimation, we consider `e` the smallest power of 2 which is bigger than the square root\\n            // of the target. (i.e. `2**(e-1) \\u2264 sqrt(a) < 2**e`). We know that `e \\u2264 128` because `(2\\u00b9\\u00b2\\u2078)\\u00b2 = 2\\u00b2\\u2075\\u2076` is\\n            // bigger than any uint256.\\n            //\\n            // By noticing that\\n            // `2**(e-1) \\u2264 sqrt(a) < 2**e \\u2192 (2**(e-1))\\u00b2 \\u2264 a < (2**e)\\u00b2 \\u2192 2**(2*e-2) \\u2264 a < 2**(2*e)`\\n            // we can deduce that `e - 1` is `log2(a) / 2`. We can thus compute `x_n = 2**(e-1)` using a method similar\\n            // to the msb function.\\n            uint256 aa = a;\\n            uint256 xn = 1;\\n\\n            if (aa >= (1 << 128)) {\\n                aa >>= 128;\\n                xn <<= 64;\\n            }\\n            if (aa >= (1 << 64)) {\\n                aa >>= 64;\\n                xn <<= 32;\\n            }\\n            if (aa >= (1 << 32)) {\\n                aa >>= 32;\\n                xn <<= 16;\\n            }\\n            if (aa >= (1 << 16)) {\\n                aa >>= 16;\\n                xn <<= 8;\\n            }\\n            if (aa >= (1 << 8)) {\\n                aa >>= 8;\\n                xn <<= 4;\\n            }\\n            if (aa >= (1 << 4)) {\\n                aa >>= 4;\\n                xn <<= 2;\\n            }\\n            if (aa >= (1 << 2)) {\\n                xn <<= 1;\\n            }\\n\\n            // We now have x_n such that `x_n = 2**(e-1) \\u2264 sqrt(a) < 2**e = 2 * x_n`. This implies \\u03b5_n \\u2264 2**(e-1).\\n            //\\n            // We can refine our estimation by noticing that the middle of that interval minimizes the error.\\n            // If we move x_n to equal 2**(e-1) + 2**(e-2), then we reduce the error to \\u03b5_n \\u2264 2**(e-2).\\n            // This is going to be our x_0 (and \\u03b5_0)\\n            xn = (3 * xn) >> 1; // \\u03b5_0 := | x_0 - sqrt(a) | \\u2264 2**(e-2)\\n\\n            // From here, Newton's method give us:\\n            // x_{n+1} = (x_n + a / x_n) / 2\\n            //\\n            // One should note that:\\n            // x_{n+1}\\u00b2 - a = ((x_n + a / x_n) / 2)\\u00b2 - a\\n            //              = ((x_n\\u00b2 + a) / (2 * x_n))\\u00b2 - a\\n            //              = (x_n\\u2074 + 2 * a * x_n\\u00b2 + a\\u00b2) / (4 * x_n\\u00b2) - a\\n            //              = (x_n\\u2074 + 2 * a * x_n\\u00b2 + a\\u00b2 - 4 * a * x_n\\u00b2) / (4 * x_n\\u00b2)\\n            //              = (x_n\\u2074 - 2 * a * x_n\\u00b2 + a\\u00b2) / (4 * x_n\\u00b2)\\n            //              = (x_n\\u00b2 - a)\\u00b2 / (2 * x_n)\\u00b2\\n            //              = ((x_n\\u00b2 - a) / (2 * x_n))\\u00b2\\n            //              \\u2265 0\\n            // Which proves that for all n \\u2265 1, sqrt(a) \\u2264 x_n\\n            //\\n            // This gives us the proof of quadratic convergence of the sequence:\\n            // \\u03b5_{n+1} = | x_{n+1} - sqrt(a) |\\n            //         = | (x_n + a / x_n) / 2 - sqrt(a) |\\n            //         = | (x_n\\u00b2 + a - 2*x_n*sqrt(a)) / (2 * x_n) |\\n            //         = | (x_n - sqrt(a))\\u00b2 / (2 * x_n) |\\n            //         = | \\u03b5_n\\u00b2 / (2 * x_n) |\\n            //         = \\u03b5_n\\u00b2 / | (2 * x_n) |\\n            //\\n            // For the first iteration, we have a special case where x_0 is known:\\n            // \\u03b5_1 = \\u03b5_0\\u00b2 / | (2 * x_0) |\\n            //     \\u2264 (2**(e-2))\\u00b2 / (2 * (2**(e-1) + 2**(e-2)))\\n            //     \\u2264 2**(2*e-4) / (3 * 2**(e-1))\\n            //     \\u2264 2**(e-3) / 3\\n            //     \\u2264 2**(e-3-log2(3))\\n            //     \\u2264 2**(e-4.5)\\n            //\\n            // For the following iterations, we use the fact that, 2**(e-1) \\u2264 sqrt(a) \\u2264 x_n:\\n            // \\u03b5_{n+1} = \\u03b5_n\\u00b2 / | (2 * x_n) |\\n            //         \\u2264 (2**(e-k))\\u00b2 / (2 * 2**(e-1))\\n            //         \\u2264 2**(2*e-2*k) / 2**e\\n            //         \\u2264 2**(e-2*k)\\n            xn = (xn + a / xn) >> 1; // \\u03b5_1 := | x_1 - sqrt(a) | \\u2264 2**(e-4.5)  -- special case, see above\\n            xn = (xn + a / xn) >> 1; // \\u03b5_2 := | x_2 - sqrt(a) | \\u2264 2**(e-9)    -- general case with k = 4.5\\n            xn = (xn + a / xn) >> 1; // \\u03b5_3 := | x_3 - sqrt(a) | \\u2264 2**(e-18)   -- general case with k = 9\\n            xn = (xn + a / xn) >> 1; // \\u03b5_4 := | x_4 - sqrt(a) | \\u2264 2**(e-36)   -- general case with k = 18\\n            xn = (xn + a / xn) >> 1; // \\u03b5_5 := | x_5 - sqrt(a) | \\u2264 2**(e-72)   -- general case with k = 36\\n            xn = (xn + a / xn) >> 1; // \\u03b5_6 := | x_6 - sqrt(a) | \\u2264 2**(e-144)  -- general case with k = 72\\n\\n            // Because e \\u2264 128 (as discussed during the first estimation phase), we know have reached a precision\\n            // \\u03b5_6 \\u2264 2**(e-144) < 1. Given we're operating on integers, then we can ensure that xn is now either\\n            // sqrt(a) or sqrt(a) + 1.\\n            return xn - SafeCast.toUint(xn > a / xn);\\n        }\\n    }\\n\\n    /**\\n     * @dev Calculates sqrt(a), following the selected rounding direction.\\n     */\\n    function sqrt(uint256 a, Rounding rounding) internal pure returns (uint256) {\\n        unchecked {\\n            uint256 result = sqrt(a);\\n            return result + SafeCast.toUint(unsignedRoundsUp(rounding) && result * result < a);\\n        }\\n    }\\n\\n    /**\\n     * @dev Return the log in base 2 of a positive value rounded towards zero.\\n     * Returns 0 if given 0.\\n     */\\n    function log2(uint256 x) internal pure returns (uint256 r) {\\n        // If value has upper 128 bits set, log2 result is at least 128\\n        r = SafeCast.toUint(x > 0xffffffffffffffffffffffffffffffff) << 7;\\n        // If upper 64 bits of 128-bit half set, add 64 to result\\n        r |= SafeCast.toUint((x >> r) > 0xffffffffffffffff) << 6;\\n        // If upper 32 bits of 64-bit half set, add 32 to result\\n        r |= SafeCast.toUint((x >> r) > 0xffffffff) << 5;\\n        // If upper 16 bits of 32-bit half set, add 16 to result\\n        r |= SafeCast.toUint((x >> r) > 0xffff) << 4;\\n        // If upper 8 bits of 16-bit half set, add 8 to result\\n        r |= SafeCast.toUint((x >> r) > 0xff) << 3;\\n        // If upper 4 bits of 8-bit half set, add 4 to result\\n        r |= SafeCast.toUint((x >> r) > 0xf) << 2;\\n\\n        // Shifts value right by the current result and use it as an index into this lookup table:\\n        //\\n        // | x (4 bits) |  index  | table[index] = MSB position |\\n        // |------------|---------|-----------------------------|\\n        // |    0000    |    0    |        table[0] = 0         |\\n        // |    0001    |    1    |        table[1] = 0         |\\n        // |    0010    |    2    |        table[2] = 1         |\\n        // |    0011    |    3    |        table[3] = 1         |\\n        // |    0100    |    4    |        table[4] = 2         |\\n        // |    0101    |    5    |        table[5] = 2         |\\n        // |    0110    |    6    |        table[6] = 2         |\\n        // |    0111    |    7    |        table[7] = 2         |\\n        // |    1000    |    8    |        table[8] = 3         |\\n        // |    1001    |    9    |        table[9] = 3         |\\n        // |    1010    |   10    |        table[10] = 3        |\\n        // |    1011    |   11    |        table[11] = 3        |\\n        // |    1100    |   12    |        table[12] = 3        |\\n        // |    1101    |   13    |        table[13] = 3        |\\n        // |    1110    |   14    |        table[14] = 3        |\\n        // |    1111    |   15    |        table[15] = 3        |\\n        //\\n        // The lookup table is represented as a 32-byte value with the MSB positions for 0-15 in the last 16 bytes.\\n        assembly (\\\"memory-safe\\\") {\\n            r := or(r, byte(shr(r, x), 0x0000010102020202030303030303030300000000000000000000000000000000))\\n        }\\n    }\\n\\n    /**\\n     * @dev Return the log in base 2, following the selected rounding direction, of a positive value.\\n     * Returns 0 if given 0.\\n     */\\n    function log2(uint256 value, Rounding rounding) internal pure returns (uint256) {\\n        unchecked {\\n            uint256 result = log2(value);\\n            return result + SafeCast.toUint(unsignedRoundsUp(rounding) && 1 << result < value);\\n        }\\n    }\\n\\n    /**\\n     * @dev Return the log in base 10 of a positive value rounded towards zero.\\n     * Returns 0 if given 0.\\n     */\\n    function log10(uint256 value) internal pure returns (uint256) {\\n        uint256 result = 0;\\n        unchecked {\\n            if (value >= 10 ** 64) {\\n                value /= 10 ** 64;\\n                result += 64;\\n            }\\n            if (value >= 10 ** 32) {\\n                value /= 10 ** 32;\\n                result += 32;\\n            }\\n            if (value >= 10 ** 16) {\\n                value /= 10 ** 16;\\n                result += 16;\\n            }\\n            if (value >= 10 ** 8) {\\n                value /= 10 ** 8;\\n                result += 8;\\n            }\\n            if (value >= 10 ** 4) {\\n                value /= 10 ** 4;\\n                result += 4;\\n            }\\n            if (value >= 10 ** 2) {\\n                value /= 10 ** 2;\\n                result += 2;\\n            }\\n            if (value >= 10 ** 1) {\\n                result += 1;\\n            }\\n        }\\n        return result;\\n    }\\n\\n    /**\\n     * @dev Return the log in base 10, following the selected rounding direction, of a positive value.\\n     * Returns 0 if given 0.\\n     */\\n    function log10(uint256 value, Rounding rounding) internal pure returns (uint256) {\\n        unchecked {\\n            uint256 result = log10(value);\\n            return result + SafeCast.toUint(unsignedRoundsUp(rounding) && 10 ** result < value);\\n        }\\n    }\\n\\n    /**\\n     * @dev Return the log in base 256 of a positive value rounded towards zero.\\n     * Returns 0 if given 0.\\n     *\\n     * Adding one to the result gives the number of pairs of hex symbols needed to represent `value` as a hex string.\\n     */\\n    function log256(uint256 x) internal pure returns (uint256 r) {\\n        // If value has upper 128 bits set, log2 result is at least 128\\n        r = SafeCast.toUint(x > 0xffffffffffffffffffffffffffffffff) << 7;\\n        // If upper 64 bits of 128-bit half set, add 64 to result\\n        r |= SafeCast.toUint((x >> r) > 0xffffffffffffffff) << 6;\\n        // If upper 32 bits of 64-bit half set, add 32 to result\\n        r |= SafeCast.toUint((x >> r) > 0xffffffff) << 5;\\n        // If upper 16 bits of 32-bit half set, add 16 to result\\n        r |= SafeCast.toUint((x >> r) > 0xffff) << 4;\\n        // Add 1 if upper 8 bits of 16-bit half set, and divide accumulated result by 8\\n        return (r >> 3) | SafeCast.toUint((x >> r) > 0xff);\\n    }\\n\\n    /**\\n     * @dev Return the log in base 256, following the selected rounding direction, of a positive value.\\n     * Returns 0 if given 0.\\n     */\\n    function log256(uint256 value, Rounding rounding) internal pure returns (uint256) {\\n        unchecked {\\n            uint256 result = log256(value);\\n            return result + SafeCast.toUint(unsignedRoundsUp(rounding) && 1 << (result << 3) < value);\\n        }\\n    }\\n\\n    /**\\n     * @dev Returns whether a provided rounding mode is considered rounding up for unsigned integers.\\n     */\\n    function unsignedRoundsUp(Rounding rounding) internal pure returns (bool) {\\n        return uint8(rounding) % 2 == 1;\\n    }\\n}\\n\",\"keccak256\":\"0x1225214420c83ebcca88f2ae2b50f053aaa7df7bd684c3e878d334627f2edfc6\",\"license\":\"MIT\"},\"@openzeppelin/contracts/utils/math/SafeCast.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n// OpenZeppelin Contracts (last updated v5.1.0) (utils/math/SafeCast.sol)\\n// This file was procedurally generated from scripts/generate/templates/SafeCast.js.\\n\\npragma solidity ^0.8.20;\\n\\n/**\\n * @dev Wrappers over Solidity's uintXX/intXX/bool casting operators with added overflow\\n * checks.\\n *\\n * Downcasting from uint256/int256 in Solidity does not revert on overflow. This can\\n * easily result in undesired exploitation or bugs, since developers usually\\n * assume that overflows raise errors. `SafeCast` restores this intuition by\\n * reverting the transaction when such an operation overflows.\\n *\\n * Using this library instead of the unchecked operations eliminates an entire\\n * class of bugs, so it's recommended to use it always.\\n */\\nlibrary SafeCast {\\n    /**\\n     * @dev Value doesn't fit in an uint of `bits` size.\\n     */\\n    error SafeCastOverflowedUintDowncast(uint8 bits, uint256 value);\\n\\n    /**\\n     * @dev An int value doesn't fit in an uint of `bits` size.\\n     */\\n    error SafeCastOverflowedIntToUint(int256 value);\\n\\n    /**\\n     * @dev Value doesn't fit in an int of `bits` size.\\n     */\\n    error SafeCastOverflowedIntDowncast(uint8 bits, int256 value);\\n\\n    /**\\n     * @dev An uint value doesn't fit in an int of `bits` size.\\n     */\\n    error SafeCastOverflowedUintToInt(uint256 value);\\n\\n    /**\\n     * @dev Returns the downcasted uint248 from uint256, reverting on\\n     * overflow (when the input is greater than largest uint248).\\n     *\\n     * Counterpart to Solidity's `uint248` operator.\\n     *\\n     * Requirements:\\n     *\\n     * - input must fit into 248 bits\\n     */\\n    function toUint248(uint256 value) internal pure returns (uint248) {\\n        if (value > type(uint248).max) {\\n            revert SafeCastOverflowedUintDowncast(248, value);\\n        }\\n        return uint248(value);\\n    }\\n\\n    /**\\n     * @dev Returns the downcasted uint240 from uint256, reverting on\\n     * overflow (when the input is greater than largest uint240).\\n     *\\n     * Counterpart to Solidity's `uint240` operator.\\n     *\\n     * Requirements:\\n     *\\n     * - input must fit into 240 bits\\n     */\\n    function toUint240(uint256 value) internal pure returns (uint240) {\\n        if (value > type(uint240).max) {\\n            revert SafeCastOverflowedUintDowncast(240, value);\\n        }\\n        return uint240(value);\\n    }\\n\\n    /**\\n     * @dev Returns the downcasted uint232 from uint256, reverting on\\n     * overflow (when the input is greater than largest uint232).\\n     *\\n     * Counterpart to Solidity's `uint232` operator.\\n     *\\n     * Requirements:\\n     *\\n     * - input must fit into 232 bits\\n     */\\n    function toUint232(uint256 value) internal pure returns (uint232) {\\n        if (value > type(uint232).max) {\\n            revert SafeCastOverflowedUintDowncast(232, value);\\n        }\\n        return uint232(value);\\n    }\\n\\n    /**\\n     * @dev Returns the downcasted uint224 from uint256, reverting on\\n     * overflow (when the input is greater than largest uint224).\\n     *\\n     * Counterpart to Solidity's `uint224` operator.\\n     *\\n     * Requirements:\\n     *\\n     * - input must fit into 224 bits\\n     */\\n    function toUint224(uint256 value) internal pure returns (uint224) {\\n        if (value > type(uint224).max) {\\n            revert SafeCastOverflowedUintDowncast(224, value);\\n        }\\n        return uint224(value);\\n    }\\n\\n    /**\\n     * @dev Returns the downcasted uint216 from uint256, reverting on\\n     * overflow (when the input is greater than largest uint216).\\n     *\\n     * Counterpart to Solidity's `uint216` operator.\\n     *\\n     * Requirements:\\n     *\\n     * - input must fit into 216 bits\\n     */\\n    function toUint216(uint256 value) internal pure returns (uint216) {\\n        if (value > type(uint216).max) {\\n            revert SafeCastOverflowedUintDowncast(216, value);\\n        }\\n        return uint216(value);\\n    }\\n\\n    /**\\n     * @dev Returns the downcasted uint208 from uint256, reverting on\\n     * overflow (when the input is greater than largest uint208).\\n     *\\n     * Counterpart to Solidity's `uint208` operator.\\n     *\\n     * Requirements:\\n     *\\n     * - input must fit into 208 bits\\n     */\\n    function toUint208(uint256 value) internal pure returns (uint208) {\\n        if (value > type(uint208).max) {\\n            revert SafeCastOverflowedUintDowncast(208, value);\\n        }\\n        return uint208(value);\\n    }\\n\\n    /**\\n     * @dev Returns the downcasted uint200 from uint256, reverting on\\n     * overflow (when the input is greater than largest uint200).\\n     *\\n     * Counterpart to Solidity's `uint200` operator.\\n     *\\n     * Requirements:\\n     *\\n     * - input must fit into 200 bits\\n     */\\n    function toUint200(uint256 value) internal pure returns (uint200) {\\n        if (value > type(uint200).max) {\\n            revert SafeCastOverflowedUintDowncast(200, value);\\n        }\\n        return uint200(value);\\n    }\\n\\n    /**\\n     * @dev Returns the downcasted uint192 from uint256, reverting on\\n     * overflow (when the input is greater than largest uint192).\\n     *\\n     * Counterpart to Solidity's `uint192` operator.\\n     *\\n     * Requirements:\\n     *\\n     * - input must fit into 192 bits\\n     */\\n    function toUint192(uint256 value) internal pure returns (uint192) {\\n        if (value > type(uint192).max) {\\n            revert SafeCastOverflowedUintDowncast(192, value);\\n        }\\n        return uint192(value);\\n    }\\n\\n    /**\\n     * @dev Returns the downcasted uint184 from uint256, reverting on\\n     * overflow (when the input is greater than largest uint184).\\n     *\\n     * Counterpart to Solidity's `uint184` operator.\\n     *\\n     * Requirements:\\n     *\\n     * - input must fit into 184 bits\\n     */\\n    function toUint184(uint256 value) internal pure returns (uint184) {\\n        if (value > type(uint184).max) {\\n            revert SafeCastOverflowedUintDowncast(184, value);\\n        }\\n        return uint184(value);\\n    }\\n\\n    /**\\n     * @dev Returns the downcasted uint176 from uint256, reverting on\\n     * overflow (when the input is greater than largest uint176).\\n     *\\n     * Counterpart to Solidity's `uint176` operator.\\n     *\\n     * Requirements:\\n     *\\n     * - input must fit into 176 bits\\n     */\\n    function toUint176(uint256 value) internal pure returns (uint176) {\\n        if (value > type(uint176).max) {\\n            revert SafeCastOverflowedUintDowncast(176, value);\\n        }\\n        return uint176(value);\\n    }\\n\\n    /**\\n     * @dev Returns the downcasted uint168 from uint256, reverting on\\n     * overflow (when the input is greater than largest uint168).\\n     *\\n     * Counterpart to Solidity's `uint168` operator.\\n     *\\n     * Requirements:\\n     *\\n     * - input must fit into 168 bits\\n     */\\n    function toUint168(uint256 value) internal pure returns (uint168) {\\n        if (value > type(uint168).max) {\\n            revert SafeCastOverflowedUintDowncast(168, value);\\n        }\\n        return uint168(value);\\n    }\\n\\n    /**\\n     * @dev Returns the downcasted uint160 from uint256, reverting on\\n     * overflow (when the input is greater than largest uint160).\\n     *\\n     * Counterpart to Solidity's `uint160` operator.\\n     *\\n     * Requirements:\\n     *\\n     * - input must fit into 160 bits\\n     */\\n    function toUint160(uint256 value) internal pure returns (uint160) {\\n        if (value > type(uint160).max) {\\n            revert SafeCastOverflowedUintDowncast(160, value);\\n        }\\n        return uint160(value);\\n    }\\n\\n    /**\\n     * @dev Returns the downcasted uint152 from uint256, reverting on\\n     * overflow (when the input is greater than largest uint152).\\n     *\\n     * Counterpart to Solidity's `uint152` operator.\\n     *\\n     * Requirements:\\n     *\\n     * - input must fit into 152 bits\\n     */\\n    function toUint152(uint256 value) internal pure returns (uint152) {\\n        if (value > type(uint152).max) {\\n            revert SafeCastOverflowedUintDowncast(152, value);\\n        }\\n        return uint152(value);\\n    }\\n\\n    /**\\n     * @dev Returns the downcasted uint144 from uint256, reverting on\\n     * overflow (when the input is greater than largest uint144).\\n     *\\n     * Counterpart to Solidity's `uint144` operator.\\n     *\\n     * Requirements:\\n     *\\n     * - input must fit into 144 bits\\n     */\\n    function toUint144(uint256 value) internal pure returns (uint144) {\\n        if (value > type(uint144).max) {\\n            revert SafeCastOverflowedUintDowncast(144, value);\\n        }\\n        return uint144(value);\\n    }\\n\\n    /**\\n     * @dev Returns the downcasted uint136 from uint256, reverting on\\n     * overflow (when the input is greater than largest uint136).\\n     *\\n     * Counterpart to Solidity's `uint136` operator.\\n     *\\n     * Requirements:\\n     *\\n     * - input must fit into 136 bits\\n     */\\n    function toUint136(uint256 value) internal pure returns (uint136) {\\n        if (value > type(uint136).max) {\\n            revert SafeCastOverflowedUintDowncast(136, value);\\n        }\\n        return uint136(value);\\n    }\\n\\n    /**\\n     * @dev Returns the downcasted uint128 from uint256, reverting on\\n     * overflow (when the input is greater than largest uint128).\\n     *\\n     * Counterpart to Solidity's `uint128` operator.\\n     *\\n     * Requirements:\\n     *\\n     * - input must fit into 128 bits\\n     */\\n    function toUint128(uint256 value) internal pure returns (uint128) {\\n        if (value > type(uint128).max) {\\n            revert SafeCastOverflowedUintDowncast(128, value);\\n        }\\n        return uint128(value);\\n    }\\n\\n    /**\\n     * @dev Returns the downcasted uint120 from uint256, reverting on\\n     * overflow (when the input is greater than largest uint120).\\n     *\\n     * Counterpart to Solidity's `uint120` operator.\\n     *\\n     * Requirements:\\n     *\\n     * - input must fit into 120 bits\\n     */\\n    function toUint120(uint256 value) internal pure returns (uint120) {\\n        if (value > type(uint120).max) {\\n            revert SafeCastOverflowedUintDowncast(120, value);\\n        }\\n        return uint120(value);\\n    }\\n\\n    /**\\n     * @dev Returns the downcasted uint112 from uint256, reverting on\\n     * overflow (when the input is greater than largest uint112).\\n     *\\n     * Counterpart to Solidity's `uint112` operator.\\n     *\\n     * Requirements:\\n     *\\n     * - input must fit into 112 bits\\n     */\\n    function toUint112(uint256 value) internal pure returns (uint112) {\\n        if (value > type(uint112).max) {\\n            revert SafeCastOverflowedUintDowncast(112, value);\\n        }\\n        return uint112(value);\\n    }\\n\\n    /**\\n     * @dev Returns the downcasted uint104 from uint256, reverting on\\n     * overflow (when the input is greater than largest uint104).\\n     *\\n     * Counterpart to Solidity's `uint104` operator.\\n     *\\n     * Requirements:\\n     *\\n     * - input must fit into 104 bits\\n     */\\n    function toUint104(uint256 value) internal pure returns (uint104) {\\n        if (value > type(uint104).max) {\\n            revert SafeCastOverflowedUintDowncast(104, value);\\n        }\\n        return uint104(value);\\n    }\\n\\n    /**\\n     * @dev Returns the downcasted uint96 from uint256, reverting on\\n     * overflow (when the input is greater than largest uint96).\\n     *\\n     * Counterpart to Solidity's `uint96` operator.\\n     *\\n     * Requirements:\\n     *\\n     * - input must fit into 96 bits\\n     */\\n    function toUint96(uint256 value) internal pure returns (uint96) {\\n        if (value > type(uint96).max) {\\n            revert SafeCastOverflowedUintDowncast(96, value);\\n        }\\n        return uint96(value);\\n    }\\n\\n    /**\\n     * @dev Returns the downcasted uint88 from uint256, reverting on\\n     * overflow (when the input is greater than largest uint88).\\n     *\\n     * Counterpart to Solidity's `uint88` operator.\\n     *\\n     * Requirements:\\n     *\\n     * - input must fit into 88 bits\\n     */\\n    function toUint88(uint256 value) internal pure returns (uint88) {\\n        if (value > type(uint88).max) {\\n            revert SafeCastOverflowedUintDowncast(88, value);\\n        }\\n        return uint88(value);\\n    }\\n\\n    /**\\n     * @dev Returns the downcasted uint80 from uint256, reverting on\\n     * overflow (when the input is greater than largest uint80).\\n     *\\n     * Counterpart to Solidity's `uint80` operator.\\n     *\\n     * Requirements:\\n     *\\n     * - input must fit into 80 bits\\n     */\\n    function toUint80(uint256 value) internal pure returns (uint80) {\\n        if (value > type(uint80).max) {\\n            revert SafeCastOverflowedUintDowncast(80, value);\\n        }\\n        return uint80(value);\\n    }\\n\\n    /**\\n     * @dev Returns the downcasted uint72 from uint256, reverting on\\n     * overflow (when the input is greater than largest uint72).\\n     *\\n     * Counterpart to Solidity's `uint72` operator.\\n     *\\n     * Requirements:\\n     *\\n     * - input must fit into 72 bits\\n     */\\n    function toUint72(uint256 value) internal pure returns (uint72) {\\n        if (value > type(uint72).max) {\\n            revert SafeCastOverflowedUintDowncast(72, value);\\n        }\\n        return uint72(value);\\n    }\\n\\n    /**\\n     * @dev Returns the downcasted uint64 from uint256, reverting on\\n     * overflow (when the input is greater than largest uint64).\\n     *\\n     * Counterpart to Solidity's `uint64` operator.\\n     *\\n     * Requirements:\\n     *\\n     * - input must fit into 64 bits\\n     */\\n    function toUint64(uint256 value) internal pure returns (uint64) {\\n        if (value > type(uint64).max) {\\n            revert SafeCastOverflowedUintDowncast(64, value);\\n        }\\n        return uint64(value);\\n    }\\n\\n    /**\\n     * @dev Returns the downcasted uint56 from uint256, reverting on\\n     * overflow (when the input is greater than largest uint56).\\n     *\\n     * Counterpart to Solidity's `uint56` operator.\\n     *\\n     * Requirements:\\n     *\\n     * - input must fit into 56 bits\\n     */\\n    function toUint56(uint256 value) internal pure returns (uint56) {\\n        if (value > type(uint56).max) {\\n            revert SafeCastOverflowedUintDowncast(56, value);\\n        }\\n        return uint56(value);\\n    }\\n\\n    /**\\n     * @dev Returns the downcasted uint48 from uint256, reverting on\\n     * overflow (when the input is greater than largest uint48).\\n     *\\n     * Counterpart to Solidity's `uint48` operator.\\n     *\\n     * Requirements:\\n     *\\n     * - input must fit into 48 bits\\n     */\\n    function toUint48(uint256 value) internal pure returns (uint48) {\\n        if (value > type(uint48).max) {\\n            revert SafeCastOverflowedUintDowncast(48, value);\\n        }\\n        return uint48(value);\\n    }\\n\\n    /**\\n     * @dev Returns the downcasted uint40 from uint256, reverting on\\n     * overflow (when the input is greater than largest uint40).\\n     *\\n     * Counterpart to Solidity's `uint40` operator.\\n     *\\n     * Requirements:\\n     *\\n     * - input must fit into 40 bits\\n     */\\n    function toUint40(uint256 value) internal pure returns (uint40) {\\n        if (value > type(uint40).max) {\\n            revert SafeCastOverflowedUintDowncast(40, value);\\n        }\\n        return uint40(value);\\n    }\\n\\n    /**\\n     * @dev Returns the downcasted uint32 from uint256, reverting on\\n     * overflow (when the input is greater than largest uint32).\\n     *\\n     * Counterpart to Solidity's `uint32` operator.\\n     *\\n     * Requirements:\\n     *\\n     * - input must fit into 32 bits\\n     */\\n    function toUint32(uint256 value) internal pure returns (uint32) {\\n        if (value > type(uint32).max) {\\n            revert SafeCastOverflowedUintDowncast(32, value);\\n        }\\n        return uint32(value);\\n    }\\n\\n    /**\\n     * @dev Returns the downcasted uint24 from uint256, reverting on\\n     * overflow (when the input is greater than largest uint24).\\n     *\\n     * Counterpart to Solidity's `uint24` operator.\\n     *\\n     * Requirements:\\n     *\\n     * - input must fit into 24 bits\\n     */\\n    function toUint24(uint256 value) internal pure returns (uint24) {\\n        if (value > type(uint24).max) {\\n            revert SafeCastOverflowedUintDowncast(24, value);\\n        }\\n        return uint24(value);\\n    }\\n\\n    /**\\n     * @dev Returns the downcasted uint16 from uint256, reverting on\\n     * overflow (when the input is greater than largest uint16).\\n     *\\n     * Counterpart to Solidity's `uint16` operator.\\n     *\\n     * Requirements:\\n     *\\n     * - input must fit into 16 bits\\n     */\\n    function toUint16(uint256 value) internal pure returns (uint16) {\\n        if (value > type(uint16).max) {\\n            revert SafeCastOverflowedUintDowncast(16, value);\\n        }\\n        return uint16(value);\\n    }\\n\\n    /**\\n     * @dev Returns the downcasted uint8 from uint256, reverting on\\n     * overflow (when the input is greater than largest uint8).\\n     *\\n     * Counterpart to Solidity's `uint8` operator.\\n     *\\n     * Requirements:\\n     *\\n     * - input must fit into 8 bits\\n     */\\n    function toUint8(uint256 value) internal pure returns (uint8) {\\n        if (value > type(uint8).max) {\\n            revert SafeCastOverflowedUintDowncast(8, value);\\n        }\\n        return uint8(value);\\n    }\\n\\n    /**\\n     * @dev Converts a signed int256 into an unsigned uint256.\\n     *\\n     * Requirements:\\n     *\\n     * - input must be greater than or equal to 0.\\n     */\\n    function toUint256(int256 value) internal pure returns (uint256) {\\n        if (value < 0) {\\n            revert SafeCastOverflowedIntToUint(value);\\n        }\\n        return uint256(value);\\n    }\\n\\n    /**\\n     * @dev Returns the downcasted int248 from int256, reverting on\\n     * overflow (when the input is less than smallest int248 or\\n     * greater than largest int248).\\n     *\\n     * Counterpart to Solidity's `int248` operator.\\n     *\\n     * Requirements:\\n     *\\n     * - input must fit into 248 bits\\n     */\\n    function toInt248(int256 value) internal pure returns (int248 downcasted) {\\n        downcasted = int248(value);\\n        if (downcasted != value) {\\n            revert SafeCastOverflowedIntDowncast(248, value);\\n        }\\n    }\\n\\n    /**\\n     * @dev Returns the downcasted int240 from int256, reverting on\\n     * overflow (when the input is less than smallest int240 or\\n     * greater than largest int240).\\n     *\\n     * Counterpart to Solidity's `int240` operator.\\n     *\\n     * Requirements:\\n     *\\n     * - input must fit into 240 bits\\n     */\\n    function toInt240(int256 value) internal pure returns (int240 downcasted) {\\n        downcasted = int240(value);\\n        if (downcasted != value) {\\n            revert SafeCastOverflowedIntDowncast(240, value);\\n        }\\n    }\\n\\n    /**\\n     * @dev Returns the downcasted int232 from int256, reverting on\\n     * overflow (when the input is less than smallest int232 or\\n     * greater than largest int232).\\n     *\\n     * Counterpart to Solidity's `int232` operator.\\n     *\\n     * Requirements:\\n     *\\n     * - input must fit into 232 bits\\n     */\\n    function toInt232(int256 value) internal pure returns (int232 downcasted) {\\n        downcasted = int232(value);\\n        if (downcasted != value) {\\n            revert SafeCastOverflowedIntDowncast(232, value);\\n        }\\n    }\\n\\n    /**\\n     * @dev Returns the downcasted int224 from int256, reverting on\\n     * overflow (when the input is less than smallest int224 or\\n     * greater than largest int224).\\n     *\\n     * Counterpart to Solidity's `int224` operator.\\n     *\\n     * Requirements:\\n     *\\n     * - input must fit into 224 bits\\n     */\\n    function toInt224(int256 value) internal pure returns (int224 downcasted) {\\n        downcasted = int224(value);\\n        if (downcasted != value) {\\n            revert SafeCastOverflowedIntDowncast(224, value);\\n        }\\n    }\\n\\n    /**\\n     * @dev Returns the downcasted int216 from int256, reverting on\\n     * overflow (when the input is less than smallest int216 or\\n     * greater than largest int216).\\n     *\\n     * Counterpart to Solidity's `int216` operator.\\n     *\\n     * Requirements:\\n     *\\n     * - input must fit into 216 bits\\n     */\\n    function toInt216(int256 value) internal pure returns (int216 downcasted) {\\n        downcasted = int216(value);\\n        if (downcasted != value) {\\n            revert SafeCastOverflowedIntDowncast(216, value);\\n        }\\n    }\\n\\n    /**\\n     * @dev Returns the downcasted int208 from int256, reverting on\\n     * overflow (when the input is less than smallest int208 or\\n     * greater than largest int208).\\n     *\\n     * Counterpart to Solidity's `int208` operator.\\n     *\\n     * Requirements:\\n     *\\n     * - input must fit into 208 bits\\n     */\\n    function toInt208(int256 value) internal pure returns (int208 downcasted) {\\n        downcasted = int208(value);\\n        if (downcasted != value) {\\n            revert SafeCastOverflowedIntDowncast(208, value);\\n        }\\n    }\\n\\n    /**\\n     * @dev Returns the downcasted int200 from int256, reverting on\\n     * overflow (when the input is less than smallest int200 or\\n     * greater than largest int200).\\n     *\\n     * Counterpart to Solidity's `int200` operator.\\n     *\\n     * Requirements:\\n     *\\n     * - input must fit into 200 bits\\n     */\\n    function toInt200(int256 value) internal pure returns (int200 downcasted) {\\n        downcasted = int200(value);\\n        if (downcasted != value) {\\n            revert SafeCastOverflowedIntDowncast(200, value);\\n        }\\n    }\\n\\n    /**\\n     * @dev Returns the downcasted int192 from int256, reverting on\\n     * overflow (when the input is less than smallest int192 or\\n     * greater than largest int192).\\n     *\\n     * Counterpart to Solidity's `int192` operator.\\n     *\\n     * Requirements:\\n     *\\n     * - input must fit into 192 bits\\n     */\\n    function toInt192(int256 value) internal pure returns (int192 downcasted) {\\n        downcasted = int192(value);\\n        if (downcasted != value) {\\n            revert SafeCastOverflowedIntDowncast(192, value);\\n        }\\n    }\\n\\n    /**\\n     * @dev Returns the downcasted int184 from int256, reverting on\\n     * overflow (when the input is less than smallest int184 or\\n     * greater than largest int184).\\n     *\\n     * Counterpart to Solidity's `int184` operator.\\n     *\\n     * Requirements:\\n     *\\n     * - input must fit into 184 bits\\n     */\\n    function toInt184(int256 value) internal pure returns (int184 downcasted) {\\n        downcasted = int184(value);\\n        if (downcasted != value) {\\n            revert SafeCastOverflowedIntDowncast(184, value);\\n        }\\n    }\\n\\n    /**\\n     * @dev Returns the downcasted int176 from int256, reverting on\\n     * overflow (when the input is less than smallest int176 or\\n     * greater than largest int176).\\n     *\\n     * Counterpart to Solidity's `int176` operator.\\n     *\\n     * Requirements:\\n     *\\n     * - input must fit into 176 bits\\n     */\\n    function toInt176(int256 value) internal pure returns (int176 downcasted) {\\n        downcasted = int176(value);\\n        if (downcasted != value) {\\n            revert SafeCastOverflowedIntDowncast(176, value);\\n        }\\n    }\\n\\n    /**\\n     * @dev Returns the downcasted int168 from int256, reverting on\\n     * overflow (when the input is less than smallest int168 or\\n     * greater than largest int168).\\n     *\\n     * Counterpart to Solidity's `int168` operator.\\n     *\\n     * Requirements:\\n     *\\n     * - input must fit into 168 bits\\n     */\\n    function toInt168(int256 value) internal pure returns (int168 downcasted) {\\n        downcasted = int168(value);\\n        if (downcasted != value) {\\n            revert SafeCastOverflowedIntDowncast(168, value);\\n        }\\n    }\\n\\n    /**\\n     * @dev Returns the downcasted int160 from int256, reverting on\\n     * overflow (when the input is less than smallest int160 or\\n     * greater than largest int160).\\n     *\\n     * Counterpart to Solidity's `int160` operator.\\n     *\\n     * Requirements:\\n     *\\n     * - input must fit into 160 bits\\n     */\\n    function toInt160(int256 value) internal pure returns (int160 downcasted) {\\n        downcasted = int160(value);\\n        if (downcasted != value) {\\n            revert SafeCastOverflowedIntDowncast(160, value);\\n        }\\n    }\\n\\n    /**\\n     * @dev Returns the downcasted int152 from int256, reverting on\\n     * overflow (when the input is less than smallest int152 or\\n     * greater than largest int152).\\n     *\\n     * Counterpart to Solidity's `int152` operator.\\n     *\\n     * Requirements:\\n     *\\n     * - input must fit into 152 bits\\n     */\\n    function toInt152(int256 value) internal pure returns (int152 downcasted) {\\n        downcasted = int152(value);\\n        if (downcasted != value) {\\n            revert SafeCastOverflowedIntDowncast(152, value);\\n        }\\n    }\\n\\n    /**\\n     * @dev Returns the downcasted int144 from int256, reverting on\\n     * overflow (when the input is less than smallest int144 or\\n     * greater than largest int144).\\n     *\\n     * Counterpart to Solidity's `int144` operator.\\n     *\\n     * Requirements:\\n     *\\n     * - input must fit into 144 bits\\n     */\\n    function toInt144(int256 value) internal pure returns (int144 downcasted) {\\n        downcasted = int144(value);\\n        if (downcasted != value) {\\n            revert SafeCastOverflowedIntDowncast(144, value);\\n        }\\n    }\\n\\n    /**\\n     * @dev Returns the downcasted int136 from int256, reverting on\\n     * overflow (when the input is less than smallest int136 or\\n     * greater than largest int136).\\n     *\\n     * Counterpart to Solidity's `int136` operator.\\n     *\\n     * Requirements:\\n     *\\n     * - input must fit into 136 bits\\n     */\\n    function toInt136(int256 value) internal pure returns (int136 downcasted) {\\n        downcasted = int136(value);\\n        if (downcasted != value) {\\n            revert SafeCastOverflowedIntDowncast(136, value);\\n        }\\n    }\\n\\n    /**\\n     * @dev Returns the downcasted int128 from int256, reverting on\\n     * overflow (when the input is less than smallest int128 or\\n     * greater than largest int128).\\n     *\\n     * Counterpart to Solidity's `int128` operator.\\n     *\\n     * Requirements:\\n     *\\n     * - input must fit into 128 bits\\n     */\\n    function toInt128(int256 value) internal pure returns (int128 downcasted) {\\n        downcasted = int128(value);\\n        if (downcasted != value) {\\n            revert SafeCastOverflowedIntDowncast(128, value);\\n        }\\n    }\\n\\n    /**\\n     * @dev Returns the downcasted int120 from int256, reverting on\\n     * overflow (when the input is less than smallest int120 or\\n     * greater than largest int120).\\n     *\\n     * Counterpart to Solidity's `int120` operator.\\n     *\\n     * Requirements:\\n     *\\n     * - input must fit into 120 bits\\n     */\\n    function toInt120(int256 value) internal pure returns (int120 downcasted) {\\n        downcasted = int120(value);\\n        if (downcasted != value) {\\n            revert SafeCastOverflowedIntDowncast(120, value);\\n        }\\n    }\\n\\n    /**\\n     * @dev Returns the downcasted int112 from int256, reverting on\\n     * overflow (when the input is less than smallest int112 or\\n     * greater than largest int112).\\n     *\\n     * Counterpart to Solidity's `int112` operator.\\n     *\\n     * Requirements:\\n     *\\n     * - input must fit into 112 bits\\n     */\\n    function toInt112(int256 value) internal pure returns (int112 downcasted) {\\n        downcasted = int112(value);\\n        if (downcasted != value) {\\n            revert SafeCastOverflowedIntDowncast(112, value);\\n        }\\n    }\\n\\n    /**\\n     * @dev Returns the downcasted int104 from int256, reverting on\\n     * overflow (when the input is less than smallest int104 or\\n     * greater than largest int104).\\n     *\\n     * Counterpart to Solidity's `int104` operator.\\n     *\\n     * Requirements:\\n     *\\n     * - input must fit into 104 bits\\n     */\\n    function toInt104(int256 value) internal pure returns (int104 downcasted) {\\n        downcasted = int104(value);\\n        if (downcasted != value) {\\n            revert SafeCastOverflowedIntDowncast(104, value);\\n        }\\n    }\\n\\n    /**\\n     * @dev Returns the downcasted int96 from int256, reverting on\\n     * overflow (when the input is less than smallest int96 or\\n     * greater than largest int96).\\n     *\\n     * Counterpart to Solidity's `int96` operator.\\n     *\\n     * Requirements:\\n     *\\n     * - input must fit into 96 bits\\n     */\\n    function toInt96(int256 value) internal pure returns (int96 downcasted) {\\n        downcasted = int96(value);\\n        if (downcasted != value) {\\n            revert SafeCastOverflowedIntDowncast(96, value);\\n        }\\n    }\\n\\n    /**\\n     * @dev Returns the downcasted int88 from int256, reverting on\\n     * overflow (when the input is less than smallest int88 or\\n     * greater than largest int88).\\n     *\\n     * Counterpart to Solidity's `int88` operator.\\n     *\\n     * Requirements:\\n     *\\n     * - input must fit into 88 bits\\n     */\\n    function toInt88(int256 value) internal pure returns (int88 downcasted) {\\n        downcasted = int88(value);\\n        if (downcasted != value) {\\n            revert SafeCastOverflowedIntDowncast(88, value);\\n        }\\n    }\\n\\n    /**\\n     * @dev Returns the downcasted int80 from int256, reverting on\\n     * overflow (when the input is less than smallest int80 or\\n     * greater than largest int80).\\n     *\\n     * Counterpart to Solidity's `int80` operator.\\n     *\\n     * Requirements:\\n     *\\n     * - input must fit into 80 bits\\n     */\\n    function toInt80(int256 value) internal pure returns (int80 downcasted) {\\n        downcasted = int80(value);\\n        if (downcasted != value) {\\n            revert SafeCastOverflowedIntDowncast(80, value);\\n        }\\n    }\\n\\n    /**\\n     * @dev Returns the downcasted int72 from int256, reverting on\\n     * overflow (when the input is less than smallest int72 or\\n     * greater than largest int72).\\n     *\\n     * Counterpart to Solidity's `int72` operator.\\n     *\\n     * Requirements:\\n     *\\n     * - input must fit into 72 bits\\n     */\\n    function toInt72(int256 value) internal pure returns (int72 downcasted) {\\n        downcasted = int72(value);\\n        if (downcasted != value) {\\n            revert SafeCastOverflowedIntDowncast(72, value);\\n        }\\n    }\\n\\n    /**\\n     * @dev Returns the downcasted int64 from int256, reverting on\\n     * overflow (when the input is less than smallest int64 or\\n     * greater than largest int64).\\n     *\\n     * Counterpart to Solidity's `int64` operator.\\n     *\\n     * Requirements:\\n     *\\n     * - input must fit into 64 bits\\n     */\\n    function toInt64(int256 value) internal pure returns (int64 downcasted) {\\n        downcasted = int64(value);\\n        if (downcasted != value) {\\n            revert SafeCastOverflowedIntDowncast(64, value);\\n        }\\n    }\\n\\n    /**\\n     * @dev Returns the downcasted int56 from int256, reverting on\\n     * overflow (when the input is less than smallest int56 or\\n     * greater than largest int56).\\n     *\\n     * Counterpart to Solidity's `int56` operator.\\n     *\\n     * Requirements:\\n     *\\n     * - input must fit into 56 bits\\n     */\\n    function toInt56(int256 value) internal pure returns (int56 downcasted) {\\n        downcasted = int56(value);\\n        if (downcasted != value) {\\n            revert SafeCastOverflowedIntDowncast(56, value);\\n        }\\n    }\\n\\n    /**\\n     * @dev Returns the downcasted int48 from int256, reverting on\\n     * overflow (when the input is less than smallest int48 or\\n     * greater than largest int48).\\n     *\\n     * Counterpart to Solidity's `int48` operator.\\n     *\\n     * Requirements:\\n     *\\n     * - input must fit into 48 bits\\n     */\\n    function toInt48(int256 value) internal pure returns (int48 downcasted) {\\n        downcasted = int48(value);\\n        if (downcasted != value) {\\n            revert SafeCastOverflowedIntDowncast(48, value);\\n        }\\n    }\\n\\n    /**\\n     * @dev Returns the downcasted int40 from int256, reverting on\\n     * overflow (when the input is less than smallest int40 or\\n     * greater than largest int40).\\n     *\\n     * Counterpart to Solidity's `int40` operator.\\n     *\\n     * Requirements:\\n     *\\n     * - input must fit into 40 bits\\n     */\\n    function toInt40(int256 value) internal pure returns (int40 downcasted) {\\n        downcasted = int40(value);\\n        if (downcasted != value) {\\n            revert SafeCastOverflowedIntDowncast(40, value);\\n        }\\n    }\\n\\n    /**\\n     * @dev Returns the downcasted int32 from int256, reverting on\\n     * overflow (when the input is less than smallest int32 or\\n     * greater than largest int32).\\n     *\\n     * Counterpart to Solidity's `int32` operator.\\n     *\\n     * Requirements:\\n     *\\n     * - input must fit into 32 bits\\n     */\\n    function toInt32(int256 value) internal pure returns (int32 downcasted) {\\n        downcasted = int32(value);\\n        if (downcasted != value) {\\n            revert SafeCastOverflowedIntDowncast(32, value);\\n        }\\n    }\\n\\n    /**\\n     * @dev Returns the downcasted int24 from int256, reverting on\\n     * overflow (when the input is less than smallest int24 or\\n     * greater than largest int24).\\n     *\\n     * Counterpart to Solidity's `int24` operator.\\n     *\\n     * Requirements:\\n     *\\n     * - input must fit into 24 bits\\n     */\\n    function toInt24(int256 value) internal pure returns (int24 downcasted) {\\n        downcasted = int24(value);\\n        if (downcasted != value) {\\n            revert SafeCastOverflowedIntDowncast(24, value);\\n        }\\n    }\\n\\n    /**\\n     * @dev Returns the downcasted int16 from int256, reverting on\\n     * overflow (when the input is less than smallest int16 or\\n     * greater than largest int16).\\n     *\\n     * Counterpart to Solidity's `int16` operator.\\n     *\\n     * Requirements:\\n     *\\n     * - input must fit into 16 bits\\n     */\\n    function toInt16(int256 value) internal pure returns (int16 downcasted) {\\n        downcasted = int16(value);\\n        if (downcasted != value) {\\n            revert SafeCastOverflowedIntDowncast(16, value);\\n        }\\n    }\\n\\n    /**\\n     * @dev Returns the downcasted int8 from int256, reverting on\\n     * overflow (when the input is less than smallest int8 or\\n     * greater than largest int8).\\n     *\\n     * Counterpart to Solidity's `int8` operator.\\n     *\\n     * Requirements:\\n     *\\n     * - input must fit into 8 bits\\n     */\\n    function toInt8(int256 value) internal pure returns (int8 downcasted) {\\n        downcasted = int8(value);\\n        if (downcasted != value) {\\n            revert SafeCastOverflowedIntDowncast(8, value);\\n        }\\n    }\\n\\n    /**\\n     * @dev Converts an unsigned uint256 into a signed int256.\\n     *\\n     * Requirements:\\n     *\\n     * - input must be less than or equal to maxInt256.\\n     */\\n    function toInt256(uint256 value) internal pure returns (int256) {\\n        // Note: Unsafe cast below is okay because `type(int256).max` is guaranteed to be positive\\n        if (value > uint256(type(int256).max)) {\\n            revert SafeCastOverflowedUintToInt(value);\\n        }\\n        return int256(value);\\n    }\\n\\n    /**\\n     * @dev Cast a boolean (false or true) to a uint256 (0 or 1) with no jump.\\n     */\\n    function toUint(bool b) internal pure returns (uint256 u) {\\n        assembly (\\\"memory-safe\\\") {\\n            u := iszero(iszero(b))\\n        }\\n    }\\n}\\n\",\"keccak256\":\"0x195533c86d0ef72bcc06456a4f66a9b941f38eb403739b00f21fd7c1abd1ae54\",\"license\":\"MIT\"},\"contracts/PDA.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity ^0.8.0;\\n\\nimport \\\"./interfaces/IERC20.sol\\\";\\nimport \\\"./interfaces/IFactory.sol\\\";\\nimport \\\"./interfaces/IPair.sol\\\";\\nimport \\\"./interfaces/IRouter02.sol\\\";\\nimport \\\"@openzeppelin/contracts/access/Ownable.sol\\\";\\nimport \\\"@openzeppelin/contracts/utils/math/Math.sol\\\";\\n\\ncontract PDA is IERC20, Ownable {\\n    mapping(address => uint256) private _balances;\\n    mapping(address => mapping(address => uint256)) private _allowances;\\n\\n    string private _name = \\\"PDA\\\";\\n    string private _symbol = \\\"PDA\\\";\\n    uint8 private _decimals = 18;\\n    uint256 private _totalSupply = 210000000 * 10**uint256(_decimals);\\n\\n    address public immutable pair;\\n\\n    address public burnAddress;\\n    address public operationAddress;\\n    address public deviceAddress;\\n\\n    address public burnSetter;\\n    address public constant USDT = 0x55d398326f99059fF775485246999027B3197955;\\n    address public constant ROUTER = 0x10ED43C718714eb63d5aA57B78B54704E256024E;\\n    address public constant DEAD_ADDRESS = 0x000000000000000000000000000000000000dEaD;\\n\\n\\n    bool public buyStatus = false;\\n    bool public sellStatus = true;\\n\\n    uint256 public sellOperationFeeRate = 20;\\n    uint256 public sellDeviceFeeRate = 30;\\n\\n\\n    uint256 public constant DAILY_BURN_RATE = 20;\\n    /*uint256 public constant BURN_INTERVAL = 1 days; TODO*/\\n    uint256 public constant BURN_INTERVAL = 24 minutes; // For testing purposes, set to 24 minutes\\n    uint256 public constant MIN_TOTAL_SUPPLY = 21000 * 10**18;\\n    uint256 public lastBurnTime;\\n    \\n    mapping(address => bool) public whiteList;\\n    \\n    constructor(address _burnAddress, address _operationAddress, address _deviceAddress,  address _burnSetter) Ownable(msg.sender) {\\n        require(_burnAddress != address(0), \\\"Invalid burn address\\\");\\n        require(_operationAddress != address(0), \\\"Invalid operation address\\\");\\n        require(_deviceAddress != address(0), \\\"Invalid device address\\\");\\n        require(_burnSetter != address(0), \\\"Invalid burn setter address\\\");\\n        burnAddress = _burnAddress;\\n        operationAddress = _operationAddress;\\n        deviceAddress = _deviceAddress;\\n        burnSetter = _burnSetter;\\n\\n        IRouter02 router = IRouter02(ROUTER);\\n        IFactory factory = IFactory(router.factory());\\n\\n        pair = factory.createPair(address(this), USDT);\\n        _balances[msg.sender] = _totalSupply;\\n        whiteList[msg.sender] = true;\\n        lastBurnTime = block.timestamp;\\n        emit Transfer(address(0), msg.sender, _totalSupply);\\n    }\\n\\n    function name() public view returns (string memory) {\\n        return _name;\\n    }\\n\\n    function symbol() public view returns (string memory) {\\n        return _symbol;\\n    }\\n\\n    function decimals() public view returns (uint8) {\\n        return _decimals;\\n    }\\n\\n    function totalSupply() public view override returns (uint256) {\\n        return _totalSupply;\\n    }\\n\\n    function circulatingSupply() public view returns (uint256) {\\n        return _totalSupply - _balances[DEAD_ADDRESS];\\n    }\\n\\n    function balanceOf(address account) public view override returns (uint256) {\\n        return _balances[account];\\n    }\\n\\n    function transfer(address recipient, uint256 amount) public override returns (bool) {\\n        _transfer(msg.sender, recipient, amount);\\n        return true;\\n    }\\n\\n    function allowance(address owner, address spender) public view override returns (uint256) {\\n        return _allowances[owner][spender];\\n    }\\n\\n    function approve(address spender, uint256 amount) public override returns (bool) {\\n        _approve(msg.sender, spender, amount);\\n        return true;\\n    }\\n\\n    function transferFrom(address sender, address recipient, uint256 amount) public override returns (bool) {\\n        uint256 currentAllowance = _allowances[sender][msg.sender];\\n        require(currentAllowance >= amount, \\\"ERC20: transfer amount exceeds allowance\\\");\\n        _transfer(sender, recipient, amount);\\n        _approve(sender, msg.sender, currentAllowance - amount);\\n        return true;\\n    }\\n\\n    function setBurnAddress(address _burnAddress) external onlyOwner {\\n        require(_burnAddress != address(0), \\\"Invalid receive wallet\\\");\\n        burnAddress = _burnAddress;\\n    }\\n\\n    function setOperationAddress(address _operationAddress) external onlyOwner {\\n        require(_operationAddress != address(0), \\\"Invalid receive wallet\\\");\\n        operationAddress = _operationAddress;\\n    }\\n\\n    function setDeviceAddress(address _deviceAddress) external onlyOwner {\\n        require(_deviceAddress != address(0), \\\"Invalid receive wallet\\\");\\n        deviceAddress = _deviceAddress;\\n    }\\n\\n    function setBurnSetter(address _burnSetter) external onlyOwner {\\n        require(_burnSetter != address(0), \\\"Invalid burn setter address\\\");\\n        burnSetter = _burnSetter;\\n    }\\n\\n    function addWhiteList(address user) external onlyOwner {\\n        require(user != address(0), \\\"Invalid address\\\");\\n        whiteList[user] = true;\\n    }\\n\\n    function removeWhiteList(address user) external onlyOwner {\\n        whiteList[user] = false;\\n    }\\n\\n    function batchAddWhiteList(address[] calldata users) external onlyOwner {\\n        for (uint256 i = 0; i < users.length; i++) {\\n            require(users[i] != address(0), \\\"Invalid address\\\");\\n            whiteList[users[i]] = true;\\n        }\\n    }\\n\\n    function batchRemoveWhiteList(address[] calldata users) external onlyOwner {\\n        for (uint256 i = 0; i < users.length; i++) {\\n            whiteList[users[i]] = false;\\n        }\\n    }\\n\\n    function isWhiteListed(address user) external view returns (bool) {\\n        return whiteList[user];\\n    }\\n\\n    function setBuyStatus(bool _status) external onlyOwner {\\n        buyStatus = _status;\\n    }\\n\\n    function setSellStatus(bool _status) external onlyOwner {\\n        sellStatus = _status;\\n    }\\n\\n    function setSellOperationFeeRate(uint256 _sellOperationFeeRate) external onlyOwner {\\n        require(_sellOperationFeeRate <= 1000, \\\"Fee rate cannot exceed 100%\\\");\\n        sellOperationFeeRate = _sellOperationFeeRate;\\n    }\\n\\n    function setSellDeviceFeeRate(uint256 _sellDeviceFeeRate) external onlyOwner {\\n        require(_sellDeviceFeeRate <= 1000, \\\"Fee rate cannot exceed 100%\\\");\\n        sellDeviceFeeRate = _sellDeviceFeeRate;\\n    }\\n\\n    function burnPoolTokens() external returns (uint256 burnAmount) {\\n        require(msg.sender == burnSetter, \\\"Only burn setter can call\\\");\\n        require(block.timestamp >= lastBurnTime + BURN_INTERVAL, \\\"Burn interval not reached\\\");\\n        \\n        uint256 circulatingSupply = _totalSupply - _balances[DEAD_ADDRESS];\\n        require(circulatingSupply > MIN_TOTAL_SUPPLY, \\\"Circulating supply has reached minimum threshold\\\");\\n        \\n        uint256 pairBalance = _balances[pair];\\n        require(pairBalance > 0, \\\"No tokens in pool\\\");\\n        \\n        burnAmount = pairBalance * DAILY_BURN_RATE / 1000;\\n        require(burnAmount > 0, \\\"Burn amount too small\\\");\\n        \\n        uint256 toBurn = burnAmount / 2;\\n        uint256 toFeeAddress = burnAmount - toBurn;\\n        \\n        if (circulatingSupply - toBurn < MIN_TOTAL_SUPPLY) {\\n            toBurn = circulatingSupply > MIN_TOTAL_SUPPLY ? circulatingSupply - MIN_TOTAL_SUPPLY : 0;\\n            toFeeAddress = burnAmount - toBurn;\\n        }\\n        \\n        _balances[pair] -= burnAmount;\\n        \\n        if (toBurn > 0) {\\n            _balances[DEAD_ADDRESS] += toBurn;\\n            emit Transfer(pair, DEAD_ADDRESS, toBurn);\\n        }\\n        \\n        if (toFeeAddress > 0) {\\n            _balances[burnAddress] += toFeeAddress;\\n            emit Transfer(pair, burnAddress, toFeeAddress);\\n        }\\n        lastBurnTime = block.timestamp;\\n        IPair(pair).sync();\\n    }\\n\\n    function _transfer(address sender, address recipient, uint256 amount) internal {\\n        require(sender != address(0), \\\"ERC20: transfer from the zero address\\\");\\n        require(recipient != address(0), \\\"ERC20: transfer to the zero address\\\");\\n        require(_balances[sender] >= amount, \\\"ERC20: transfer amount exceeds balance\\\");\\n\\n        _balances[sender] -= amount;\\n\\n        uint256 transferAmount = amount;\\n\\n        if (sender == pair) {\\n            uint256 removeLiquidity = _isRemoveLiquidity(transferAmount);\\n            if (removeLiquidity > 0) {\\n                if (!whiteList[recipient]) {\\n                    uint256 userReceive = amount / 100; \\n                    uint256 burnAmount = amount - userReceive;\\n                    transferAmount = userReceive;\\n                    if (burnAmount > 0) {\\n                        _balances[DEAD_ADDRESS] += burnAmount;\\n                        emit Transfer(sender, DEAD_ADDRESS, burnAmount);\\n                    }\\n                }\\n            } else {\\n                if (!whiteList[recipient]) {\\n                    require(buyStatus, \\\"Access denied: can't buy PDA\\\");\\n                }\\n            }\\n        }\\n\\n        if (recipient == pair) {\\n            if (!whiteList[sender]) {\\n                if(_isAddLiquidity(transferAmount) <= 0) {\\n                    require(sellStatus, \\\"Access denied: can't sell PDA\\\");\\n                    uint256 sellOperationFee = amount * sellOperationFeeRate / 1000;\\n                    transferAmount = amount - sellOperationFee;\\n\\n                    if (sellOperationFee > 0) {\\n                        _balances[operationAddress] += sellOperationFee;\\n                        emit Transfer(sender, operationAddress, sellOperationFee);\\n                    }\\n\\n                    uint256 sellDeviceFee = amount * sellDeviceFeeRate / 1000;\\n                    transferAmount -= sellDeviceFee;\\n                    if (sellDeviceFee > 0) {\\n                        _balances[deviceAddress] += sellDeviceFee;\\n                        emit Transfer(sender, deviceAddress, sellDeviceFee);\\n                    }\\n                }\\n            }\\n        }\\n        \\n        _balances[recipient] += transferAmount;\\n        emit Transfer(sender, recipient, transferAmount);\\n    }\\n\\n    function _approve(address owner, address spender, uint256 amount) internal {\\n        require(owner != address(0), \\\"ERC20: approve from the zero address\\\");\\n        require(spender != address(0), \\\"ERC20: approve to the zero address\\\");\\n        _allowances[owner][spender] = amount;\\n        emit Approval(owner, spender, amount);\\n    }\\n\\n    function _isRemoveLiquidity(\\n        uint256 amount\\n    ) internal view returns (uint256 liquidity) {\\n        (uint256 rOther, , uint256 balanceOther) = _getReserves();\\n\\n        if (balanceOther <= rOther) {\\n            liquidity = (amount * IPair(pair).totalSupply()) / (balanceOf(pair) - amount);\\n        }\\n    }\\n\\n    function _getReserves() internal view returns (uint256 rOther, uint256 rThis, uint256 balanceOther)\\n    {\\n        (uint r0, uint256 r1, ) = IPair(pair).getReserves();\\n\\n        address tokenOther = USDT;\\n        if (tokenOther < address(this)) {\\n            rOther = r0;\\n            rThis = r1;\\n        } else {\\n            rOther = r1;\\n            rThis = r0;\\n        }\\n\\n        balanceOther = IERC20(tokenOther).balanceOf(pair);\\n    }\\n\\n    function _isAddLiquidity(\\n        uint256 amount\\n    ) internal view returns (uint256 liquidity) {\\n        (uint256 rOther, uint256 rThis, uint256 balanceOther) = _getReserves();\\n        uint256 amountOther;\\n        if (rOther > 0 && rThis > 0) {\\n            amountOther = (amount * rOther) / rThis;\\n        }\\n        if (balanceOther >= rOther + amountOther) {\\n            liquidity = calLiquidity(balanceOther, amount, rOther, rThis);\\n        }\\n    }\\n\\n    function calLiquidity(\\n        uint256 balanceA,\\n        uint256 amount,\\n        uint256 r0,\\n        uint256 r1\\n    ) private view returns (uint256 liquidity) {\\n        uint256 pairTotalSupply = IPair(pair).totalSupply();\\n        address feeTo = IFactory(IRouter02(ROUTER).factory()).feeTo();\\n        bool feeOn = feeTo != address(0);\\n        uint256 _kLast = IPair(pair).kLast();\\n        if (feeOn) {\\n            if (_kLast != 0) {\\n                uint256 rootK = Math.sqrt(r0 * r1);\\n                uint256 rootKLast = Math.sqrt(_kLast);\\n                if (rootK > rootKLast) {\\n                    uint256 numerator = pairTotalSupply *\\n                        (rootK - rootKLast) *\\n                                8;\\n                    uint256 denominator = rootK * 17 + (rootKLast * 8);\\n                    uint256 feeToLiquidity = numerator / denominator;\\n                    if (feeToLiquidity > 0) pairTotalSupply += feeToLiquidity;\\n                }\\n            }\\n        }\\n        uint256 amount0 = balanceA - r0;\\n        if (pairTotalSupply == 0) {\\n            liquidity = Math.sqrt(amount0 * amount) - 1000;\\n        } else {\\n            liquidity = Math.min(\\n                (amount0 * pairTotalSupply) / r0,\\n                (amount * pairTotalSupply) / r1\\n            );\\n        }\\n    }\\n}\",\"keccak256\":\"0xdcc1519fed6188a3d2a10541acd0b21f8011d406e36a5dc14624ac656e13783f\",\"license\":\"MIT\"},\"contracts/interfaces/IERC20.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\r\\npragma solidity ^0.8.0;\\r\\n\\r\\n/**\\r\\n * Interface of the ERC20 standard.\\r\\n */\\r\\ninterface IERC20 {\\r\\n    function totalSupply() external view returns (uint256);\\r\\n    function balanceOf(address account) external view returns (uint256);\\r\\n    function transfer(address recipient, uint256 amount) external returns (bool);\\r\\n    function allowance(address owner, address spender) external view returns (uint256);\\r\\n    function approve(address spender, uint256 amount) external returns (bool);\\r\\n    function transferFrom(address sender, address recipient, uint256 amount) external returns (bool);\\r\\n\\r\\n    event Transfer(address indexed from, address indexed to, uint256 value);\\r\\n    event Approval(address indexed owner, address indexed spender, uint256 value);\\r\\n} \",\"keccak256\":\"0xc0313ab5b40eab69cbf2a25133d4e396b5c8865d43e2beeb5a2812b8139b4691\",\"license\":\"MIT\"},\"contracts/interfaces/IFactory.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\r\\npragma solidity ^0.8.0;\\r\\n\\r\\n/**\\r\\n * JAMM Factory Interface\\r\\n */\\r\\ninterface IFactory {\\r\\n    function createPair(address tokenA, address tokenB) external returns (address pair);\\r\\n    function getPair(address tokenA, address tokenB) external view returns (address pair);\\r\\n    function feeTo() external view returns (address);\\r\\n}\",\"keccak256\":\"0x63aac20eade548df3c95666856503cdff054acd2fd199d12008af55325679c5c\",\"license\":\"MIT\"},\"contracts/interfaces/IPair.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\r\\npragma solidity ^0.8.0;\\r\\n/**\\r\\n * @dev PancakeSwap Pair Interface\\r\\n */\\r\\ninterface IPair {\\r\\n    function sync() external;\\r\\n    function totalSupply() external view returns (uint256);\\r\\n    function getReserves() external view returns (uint112 reserve0, uint112 reserve1, uint32 blockTimestampLast);\\r\\n    function token0() external view returns (address);\\r\\n    function token1() external view returns (address);\\r\\n    function kLast() external view returns (uint256);\\r\\n    function burn(address to) external returns (uint amount0, uint amount1);\\r\\n    function mint(address to) external returns (uint liquidity);\\r\\n}\",\"keccak256\":\"0x6cd361e1c380928b322b480aac9845ea58de529d020e92f8aa3db9cc0e90c717\",\"license\":\"MIT\"},\"contracts/interfaces/IRouter02.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\r\\npragma solidity ^0.8.0;\\r\\n\\r\\ninterface IRouter02 {\\r\\n    function factory() external pure returns (address);\\r\\n\\r\\n    function WETH() external pure returns (address);\\r\\n\\r\\n    function swapExactTokensForTokens(\\r\\n        uint amountIn,\\r\\n        uint amountOutMin,\\r\\n        address[] calldata path,\\r\\n        address to,\\r\\n        uint deadline\\r\\n    ) external returns (uint[] memory amounts);\\r\\n\\r\\n    function addLiquidity(\\r\\n        address tokenA,\\r\\n        address tokenB,\\r\\n        uint amountADesired,\\r\\n        uint amountBDesired,\\r\\n        uint amountAMin,\\r\\n        uint amountBMin,\\r\\n        address to,\\r\\n        uint deadline\\r\\n    ) external returns (uint amountA, uint amountB, uint liquidity);\\r\\n\\r\\n    function removeLiquidity(\\r\\n        address tokenA,\\r\\n        address tokenB,\\r\\n        uint liquidity,\\r\\n        uint amountAMin,\\r\\n        uint amountBMin,\\r\\n        address to,\\r\\n        uint deadline\\r\\n    ) external returns (uint amountA, uint amountB);\\r\\n\\r\\n\\r\\n    function getAmountsOut(uint amountIn, address[] calldata path)\\r\\n        external\\r\\n        view\\r\\n        returns (uint[] memory amounts);\\r\\n\\r\\n}\\r\\n\",\"keccak256\":\"0xb367d790a1453833a0a64ac814a1d5fb920b8031d9a5aada29632c5f34387808\",\"license\":\"MIT\"}},\"version\":1}",
+  "bytecode": "0x60a060409080825234620004fe57608081620024fe803803809162000025828562000503565b833981010312620004fe576200003b816200053d565b906020916200004c8383016200053d565b90620000686060620000608786016200053d565b94016200053d565b903315620004e657600080546001600160a01b03198082163390811784558951939791956001600160a01b03959294929390919086167f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e08a80a3600354956001968781811c91168015620004db575b8b821014620004c757601f811162000498575b5060066250444160e81b01948560035560049586548981811c911680156200048d575b8d8210146200047a57601f81116200044c575b50865560ff199860128a60055416176005556aadb53acfa41aee1200000060065587600a54966014600b55601e600c55169485156200040b57508716908115620003c85787169283156200038557871693841562000342578260075416176007558160085416176008556009541617600955600160a81b9160018060b01b0319161717600a5586519063c45a015560e01b8252868282817310ed43c718714eb63d5aa57b78b54704e256024e5afa9182156200033857908792918792620002f1575b50604490878a5195869485936364e329cb60e11b855230908501527355d398326f99059ff775485246999027b31979556024850152165af1908115620002e7578491620002a6575b5060805260065433845281855285842055600e84528483209182541617905542600d557fddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef6006549284519384523393a351611fab908162000553823960805181818161057c01528181610a2c015281816115560152611d010152f35b90508481813d8311620002df575b620002c0818362000503565b81010312620002db57620002d4906200053d565b386200022a565b8380fd5b503d620002b4565b86513d86823e3d90fd5b8092508391933d831162000330575b6200030c818362000503565b810103126200032c579060446200032488936200053d565b9190620001e2565b8580fd5b503d62000300565b88513d88823e3d90fd5b8c5162461bcd60e51b81528088018d9052601b60248201527f496e76616c6964206275726e20736574746572206164647265737300000000006044820152606490fd5b8c5162461bcd60e51b81528088018d9052601660248201527f496e76616c6964206465766963652061646472657373000000000000000000006044820152606490fd5b8c5162461bcd60e51b81528088018d9052601960248201527f496e76616c6964206f7065726174696f6e2061646472657373000000000000006044820152606490fd5b62461bcd60e51b81528781018d9052601460248201527f496e76616c6964206275726e20616464726573730000000000000000000000006044820152606490fd5b89601f8e8e8b815220920160051c8201915b8281106200046e57505062000120565b8d8155018a906200045e565b634e487b7160e01b8c526022885260248cfd5b90607f16906200010d565b60038a5287601f8c8c20920160051c8201915b828110620004bb575050620000ea565b8b8155018890620004ab565b634e487b7160e01b8a52602260045260248afd5b90607f1690620000d7565b8551631e4fbdf760e01b815260006004820152602490fd5b600080fd5b601f909101601f19168101906001600160401b038211908210176200052757604052565b634e487b7160e01b600052604160045260246000fd5b51906001600160a01b0382168203620004fe5756fe608060408181526004918236101561001657600080fd5b600092833560e01c91826306fdde031461107357508163095ea7b3146110495781630d02e05c1461100357816318160ddd14610fe45781632042e5c214610fa457816323b872dd14610edf578163313ce56714610ebd57816332fe7b2614610e8e5781633415650e14610e67578163372c12b114610d36578163413d29ab14610e485781634b0e721614610dfc5781634e6fd6c414610ddf5781635122c40914610dba5781635b4be32b14610d745781636f9170f614610d3657816370a0823114610cfe57816370d5ae0514610cd5578163715018a614610c7b5781637b1648e214610c5e5781638b6116ae14610c2e5781638da5cb5b14610c065781639358928b14610bd157816395d89b4114610acc5781639757982514610aa357816397bcd18414610a84578163a441c30214610a5b578163a8aa1b3114610a17578163a9059cbb146109e6578163b1d0b725146109bf578163bcb04de114610966578163c015ef3c146108d8578163c364e1d514610505578163c54e44eb146104d6578163c9555429146104a6578163ca2a62531461045a578163cd059237146103e0578163d53ce95614610391578163dd62ed3e14610348578163e306744914610329578163e6a957e71461030d578163e7cd4a04146102bf578163f2fde38b14610234575063f81e5a9a1461020957600080fd5b34610230578160031936011261023057600a5490516001600160a01b039091168152602090f35b5080fd5b9050346102bb5760203660031901126102bb5761024f6111b1565b906102586114d5565b6001600160a01b039182169283156102a557505082546001600160a01b0319811683178455167f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e08380a380f35b51631e4fbdf760e01b8152908101849052602490fd5b8280fd5b505034610230576020366003190112610230576102da6111b1565b6102e26114d5565b6001600160a01b03166102f6811515611395565b8252600e6020528120805460ff1916600117905580f35b5050346102305781600319360112610230576020905160148152f35b505034610230578160031936011261023057602090600d549051908152f35b505034610230578060031936011261023057806020926103666111b1565b61036e6111cc565b6001600160a01b0391821683526002865283832091168252845220549051908152f35b83346103dd5760203660031901126103dd576103ab6111b1565b6103b36114d5565b6001600160a01b03166103c781151561128a565b6001600160601b0360a01b600854161760085580f35b80fd5b505034610230576103f0366111e2565b91906103fa6114d5565b835b838110610407578480f35b6001906001600160a01b0361043181610429610424858a8961131b565b611341565b161515611395565b61043f61042483888761131b565b168652600e602052838620805460ff191683179055016103fc565b83346103dd5760203660031901126103dd576104746111b1565b61047c6114d5565b6001600160a01b031661049081151561128a565b6001600160601b0360a01b600954161760095580f35b83903461023057602036600319011261023057356104c26114d5565b6104d06103e88211156112cf565b600c5580f35b505034610230578160031936011261023057602090517355d398326f99059ff775485246999027b31979558152f35b838334610230578160031936011261023057600a546001600160a01b0392908316330361089557600d546105a0810180911161088257421061083f576006549361dead938483526001906105626020978389528686205490611267565b91690472698b413b43200000918284119788156107e357817f00000000000000000000000000000000000000000000000000000000000000001694858852838b528888205480156107ac5760148102908104601403610799576103e89004998a1561075e57918a8594928d946105dc838b991c8094611267565b986105e78484611267565b106106ff575b50508590818b528585528c6106068d8d20918254611267565b905584816106ca575b505050508461068c575b505050505042600d55803b156102bb57908280928286518096819363fff6cae960e01b83525af1801561068257610654575b50505051908152f35b67ffffffffffffffff831161066f575050815283808061064b565b634e487b7160e01b825260419052602490fd5b84513d84823e3d90fd5b600080516020611f7f833981519152928160075416895282528888206106b3868254611355565b905560075416938851908152a38681818881610619565b600080516020611f7f83398151915291848d528782528d8d206106ee828254611355565b90558d51908152a38b84818461060f565b929750949592949391159050610753575050690472698b413b431fffff198101908111610740578492918a91945b84610738878d611267565b96908e6105ed565b634e487b7160e01b875260118652602487fd5b91509291879461072d565b895162461bcd60e51b81528089018d90526015602482015274109d5c9b88185b5bdd5b9d081d1bdbc81cdb585b1b605a1b6044820152606490fd5b634e487b7160e01b895260118852602489fd5b895162461bcd60e51b81528089018d90526011602482015270139bc81d1bdad95b9cc81a5b881c1bdbdb607a1b6044820152606490fd5b875162461bcd60e51b81528087018b9052603060248201527f43697263756c6174696e6720737570706c79206861732072656163686564206d60448201526f1a5b9a5b5d5b481d1a1c995cda1bdb1960821b6064820152608490fd5b815162461bcd60e51b8152602081860152601960248201527f4275726e20696e74657276616c206e6f742072656163686564000000000000006044820152606490fd5b634e487b7160e01b825260118552602482fd5b815162461bcd60e51b8152602081860152601960248201527f4f6e6c79206275726e207365747465722063616e2063616c6c000000000000006044820152606490fd5b9050346102bb5760203660031901126102bb576108f36111b1565b6108fb6114d5565b6001600160a01b03169182156109235750506001600160601b0360a01b600a541617600a5580f35b906020606492519162461bcd60e51b8352820152601b60248201527f496e76616c6964206275726e20736574746572206164647265737300000000006044820152fd5b50503461023057610976366111e2565b91906109806114d5565b835b83811061098d578480f35b6001906001600160a01b036109a661042483888761131b565b168652600e602052838620805460ff1916905501610982565b50503461023057816003193601126102305760209060ff600a5460a81c1690519015158152f35b505034610230578060031936011261023057602090610a10610a066111b1565b6024359033611501565b5160018152f35b505034610230578160031936011261023057517f00000000000000000000000000000000000000000000000000000000000000006001600160a01b03168152602090f35b50503461023057816003193601126102305760085490516001600160a01b039091168152602090f35b505034610230578160031936011261023057602090600c549051908152f35b50503461023057816003193601126102305760095490516001600160a01b039091168152602090f35b83833461023057816003193601126102305780519180938054916001908360011c9260018516948515610bc7575b6020958686108114610bb457858952908115610b905750600114610b38575b610b348787610b2a828c038361122f565b5191829182611168565b0390f35b81529295507f8a35acfbc15ff81a39ae7d344fd709f28e8600b4aa8c65c6b64bfe7fe36bd19b5b828410610b7d5750505082610b3494610b2a92820101948680610b19565b8054868501880152928601928101610b5f565b60ff19168887015250505050151560051b8301019250610b2a82610b348680610b19565b634e487b7160e01b845260228352602484fd5b93607f1693610afa565b505034610230578160031936011261023057610bff602092826006549161dead815260018652205490611267565b9051908152f35b505034610230578160031936011261023057905490516001600160a01b039091168152602090f35b8390346102305760203660031901126102305735610c4a6114d5565b610c586103e88211156112cf565b600b5580f35b505034610230578160031936011261023057602090516105a08152f35b83346103dd57806003193601126103dd57610c946114d5565b80546001600160a01b03198116825581906001600160a01b03167f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e08280a380f35b50503461023057816003193601126102305760075490516001600160a01b039091168152602090f35b5050346102305760203660031901126102305760209181906001600160a01b03610d266111b1565b1681526001845220549051908152f35b5050346102305760203660031901126102305760209160ff9082906001600160a01b03610d616111b1565b168152600e855220541690519015158152f35b839034610230576020366003190112610230573580151580910361023057610d9a6114d5565b600a805460ff60a81b191660a89290921b60ff60a81b1691909117905580f35b50503461023057816003193601126102305760209051690472698b413b432000008152f35b5050346102305781600319360112610230576020905161dead8152f35b83346103dd5760203660031901126103dd57610e166111b1565b610e1e6114d5565b6001600160a01b0316610e3281151561128a565b6001600160601b0360a01b600754161760075580f35b505034610230578160031936011261023057602090600b549051908152f35b50503461023057816003193601126102305760209060ff600a5460a01c1690519015158152f35b505034610230578160031936011261023057602090517310ed43c718714eb63d5aa57b78b54704e256024e8152f35b50503461023057816003193601126102305760209060ff600554169051908152f35b905082346103dd5760603660031901126103dd57610efb6111b1565b91610f046111cc565b846044359360018060a01b03861681526002602052818120338252602052205491838310610f5057602086610a1087610f488888610f43828a86611501565b611267565b9033906113d3565b608490602087519162461bcd60e51b8352820152602860248201527f45524332303a207472616e7366657220616d6f756e74206578636565647320616044820152676c6c6f77616e636560c01b6064820152fd5b50503461023057602036600319011261023057610fbf6111b1565b610fc76114d5565b6001600160a01b03168252600e6020528120805460ff1916905580f35b5050346102305781600319360112610230576020906006549051908152f35b8390346102305760203660031901126102305735801515809103610230576110296114d5565b600a805460ff60a01b191660a09290921b60ff60a01b1691909117905580f35b505034610230578060031936011261023057602090610a106110696111b1565b60243590336113d3565b92915034611164578360031936011261116457600354600181811c918690828116801561115a575b6020958686108214611147575084885290811561112557506001146110cc575b610b348686610b2a828b038361122f565b929550600383527fc2575a0e9e593c00f959f8c92f12db2869c3395a3b0502d05e2516446f71f85b5b8284106111125750505082610b3494610b2a9282010194386110bb565b80548685018801529286019281016110f5565b60ff191687860152505050151560051b8301019250610b2a82610b34386110bb565b634e487b7160e01b845260229052602483fd5b93607f169361109b565b8380fd5b6020808252825181830181905290939260005b82811061119d57505060409293506000838284010152601f8019910116010190565b81810186015184820160400152850161117b565b600435906001600160a01b03821682036111c757565b600080fd5b602435906001600160a01b03821682036111c757565b9060206003198301126111c75760043567ffffffffffffffff928382116111c757806023830112156111c75781600401359384116111c75760248460051b830101116111c7576024019190565b90601f8019910116810190811067ffffffffffffffff82111761125157604052565b634e487b7160e01b600052604160045260246000fd5b9190820391821161127457565b634e487b7160e01b600052601160045260246000fd5b1561129157565b60405162461bcd60e51b8152602060048201526016602482015275125b9d985b1a59081c9958d95a5d99481dd85b1b195d60521b6044820152606490fd5b156112d657565b60405162461bcd60e51b815260206004820152601b60248201527f46656520726174652063616e6e6f7420657863656564203130302500000000006044820152606490fd5b919081101561132b5760051b0190565b634e487b7160e01b600052603260045260246000fd5b356001600160a01b03811681036111c75790565b9190820180921161127457565b8181029291811591840414171561127457565b811561137f570490565b634e487b7160e01b600052601260045260246000fd5b1561139c57565b60405162461bcd60e51b815260206004820152600f60248201526e496e76616c6964206164647265737360881b6044820152606490fd5b6001600160a01b0390811691821561148457169182156114345760207f8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925918360005260028252604060002085600052825280604060002055604051908152a3565b60405162461bcd60e51b815260206004820152602260248201527f45524332303a20617070726f766520746f20746865207a65726f206164647265604482015261737360f01b6064820152608490fd5b60405162461bcd60e51b8152602060048201526024808201527f45524332303a20617070726f76652066726f6d20746865207a65726f206164646044820152637265737360e01b6064820152608490fd5b6000546001600160a01b031633036114e957565b60405163118cdaa760e01b8152336004820152602490fd5b9192916001600160a01b0391908216908115611c8a578216918215611c395760009482865260019160209280845260409183838a205410611be657858952818552828920611550858254611267565b905583817f000000000000000000000000000000000000000000000000000000000000000016808814611a68575b8089146115b8575b50505087829187600080516020611f7f8339815191529798999a528552206115af838254611355565b905551908152a3565b878b52600e875260ff858c205416611586578a80916115d5611cf1565b9192916115f58583868e81151580611a5f575b611a48575b509050611355565b811015611741575b50505050501561160e575b80611586565b90935060ff600a5460a81c16156116fd579782918587611677600080516020611f7f833981519152999a9b9c61166f6103e8918261164e600b5483611362565b04858c61165b8385611267565b98836116bf575b50505050600c5490611362565b048093611267565b96888361168f575b5050505091819998979650611608565b818b926009541687528582528787206116a9868254611355565b905560095416938751908152a33888818861167f565b600080516020611f7f8339815191529180600854168d528b82528d8d206116e7868254611355565b905560085416938d51908152a338858c8e611662565b825162461bcd60e51b815260048101869052601d60248201527f4163636573732064656e6965643a2063616e27742073656c6c205044410000006044820152606490fd5b909192938095505088516318160ddd60e01b81526004958c828881885afa918215611a3c578192611a0d575b508a5163c45a015560e01b8152919485928e818a817310ed43c718714eb63d5aa57b78b54704e256024e5afa9081156119e4578f90918a8f8e959487936119ee575b5051622fcfcb60e31b81529485928391165afa9182156119e4578f90918e8b9386956119b5575b5051637464fc3d60e01b815292839182905afa9283156119aa57918b918f99989796959461196e575b508793929116611890575b505061181591611267565b928261185d575050506118309161182b91611362565b611e5e565b6103e71981019190821161184a57505b8a388080806115fd565b634e487b7160e01b8c526011905260248bfd5b82955061188294506118766118769361187b9395611362565b611375565b9389611362565b908180821091180218611840565b801561180a5790916118a861182b866118ae93611362565b91611e5e565b8082116118be575b86925061180a565b90919293949596506118d96118d38284611267565b84611362565b918260031b928084046008149015171561195757601181029080820460111490151715611957578160031b91808304600814901517156119575787969594926119288f99959361192e93611355565b90611375565b908161193d575b8293506118b6565b611815939295509061194e91611355565b93909138611935565b5050505060248f601187634e487b7160e01b835252fd5b9392509750508d82813d83116119a3575b611989818361122f565b8101031261199d5790518c968a90876117ff565b50508f80fd5b503d61197f565b8d51903d90823e3d90fd5b6119d6919550833d85116119dd575b6119ce818361122f565b810190611e3f565b93386117d6565b503d6119c4565b8d513d85823e3d90fd5b611a06919350843d86116119dd576119ce818361122f565b91386117af565b9091508c81813d8311611a35575b611a25818361122f565b810103126102305751903861176d565b503d611a1b565b508a51903d90823e3d90fd5b611a5793509061187691611362565b83868e6115ed565b508215156115e8565b8a611a71611cf1565b90501115611b55575b15611af257888b52600e875260ff858c20541615611a98575b61157e565b6064820495508a88611aaa8885611267565b8981611aba575b5050505061157e565b600080516020611f7f833981519152918961dead958681528a845220611ae1828254611355565b90558951908152a38a883889611ab1565b888b52600e875260ff858c20541661157e5760ff600a5460a01c16611a9357845162461bcd60e51b815260048101889052601c60248201527f4163636573732064656e6965643a2063616e27742062757920504441000000006044820152606490fd5b5084516318160ddd60e01b81528b908881600481865afa908115611bdc5782918891869491611ba5575b509261192891611b92611ba09583611362565b93868152898d522054611267565b611a7a565b935050508882813d8311611bd5575b611bbe818361122f565b810103126103dd5790518391908790611928611b7f565b503d611bb4565b87513d84823e3d90fd5b825162461bcd60e51b815260048101869052602660248201527f45524332303a207472616e7366657220616d6f756e7420657863656564732062604482015265616c616e636560d01b6064820152608490fd5b60405162461bcd60e51b815260206004820152602360248201527f45524332303a207472616e7366657220746f20746865207a65726f206164647260448201526265737360e81b6064820152608490fd5b60405162461bcd60e51b815260206004820152602560248201527f45524332303a207472616e736665722066726f6d20746865207a65726f206164604482015264647265737360d81b6064820152608490fd5b51906001600160701b03821682036111c757565b604051630240bc6b60e21b8152907f00000000000000000000000000000000000000000000000000000000000000006001600160a01b031690606083600481855afa928315611dd1576000908194611de6575b506001600160701b03938416937355d398326f99059ff775485246999027b3197955911630821015611ddd5760209094935b6024604051809481936370a0823160e01b835260048301525afa908115611dd157600091611da2575090565b90506020813d602011611dc9575b81611dbd6020938361122f565b810103126111c7575190565b3d9150611db0565b6040513d6000823e3d90fd5b92602090611d76565b93506060843d606011611e37575b81611e016060938361122f565b810103126103dd57611e1284611cdd565b906040611e2160208701611cdd565b95015163ffffffff8116036103dd575038611d44565b3d9150611df4565b908160209103126111c757516001600160a01b03811681036111c75790565b600180821115611f7a57611f1b908083600160801b811015611f68575b80600160401b6004921015611f5b575b640100000000811015611f4e575b62010000811015611f41575b610100811015611f35575b6010811015611f29575b1015611f22575b600302811c611ed08185611375565b01811c611edd8185611375565b01811c611eea8185611375565b01811c611ef78185611375565b01811c611f048185611375565b01811c611f118185611375565b01901c8092611375565b8111900390565b811b611ec1565b811c9160021b91611eba565b60081c91811b91611eb0565b60101c9160081b91611ea5565b60201c9160101b91611e99565b60401c9160201b91611e8b565b50600160401b9050608084901c611e7b565b509056feddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3efa164736f6c6343000816000a",
+  "deployedBytecode": "0x608060408181526004918236101561001657600080fd5b600092833560e01c91826306fdde031461107357508163095ea7b3146110495781630d02e05c1461100357816318160ddd14610fe45781632042e5c214610fa457816323b872dd14610edf578163313ce56714610ebd57816332fe7b2614610e8e5781633415650e14610e67578163372c12b114610d36578163413d29ab14610e485781634b0e721614610dfc5781634e6fd6c414610ddf5781635122c40914610dba5781635b4be32b14610d745781636f9170f614610d3657816370a0823114610cfe57816370d5ae0514610cd5578163715018a614610c7b5781637b1648e214610c5e5781638b6116ae14610c2e5781638da5cb5b14610c065781639358928b14610bd157816395d89b4114610acc5781639757982514610aa357816397bcd18414610a84578163a441c30214610a5b578163a8aa1b3114610a17578163a9059cbb146109e6578163b1d0b725146109bf578163bcb04de114610966578163c015ef3c146108d8578163c364e1d514610505578163c54e44eb146104d6578163c9555429146104a6578163ca2a62531461045a578163cd059237146103e0578163d53ce95614610391578163dd62ed3e14610348578163e306744914610329578163e6a957e71461030d578163e7cd4a04146102bf578163f2fde38b14610234575063f81e5a9a1461020957600080fd5b34610230578160031936011261023057600a5490516001600160a01b039091168152602090f35b5080fd5b9050346102bb5760203660031901126102bb5761024f6111b1565b906102586114d5565b6001600160a01b039182169283156102a557505082546001600160a01b0319811683178455167f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e08380a380f35b51631e4fbdf760e01b8152908101849052602490fd5b8280fd5b505034610230576020366003190112610230576102da6111b1565b6102e26114d5565b6001600160a01b03166102f6811515611395565b8252600e6020528120805460ff1916600117905580f35b5050346102305781600319360112610230576020905160148152f35b505034610230578160031936011261023057602090600d549051908152f35b505034610230578060031936011261023057806020926103666111b1565b61036e6111cc565b6001600160a01b0391821683526002865283832091168252845220549051908152f35b83346103dd5760203660031901126103dd576103ab6111b1565b6103b36114d5565b6001600160a01b03166103c781151561128a565b6001600160601b0360a01b600854161760085580f35b80fd5b505034610230576103f0366111e2565b91906103fa6114d5565b835b838110610407578480f35b6001906001600160a01b0361043181610429610424858a8961131b565b611341565b161515611395565b61043f61042483888761131b565b168652600e602052838620805460ff191683179055016103fc565b83346103dd5760203660031901126103dd576104746111b1565b61047c6114d5565b6001600160a01b031661049081151561128a565b6001600160601b0360a01b600954161760095580f35b83903461023057602036600319011261023057356104c26114d5565b6104d06103e88211156112cf565b600c5580f35b505034610230578160031936011261023057602090517355d398326f99059ff775485246999027b31979558152f35b838334610230578160031936011261023057600a546001600160a01b0392908316330361089557600d546105a0810180911161088257421061083f576006549361dead938483526001906105626020978389528686205490611267565b91690472698b413b43200000918284119788156107e357817f00000000000000000000000000000000000000000000000000000000000000001694858852838b528888205480156107ac5760148102908104601403610799576103e89004998a1561075e57918a8594928d946105dc838b991c8094611267565b986105e78484611267565b106106ff575b50508590818b528585528c6106068d8d20918254611267565b905584816106ca575b505050508461068c575b505050505042600d55803b156102bb57908280928286518096819363fff6cae960e01b83525af1801561068257610654575b50505051908152f35b67ffffffffffffffff831161066f575050815283808061064b565b634e487b7160e01b825260419052602490fd5b84513d84823e3d90fd5b600080516020611f7f833981519152928160075416895282528888206106b3868254611355565b905560075416938851908152a38681818881610619565b600080516020611f7f83398151915291848d528782528d8d206106ee828254611355565b90558d51908152a38b84818461060f565b929750949592949391159050610753575050690472698b413b431fffff198101908111610740578492918a91945b84610738878d611267565b96908e6105ed565b634e487b7160e01b875260118652602487fd5b91509291879461072d565b895162461bcd60e51b81528089018d90526015602482015274109d5c9b88185b5bdd5b9d081d1bdbc81cdb585b1b605a1b6044820152606490fd5b634e487b7160e01b895260118852602489fd5b895162461bcd60e51b81528089018d90526011602482015270139bc81d1bdad95b9cc81a5b881c1bdbdb607a1b6044820152606490fd5b875162461bcd60e51b81528087018b9052603060248201527f43697263756c6174696e6720737570706c79206861732072656163686564206d60448201526f1a5b9a5b5d5b481d1a1c995cda1bdb1960821b6064820152608490fd5b815162461bcd60e51b8152602081860152601960248201527f4275726e20696e74657276616c206e6f742072656163686564000000000000006044820152606490fd5b634e487b7160e01b825260118552602482fd5b815162461bcd60e51b8152602081860152601960248201527f4f6e6c79206275726e207365747465722063616e2063616c6c000000000000006044820152606490fd5b9050346102bb5760203660031901126102bb576108f36111b1565b6108fb6114d5565b6001600160a01b03169182156109235750506001600160601b0360a01b600a541617600a5580f35b906020606492519162461bcd60e51b8352820152601b60248201527f496e76616c6964206275726e20736574746572206164647265737300000000006044820152fd5b50503461023057610976366111e2565b91906109806114d5565b835b83811061098d578480f35b6001906001600160a01b036109a661042483888761131b565b168652600e602052838620805460ff1916905501610982565b50503461023057816003193601126102305760209060ff600a5460a81c1690519015158152f35b505034610230578060031936011261023057602090610a10610a066111b1565b6024359033611501565b5160018152f35b505034610230578160031936011261023057517f00000000000000000000000000000000000000000000000000000000000000006001600160a01b03168152602090f35b50503461023057816003193601126102305760085490516001600160a01b039091168152602090f35b505034610230578160031936011261023057602090600c549051908152f35b50503461023057816003193601126102305760095490516001600160a01b039091168152602090f35b83833461023057816003193601126102305780519180938054916001908360011c9260018516948515610bc7575b6020958686108114610bb457858952908115610b905750600114610b38575b610b348787610b2a828c038361122f565b5191829182611168565b0390f35b81529295507f8a35acfbc15ff81a39ae7d344fd709f28e8600b4aa8c65c6b64bfe7fe36bd19b5b828410610b7d5750505082610b3494610b2a92820101948680610b19565b8054868501880152928601928101610b5f565b60ff19168887015250505050151560051b8301019250610b2a82610b348680610b19565b634e487b7160e01b845260228352602484fd5b93607f1693610afa565b505034610230578160031936011261023057610bff602092826006549161dead815260018652205490611267565b9051908152f35b505034610230578160031936011261023057905490516001600160a01b039091168152602090f35b8390346102305760203660031901126102305735610c4a6114d5565b610c586103e88211156112cf565b600b5580f35b505034610230578160031936011261023057602090516105a08152f35b83346103dd57806003193601126103dd57610c946114d5565b80546001600160a01b03198116825581906001600160a01b03167f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e08280a380f35b50503461023057816003193601126102305760075490516001600160a01b039091168152602090f35b5050346102305760203660031901126102305760209181906001600160a01b03610d266111b1565b1681526001845220549051908152f35b5050346102305760203660031901126102305760209160ff9082906001600160a01b03610d616111b1565b168152600e855220541690519015158152f35b839034610230576020366003190112610230573580151580910361023057610d9a6114d5565b600a805460ff60a81b191660a89290921b60ff60a81b1691909117905580f35b50503461023057816003193601126102305760209051690472698b413b432000008152f35b5050346102305781600319360112610230576020905161dead8152f35b83346103dd5760203660031901126103dd57610e166111b1565b610e1e6114d5565b6001600160a01b0316610e3281151561128a565b6001600160601b0360a01b600754161760075580f35b505034610230578160031936011261023057602090600b549051908152f35b50503461023057816003193601126102305760209060ff600a5460a01c1690519015158152f35b505034610230578160031936011261023057602090517310ed43c718714eb63d5aa57b78b54704e256024e8152f35b50503461023057816003193601126102305760209060ff600554169051908152f35b905082346103dd5760603660031901126103dd57610efb6111b1565b91610f046111cc565b846044359360018060a01b03861681526002602052818120338252602052205491838310610f5057602086610a1087610f488888610f43828a86611501565b611267565b9033906113d3565b608490602087519162461bcd60e51b8352820152602860248201527f45524332303a207472616e7366657220616d6f756e74206578636565647320616044820152676c6c6f77616e636560c01b6064820152fd5b50503461023057602036600319011261023057610fbf6111b1565b610fc76114d5565b6001600160a01b03168252600e6020528120805460ff1916905580f35b5050346102305781600319360112610230576020906006549051908152f35b8390346102305760203660031901126102305735801515809103610230576110296114d5565b600a805460ff60a01b191660a09290921b60ff60a01b1691909117905580f35b505034610230578060031936011261023057602090610a106110696111b1565b60243590336113d3565b92915034611164578360031936011261116457600354600181811c918690828116801561115a575b6020958686108214611147575084885290811561112557506001146110cc575b610b348686610b2a828b038361122f565b929550600383527fc2575a0e9e593c00f959f8c92f12db2869c3395a3b0502d05e2516446f71f85b5b8284106111125750505082610b3494610b2a9282010194386110bb565b80548685018801529286019281016110f5565b60ff191687860152505050151560051b8301019250610b2a82610b34386110bb565b634e487b7160e01b845260229052602483fd5b93607f169361109b565b8380fd5b6020808252825181830181905290939260005b82811061119d57505060409293506000838284010152601f8019910116010190565b81810186015184820160400152850161117b565b600435906001600160a01b03821682036111c757565b600080fd5b602435906001600160a01b03821682036111c757565b9060206003198301126111c75760043567ffffffffffffffff928382116111c757806023830112156111c75781600401359384116111c75760248460051b830101116111c7576024019190565b90601f8019910116810190811067ffffffffffffffff82111761125157604052565b634e487b7160e01b600052604160045260246000fd5b9190820391821161127457565b634e487b7160e01b600052601160045260246000fd5b1561129157565b60405162461bcd60e51b8152602060048201526016602482015275125b9d985b1a59081c9958d95a5d99481dd85b1b195d60521b6044820152606490fd5b156112d657565b60405162461bcd60e51b815260206004820152601b60248201527f46656520726174652063616e6e6f7420657863656564203130302500000000006044820152606490fd5b919081101561132b5760051b0190565b634e487b7160e01b600052603260045260246000fd5b356001600160a01b03811681036111c75790565b9190820180921161127457565b8181029291811591840414171561127457565b811561137f570490565b634e487b7160e01b600052601260045260246000fd5b1561139c57565b60405162461bcd60e51b815260206004820152600f60248201526e496e76616c6964206164647265737360881b6044820152606490fd5b6001600160a01b0390811691821561148457169182156114345760207f8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925918360005260028252604060002085600052825280604060002055604051908152a3565b60405162461bcd60e51b815260206004820152602260248201527f45524332303a20617070726f766520746f20746865207a65726f206164647265604482015261737360f01b6064820152608490fd5b60405162461bcd60e51b8152602060048201526024808201527f45524332303a20617070726f76652066726f6d20746865207a65726f206164646044820152637265737360e01b6064820152608490fd5b6000546001600160a01b031633036114e957565b60405163118cdaa760e01b8152336004820152602490fd5b9192916001600160a01b0391908216908115611c8a578216918215611c395760009482865260019160209280845260409183838a205410611be657858952818552828920611550858254611267565b905583817f000000000000000000000000000000000000000000000000000000000000000016808814611a68575b8089146115b8575b50505087829187600080516020611f7f8339815191529798999a528552206115af838254611355565b905551908152a3565b878b52600e875260ff858c205416611586578a80916115d5611cf1565b9192916115f58583868e81151580611a5f575b611a48575b509050611355565b811015611741575b50505050501561160e575b80611586565b90935060ff600a5460a81c16156116fd579782918587611677600080516020611f7f833981519152999a9b9c61166f6103e8918261164e600b5483611362565b04858c61165b8385611267565b98836116bf575b50505050600c5490611362565b048093611267565b96888361168f575b5050505091819998979650611608565b818b926009541687528582528787206116a9868254611355565b905560095416938751908152a33888818861167f565b600080516020611f7f8339815191529180600854168d528b82528d8d206116e7868254611355565b905560085416938d51908152a338858c8e611662565b825162461bcd60e51b815260048101869052601d60248201527f4163636573732064656e6965643a2063616e27742073656c6c205044410000006044820152606490fd5b909192938095505088516318160ddd60e01b81526004958c828881885afa918215611a3c578192611a0d575b508a5163c45a015560e01b8152919485928e818a817310ed43c718714eb63d5aa57b78b54704e256024e5afa9081156119e4578f90918a8f8e959487936119ee575b5051622fcfcb60e31b81529485928391165afa9182156119e4578f90918e8b9386956119b5575b5051637464fc3d60e01b815292839182905afa9283156119aa57918b918f99989796959461196e575b508793929116611890575b505061181591611267565b928261185d575050506118309161182b91611362565b611e5e565b6103e71981019190821161184a57505b8a388080806115fd565b634e487b7160e01b8c526011905260248bfd5b82955061188294506118766118769361187b9395611362565b611375565b9389611362565b908180821091180218611840565b801561180a5790916118a861182b866118ae93611362565b91611e5e565b8082116118be575b86925061180a565b90919293949596506118d96118d38284611267565b84611362565b918260031b928084046008149015171561195757601181029080820460111490151715611957578160031b91808304600814901517156119575787969594926119288f99959361192e93611355565b90611375565b908161193d575b8293506118b6565b611815939295509061194e91611355565b93909138611935565b5050505060248f601187634e487b7160e01b835252fd5b9392509750508d82813d83116119a3575b611989818361122f565b8101031261199d5790518c968a90876117ff565b50508f80fd5b503d61197f565b8d51903d90823e3d90fd5b6119d6919550833d85116119dd575b6119ce818361122f565b810190611e3f565b93386117d6565b503d6119c4565b8d513d85823e3d90fd5b611a06919350843d86116119dd576119ce818361122f565b91386117af565b9091508c81813d8311611a35575b611a25818361122f565b810103126102305751903861176d565b503d611a1b565b508a51903d90823e3d90fd5b611a5793509061187691611362565b83868e6115ed565b508215156115e8565b8a611a71611cf1565b90501115611b55575b15611af257888b52600e875260ff858c20541615611a98575b61157e565b6064820495508a88611aaa8885611267565b8981611aba575b5050505061157e565b600080516020611f7f833981519152918961dead958681528a845220611ae1828254611355565b90558951908152a38a883889611ab1565b888b52600e875260ff858c20541661157e5760ff600a5460a01c16611a9357845162461bcd60e51b815260048101889052601c60248201527f4163636573732064656e6965643a2063616e27742062757920504441000000006044820152606490fd5b5084516318160ddd60e01b81528b908881600481865afa908115611bdc5782918891869491611ba5575b509261192891611b92611ba09583611362565b93868152898d522054611267565b611a7a565b935050508882813d8311611bd5575b611bbe818361122f565b810103126103dd5790518391908790611928611b7f565b503d611bb4565b87513d84823e3d90fd5b825162461bcd60e51b815260048101869052602660248201527f45524332303a207472616e7366657220616d6f756e7420657863656564732062604482015265616c616e636560d01b6064820152608490fd5b60405162461bcd60e51b815260206004820152602360248201527f45524332303a207472616e7366657220746f20746865207a65726f206164647260448201526265737360e81b6064820152608490fd5b60405162461bcd60e51b815260206004820152602560248201527f45524332303a207472616e736665722066726f6d20746865207a65726f206164604482015264647265737360d81b6064820152608490fd5b51906001600160701b03821682036111c757565b604051630240bc6b60e21b8152907f00000000000000000000000000000000000000000000000000000000000000006001600160a01b031690606083600481855afa928315611dd1576000908194611de6575b506001600160701b03938416937355d398326f99059ff775485246999027b3197955911630821015611ddd5760209094935b6024604051809481936370a0823160e01b835260048301525afa908115611dd157600091611da2575090565b90506020813d602011611dc9575b81611dbd6020938361122f565b810103126111c7575190565b3d9150611db0565b6040513d6000823e3d90fd5b92602090611d76565b93506060843d606011611e37575b81611e016060938361122f565b810103126103dd57611e1284611cdd565b906040611e2160208701611cdd565b95015163ffffffff8116036103dd575038611d44565b3d9150611df4565b908160209103126111c757516001600160a01b03811681036111c75790565b600180821115611f7a57611f1b908083600160801b811015611f68575b80600160401b6004921015611f5b575b640100000000811015611f4e575b62010000811015611f41575b610100811015611f35575b6010811015611f29575b1015611f22575b600302811c611ed08185611375565b01811c611edd8185611375565b01811c611eea8185611375565b01811c611ef78185611375565b01811c611f048185611375565b01811c611f118185611375565b01901c8092611375565b8111900390565b811b611ec1565b811c9160021b91611eba565b60081c91811b91611eb0565b60101c9160081b91611ea5565b60201c9160101b91611e99565b60401c9160201b91611e8b565b50600160401b9050608084901c611e7b565b509056feddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3efa164736f6c6343000816000a",
+  "devdoc": {
+    "errors": {
+      "OwnableInvalidOwner(address)": [
+        {
+          "details": "The owner is not a valid owner account. (eg. `address(0)`)"
+        }
+      ],
+      "OwnableUnauthorizedAccount(address)": [
+        {
+          "details": "The caller account is not authorized to perform an operation."
+        }
+      ]
+    },
+    "kind": "dev",
+    "methods": {
+      "owner()": {
+        "details": "Returns the address of the current owner."
+      },
+      "renounceOwnership()": {
+        "details": "Leaves the contract without owner. It will not be possible to call `onlyOwner` functions. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby disabling any functionality that is only available to the owner."
+      },
+      "transferOwnership(address)": {
+        "details": "Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner."
+      }
+    },
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  },
+  "storageLayout": {
+    "storage": [
+      {
+        "astId": 8,
+        "contract": "contracts/PDA.sol:PDA",
+        "label": "_owner",
+        "offset": 0,
+        "slot": "0",
+        "type": "t_address"
+      },
+      {
+        "astId": 3631,
+        "contract": "contracts/PDA.sol:PDA",
+        "label": "_balances",
+        "offset": 0,
+        "slot": "1",
+        "type": "t_mapping(t_address,t_uint256)"
+      },
+      {
+        "astId": 3637,
+        "contract": "contracts/PDA.sol:PDA",
+        "label": "_allowances",
+        "offset": 0,
+        "slot": "2",
+        "type": "t_mapping(t_address,t_mapping(t_address,t_uint256))"
+      },
+      {
+        "astId": 3640,
+        "contract": "contracts/PDA.sol:PDA",
+        "label": "_name",
+        "offset": 0,
+        "slot": "3",
+        "type": "t_string_storage"
+      },
+      {
+        "astId": 3643,
+        "contract": "contracts/PDA.sol:PDA",
+        "label": "_symbol",
+        "offset": 0,
+        "slot": "4",
+        "type": "t_string_storage"
+      },
+      {
+        "astId": 3646,
+        "contract": "contracts/PDA.sol:PDA",
+        "label": "_decimals",
+        "offset": 0,
+        "slot": "5",
+        "type": "t_uint8"
+      },
+      {
+        "astId": 3656,
+        "contract": "contracts/PDA.sol:PDA",
+        "label": "_totalSupply",
+        "offset": 0,
+        "slot": "6",
+        "type": "t_uint256"
+      },
+      {
+        "astId": 3660,
+        "contract": "contracts/PDA.sol:PDA",
+        "label": "burnAddress",
+        "offset": 0,
+        "slot": "7",
+        "type": "t_address"
+      },
+      {
+        "astId": 3662,
+        "contract": "contracts/PDA.sol:PDA",
+        "label": "operationAddress",
+        "offset": 0,
+        "slot": "8",
+        "type": "t_address"
+      },
+      {
+        "astId": 3664,
+        "contract": "contracts/PDA.sol:PDA",
+        "label": "deviceAddress",
+        "offset": 0,
+        "slot": "9",
+        "type": "t_address"
+      },
+      {
+        "astId": 3666,
+        "contract": "contracts/PDA.sol:PDA",
+        "label": "burnSetter",
+        "offset": 0,
+        "slot": "10",
+        "type": "t_address"
+      },
+      {
+        "astId": 3678,
+        "contract": "contracts/PDA.sol:PDA",
+        "label": "buyStatus",
+        "offset": 20,
+        "slot": "10",
+        "type": "t_bool"
+      },
+      {
+        "astId": 3681,
+        "contract": "contracts/PDA.sol:PDA",
+        "label": "sellStatus",
+        "offset": 21,
+        "slot": "10",
+        "type": "t_bool"
+      },
+      {
+        "astId": 3684,
+        "contract": "contracts/PDA.sol:PDA",
+        "label": "sellOperationFeeRate",
+        "offset": 0,
+        "slot": "11",
+        "type": "t_uint256"
+      },
+      {
+        "astId": 3687,
+        "contract": "contracts/PDA.sol:PDA",
+        "label": "sellDeviceFeeRate",
+        "offset": 0,
+        "slot": "12",
+        "type": "t_uint256"
+      },
+      {
+        "astId": 3702,
+        "contract": "contracts/PDA.sol:PDA",
+        "label": "lastBurnTime",
+        "offset": 0,
+        "slot": "13",
+        "type": "t_uint256"
+      },
+      {
+        "astId": 3706,
+        "contract": "contracts/PDA.sol:PDA",
+        "label": "whiteList",
+        "offset": 0,
+        "slot": "14",
+        "type": "t_mapping(t_address,t_bool)"
+      }
+    ],
+    "types": {
+      "t_address": {
+        "encoding": "inplace",
+        "label": "address",
+        "numberOfBytes": "20"
+      },
+      "t_bool": {
+        "encoding": "inplace",
+        "label": "bool",
+        "numberOfBytes": "1"
+      },
+      "t_mapping(t_address,t_bool)": {
+        "encoding": "mapping",
+        "key": "t_address",
+        "label": "mapping(address => bool)",
+        "numberOfBytes": "32",
+        "value": "t_bool"
+      },
+      "t_mapping(t_address,t_mapping(t_address,t_uint256))": {
+        "encoding": "mapping",
+        "key": "t_address",
+        "label": "mapping(address => mapping(address => uint256))",
+        "numberOfBytes": "32",
+        "value": "t_mapping(t_address,t_uint256)"
+      },
+      "t_mapping(t_address,t_uint256)": {
+        "encoding": "mapping",
+        "key": "t_address",
+        "label": "mapping(address => uint256)",
+        "numberOfBytes": "32",
+        "value": "t_uint256"
+      },
+      "t_string_storage": {
+        "encoding": "bytes",
+        "label": "string",
+        "numberOfBytes": "32"
+      },
+      "t_uint256": {
+        "encoding": "inplace",
+        "label": "uint256",
+        "numberOfBytes": "32"
+      },
+      "t_uint8": {
+        "encoding": "inplace",
+        "label": "uint8",
+        "numberOfBytes": "1"
+      }
+    }
+  }
+}

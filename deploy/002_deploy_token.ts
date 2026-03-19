@@ -29,7 +29,9 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
      console.log(` AddWhiteList  Transaction hash: ${receipt?.hash || receipt?.transactionHash}`);
 
      //转账
-     const transferTx = await pdaContract.transfer(whiteAddress, BigInt(200000000 * 10**18));
+     // 210 million tokens with 18 decimals 注意ts精度
+     const initialAmount = BigInt(210_000_000) * BigInt(10 ** 18);
+     const transferTx = await pdaContract.transfer(whiteAddress, initialAmount);
      const transferReceipt = await (transferTx as any).wait();
      console.log(` Transfer  Transaction hash: ${transferReceipt?.hash || transferReceipt?.transactionHash}`);
 

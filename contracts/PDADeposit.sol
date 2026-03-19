@@ -9,11 +9,7 @@ import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/utils/ReentrancyGuardUpgradeable.sol";
 
-/**
- * @title PDADeposit
- * @dev 可升级的入金合约（UUPS代理模式），支持10-1000U入金，使用统一的推荐关系合约，通过流动性管理合约添加流动性
- */
-contract PDADeposit is 
+contract PDADeposit is
     Initializable, 
     OwnableUpgradeable, 
     UUPSUpgradeable, 
@@ -27,7 +23,7 @@ contract PDADeposit is
     address public operationAddress;
     address public dappAddress;
     address public commissionReceiver;
-    
+
     uint256 public constant MIN_DEPOSIT = 100 * 10**18;
     uint256 public constant MAX_DEPOSIT = 1000 * 10**18;
 

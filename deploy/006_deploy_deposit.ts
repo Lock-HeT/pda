@@ -146,6 +146,5 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
 };
 
 func.tags = ['PDADeposit'];
-func.dependencies = ['PDAReferral', 'PDALiquidityManager'];
 
 export default func;

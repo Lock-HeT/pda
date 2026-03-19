@@ -1,7 +1,7 @@
 import { HardhatRuntimeEnvironment } from "hardhat/types";
 import { DeployFunction } from "hardhat-deploy/types";
 
-const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
+const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {/*
     const { deployments, getNamedAccounts, ethers} = hre;
     const { deploy } = deployments;
     const { deployer } = await getNamedAccounts();
@@ -23,7 +23,7 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
     });
 
     console.log("receiver 部署成功!");
-    console.log("合约地址:", receiverContract.address);
+    console.log("合约地址:", receiverContract.address);*/
 };
 
 func.tags = ["receiver"];

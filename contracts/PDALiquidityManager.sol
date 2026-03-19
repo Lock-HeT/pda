@@ -2,6 +2,7 @@
 pragma solidity ^0.8.0;
 
 import "./interfaces/IERC20.sol";
+import "./interfaces/IPDA.sol";
 import "./interfaces/IFactory.sol";
 import "./interfaces/IPair.sol";
 import "./interfaces/IRouter02.sol";
@@ -14,13 +15,15 @@ contract PDALiquidityManager is  Initializable, OwnableUpgradeable, UUPSUpgradea
     address public PDA;
     address public NFTLPSetter;
     address public LP_TOKEN;
+    address public burnReceiver;
     address public constant DEAD_ADDRESS = 0x000000000000000000000000000000000000dEaD;
     address public constant ROUTER = 0x10ED43C718714eb63d5aA57B78B54704E256024E;
     address public constant USDT = 0x55d398326f99059fF775485246999027B3197955;
+    uint256 public constant MIN_CIRCULATING_SUPPLY = 21000 * 10**18;
 
 
 
-    uint256 public startTime;
+    mapping(uint256 => uint256) public sourceStartTime;
 
     struct LPInfo {
         uint256 amount;
@@ -41,17 +44,20 @@ contract PDALiquidityManager is  Initializable, OwnableUpgradeable, UUPSUpgradea
     event LiquidityRemoved(address indexed user, uint256 source, uint256 lpAmount, uint256 pdaReturned, uint256 pdaBurned, uint256 usdtReturned);
     event AuthorizedContractAdded(address indexed contractAddress, uint256 source);
     event AuthorizedContractRemoved(address indexed contractAddress);
+    event BurnReceiverUpdated(address indexed oldReceiver, address indexed newReceiver);
 
     /// @custom:oz-upgrades-unsafe-allow constructor
     constructor() {
         _disableInitializers();
     }
 
-    function initialize(address _pda, address _NFTLPSetter) external initializer {
+    function initialize(address _pda, address _NFTLPSetter, address _burnReceiver) external initializer {
         require(_pda != address(0), "Invalid PDA address");
         require(_NFTLPSetter != address(0), "Invalid NFTLPSetter address");
+        require(_burnReceiver != address(0), "Invalid burn receiver address");
         PDA = _pda;
         NFTLPSetter = _NFTLPSetter;
+        burnReceiver = _burnReceiver;
 
         IRouter02 router = IRouter02(ROUTER);
         IFactory factory = IFactory(router.factory());
@@ -62,8 +68,6 @@ contract PDALiquidityManager is  Initializable, OwnableUpgradeable, UUPSUpgradea
         } else {
             LP_TOKEN = pair;
         }
-
-        startTime = block.timestamp;
 
         __Ownable_init(_msgSender());
         __UUPSUpgradeable_init();
@@ -77,6 +81,10 @@ contract PDALiquidityManager is  Initializable, OwnableUpgradeable, UUPSUpgradea
         require(usdtAmount > 0, "Invalid amount");
 
         uint256 source = contractSource[msg.sender];
+        
+        if (sourceStartTime[source] == 0) {
+            sourceStartTime[source] = block.timestamp;
+        }
 
         require(
             IERC20(USDT).transferFrom(msg.sender, address(this), usdtAmount),
@@ -115,7 +123,7 @@ contract PDALiquidityManager is  Initializable, OwnableUpgradeable, UUPSUpgradea
             block.timestamp + 300
         );
 
-        uint256 currentDay = getCurrentDay();
+        uint256 currentDay = getCurrentDay(source);
         LPInfo storage info = userLPInfo[user][source];
 
         if (info.amount > 0) {
@@ -162,13 +170,36 @@ contract PDALiquidityManager is  Initializable, OwnableUpgradeable, UUPSUpgradea
             burnedPDA = pdaAmount - returnedPDA;
         }
 
+        uint256 circulatingSupply = IPDA(PDA).circulatingSupply();
+        
+        uint256 toBurnAddress = 0;
+        uint256 toReceiver = 0;
+        
+        if (burnedPDA > 0) {
+            if (circulatingSupply > MIN_CIRCULATING_SUPPLY) {
+                uint256 maxBurnAmount = circulatingSupply - MIN_CIRCULATING_SUPPLY;
+                if (burnedPDA <= maxBurnAmount) {
+                    toBurnAddress = burnedPDA;
+                } else {
+                    toBurnAddress = maxBurnAmount;
+                    toReceiver = burnedPDA - maxBurnAmount;
+                }
+            } else {
+                toReceiver = burnedPDA;
+            }
+        }
+
         if (returnedPDA > 0) {
             require(IERC20(PDA).transfer(msg.sender, returnedPDA), "PDA transfer failed");
         }
 
-        if (burnedPDA > 0) {
-            require(IERC20(PDA).transfer(DEAD_ADDRESS, burnedPDA), "PDA burn failed");
-            totalPDABurned += burnedPDA;
+        if (toBurnAddress > 0) {
+            require(IERC20(PDA).transfer(DEAD_ADDRESS, toBurnAddress), "PDA burn failed");
+            totalPDABurned += toBurnAddress;
+        }
+
+        if (toReceiver > 0) {
+            require(IERC20(PDA).transfer(burnReceiver, toReceiver), "PDA transfer to receiver failed");
         }
 
         require(IERC20(USDT).transfer(msg.sender, usdtAmount), "USDT transfer failed");
@@ -178,12 +209,19 @@ contract PDALiquidityManager is  Initializable, OwnableUpgradeable, UUPSUpgradea
 
         delete userLPInfo[msg.sender][source];
         
-        emit LiquidityRemoved(msg.sender, source, lpAmount, returnedPDA, burnedPDA, usdtAmount);
+        emit LiquidityRemoved(msg.sender, source, lpAmount, returnedPDA, toBurnAddress, usdtAmount);
     }
 
     function setNFTLPSetter(address _NFTLPSetter) external onlyOwner {
         require(_NFTLPSetter != address(0), "Invalid NFTLPSetter address");
         NFTLPSetter = _NFTLPSetter;
+    }
+
+    function setBurnReceiver(address _burnReceiver) external onlyOwner {
+        require(_burnReceiver != address(0), "Invalid burn receiver address");
+        address oldReceiver = burnReceiver;
+        burnReceiver = _burnReceiver;
+        emit BurnReceiverUpdated(oldReceiver, _burnReceiver);
     }
 
     function setUserLPInfo(address user,  uint256 amount, uint256 depositTime, uint256 depositDay) external {
@@ -206,8 +244,12 @@ contract PDALiquidityManager is  Initializable, OwnableUpgradeable, UUPSUpgradea
     }
     
 
-    function getCurrentDay() public view returns (uint256) {
-        return (block.timestamp - startTime) / 1 days;
+    function getCurrentDay(uint256 source) public view returns (uint256) {
+        require(source <= 2, "Invalid source");
+        if (sourceStartTime[source] == 0) {
+            return 0;
+        }
+        return (block.timestamp - sourceStartTime[source]) / 1 days;
     }
 
     function getUserLPInfo(address user, uint256 source) external view returns (
@@ -249,15 +291,16 @@ contract PDALiquidityManager is  Initializable, OwnableUpgradeable, UUPSUpgradea
         nftReturnRate = nftInfo.amount > 0 ? calculateReturnRate(nftInfo.depositDay) : 0;
     }
 
-    function getContractStats() external view returns (
+    function getContractStats(uint256 source) external view returns (
         uint256 _totalLPLocked,
         uint256 _totalPDABurned,
         uint256 _currentDay,
         uint256 _currentReturnRate
     ) {
+        require(source <= 2, "Invalid source");
         _totalLPLocked = totalLPLocked;
         _totalPDABurned = totalPDABurned;
-        _currentDay = getCurrentDay();
+        _currentDay = getCurrentDay(source);
         _currentReturnRate = calculateReturnRate(_currentDay);
     }
 

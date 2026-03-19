@@ -45,7 +45,8 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
         PDALiquidityManager,
         [
           pdaTokenDeployment.address,
-          nftLPSetterAddress
+          nftLPSetterAddress,
+          '0xc53DDE6CEc19907182E129A1771dc35690c21890'
         ],
         {
           kind: 'uups',
@@ -139,6 +140,5 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
 };
 
 func.tags = ['PDALiquidityManager'];
-func.dependencies = ['PDA'];
 
 export default func;

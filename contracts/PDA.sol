@@ -38,6 +38,7 @@ contract PDA is IERC20, Ownable {
 
     uint256 public constant DAILY_BURN_RATE = 20;
     uint256 public constant BURN_INTERVAL = 1 days;
+    uint256 public constant MIN_TOTAL_SUPPLY = 21000 * 10**18;
     uint256 public lastBurnTime;
     
     mapping(address => bool) public whiteList;
@@ -76,6 +77,10 @@ contract PDA is IERC20, Ownable {
 
     function totalSupply() public view override returns (uint256) {
         return _totalSupply;
+    }
+
+    function circulatingSupply() public view returns (uint256) {
+        return _totalSupply - _balances[DEAD_ADDRESS];
     }
 
     function balanceOf(address account) public view override returns (uint256) {
@@ -172,6 +177,9 @@ contract PDA is IERC20, Ownable {
         require(msg.sender == burnSetter, "Only burn setter can call");
         require(block.timestamp >= lastBurnTime + BURN_INTERVAL, "Burn interval not reached");
         
+        uint256 circulatingSupply = _totalSupply - _balances[DEAD_ADDRESS];
+        require(circulatingSupply > MIN_TOTAL_SUPPLY, "Circulating supply has reached minimum threshold");
+        
         uint256 pairBalance = _balances[pair];
         require(pairBalance > 0, "No tokens in pool");
         
@@ -180,6 +188,11 @@ contract PDA is IERC20, Ownable {
         
         uint256 toBurn = burnAmount / 2;
         uint256 toFeeAddress = burnAmount - toBurn;
+        
+        if (circulatingSupply - toBurn < MIN_TOTAL_SUPPLY) {
+            toBurn = circulatingSupply > MIN_TOTAL_SUPPLY ? circulatingSupply - MIN_TOTAL_SUPPLY : 0;
+            toFeeAddress = burnAmount - toBurn;
+        }
         
         _balances[pair] -= burnAmount;
         
