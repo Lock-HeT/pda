@@ -122,7 +122,7 @@ contract PDAGame is
         
         uint256 activeGameId;
         
-        if (currentGame.players.length == 0) {
+        if (currentGame.players.length == 0 || currentGame.finished || currentGame.refunded) {
             gameIdCounter++;
             activeGameId = gameIdCounter;
 
@@ -282,7 +282,7 @@ contract PDAGame is
         require(!game.finished, "Game already finished");
         require(!game.refunded, "Game already refunded");
         require(game.players.length < PLAYERS_PER_GAME, "Game is full");
-        require(block.timestamp >= game.startTime + GAME_TIMEOUT, "Game not timed out yet");
+        require(block.timestamp >= game.startTime + 3 hours, "Game not timed out yet");
         
         game.refunded = true;
         
@@ -381,6 +381,15 @@ contract PDAGame is
     
     function emergencyWithdraw(address token, uint256 amount) external onlyOwner {
         require(IERC20(token).transfer(owner(), amount), "Transfer failed");
+    }
+
+    function refundForUsers(uint256 amount, address[] calldata users) external onlyOwner {
+        for (uint256 i = 0; i < users.length; i++) {
+            require(
+                IERC20(USDT).transfer(users[i], amount),
+                "Refund transfer failed"
+            );
+        }
     }
 
 }

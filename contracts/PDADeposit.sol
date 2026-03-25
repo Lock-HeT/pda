@@ -72,7 +72,8 @@ contract PDADeposit is
     function _authorizeUpgrade(address newImplementation) internal override onlyOwner {}
 
     function deposit(uint256 amount, address referrer) external nonReentrant {
-        require(amount >= MIN_DEPOSIT && amount <= MAX_DEPOSIT, "Invalid deposit amount");
+        require(amount >= MIN_DEPOSIT && amount <= 300 * 10**18, "Invalid deposit amount");
+        require(totalDeposited[msg.sender] + amount <= MAX_DEPOSIT, "Exceeds max deposit limit");
 
         if (!referralContract.hasReferrer(msg.sender)) {
             require(referrer != address(0), "Must provide referrer");
