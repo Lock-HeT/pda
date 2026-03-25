@@ -48,10 +48,14 @@ contract PDAGame is
     mapping(uint256 => uint256) public currentGameIndex;
 
     mapping(address => uint256[]) public userGames;
-
+    
     uint256[3] public gameTypes;
 
     address public constant USDT = 0x55d398326f99059fF775485246999027B3197955;
+
+    uint256 public constant MAX_BET_LIMIT = 1000 * 10**18;
+
+    mapping(address => uint256) public userTotalWinningBets;
 
     event GameCreated(uint256 indexed gameId, uint256 betAmount);
     event PlayerJoined(uint256 indexed gameId, address indexed player, uint256 playerIndex);
@@ -59,6 +63,7 @@ contract PDAGame is
     event GameRefunded(uint256 indexed gameId);
     event PrizePaid(uint256 indexed gameId, address indexed recipient, uint256 amount, string reason);
     event Initialized(address indexed owner, address referral, address liquidityMgr);
+    event UserWinningBetUpdated(address indexed user, uint256 totalWinningBets);
     
     /// @custom:oz-upgrades-unsafe-allow constructor
     constructor() {
@@ -105,6 +110,11 @@ contract PDAGame is
         require(
             betAmount == GAME_TYPE_100 || betAmount == GAME_TYPE_200 || betAmount == GAME_TYPE_300,
             "Invalid bet amount"
+        );
+
+        require(
+            userTotalWinningBets[msg.sender] + betAmount <= MAX_BET_LIMIT,
+            "Exceeds maximum bet limit"
         );
 
         if (!referralContract.hasReferrer(msg.sender)) {
@@ -192,6 +202,9 @@ contract PDAGame is
         game.finished = true;
         game.winner = winner;
         game.endTime = block.timestamp;
+        
+        userTotalWinningBets[winner] += game.betAmount;
+        emit UserWinningBetUpdated(winner, userTotalWinningBets[winner]);
         
         _distributePrize(gameId, winnerNumber);
 
@@ -285,7 +298,13 @@ contract PDAGame is
         require(block.timestamp >= game.startTime + 3 hours, "Game not timed out yet");
         
         game.refunded = true;
-        
+
+        uint256 betAmount = game.betAmount;
+        uint256 currentIndex = currentGameIndex[betAmount];
+        if (gamesByType[betAmount][currentIndex].gameId == gameId) {
+            gamesByType[betAmount][currentIndex].refunded = true;
+        }
+
         for (uint256 i = 0; i < game.players.length; i++) {
             require(
                 IERC20(USDT).transfer(game.players[i], game.betAmount),
@@ -351,7 +370,6 @@ contract PDAGame is
     function getUserGames(address user) external view returns (uint256[] memory) {
         return userGames[user];
     }
-    
 
     function setOperationAddress(address _operationAddress) external onlyOwner {
         require(_operationAddress != address(0), "Invalid operation address");
