@@ -99,10 +99,15 @@ contract PDALiquidityManager is  Initializable, OwnableUpgradeable, UUPSUpgradea
         address[] memory path = new address[](2);
         path[0] = USDT;
         path[1] = PDA;
+
+        uint256[] memory amountsOut = IRouter02(ROUTER).getAmountsOut(halfAmount, path);
+        uint256 expectedPdaAmount = amountsOut[1];
+
+        uint256 minPDAOutput = (expectedPdaAmount * (10000 - 500)) / 10000;
         
         uint256[] memory amounts = IRouter02(ROUTER).swapExactTokensForTokens(
             halfAmount,
-            0,
+            minPDAOutput,
             path,
             address(this),
             block.timestamp + 300
@@ -226,11 +231,6 @@ contract PDALiquidityManager is  Initializable, OwnableUpgradeable, UUPSUpgradea
 
     function setUserLPInfo(address user,  uint256 amount, uint256 depositTime, uint256 depositDay) external {
         require(msg.sender == NFTLPSetter, "Only NFTLPSetter can call");
-
-        LPInfo storage info = userLPInfo[user][2];
-        info.amount = amount;
-        info.depositTime = depositTime;
-        info.depositDay = depositDay;
     }
 
     function calculateReturnRate(uint256 depositDay) public pure returns (uint256) {
