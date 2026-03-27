@@ -148,6 +148,7 @@ contract PDAGame is
             currentGame.startTime = block.timestamp;
             currentGame.finished = false;
             currentGame.refunded = false;
+            delete currentGame.players;
             
             emit GameCreated(activeGameId, betAmount);
         } else if (currentGame.players.length >= PLAYERS_PER_GAME) {
