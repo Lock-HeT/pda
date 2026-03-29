@@ -291,13 +291,12 @@ contract PDAGame is
     }
 
     function refundGame(uint256 gameId) external nonReentrant {
+        require(msg.sender == gameOperator, "Only game operator can refund game");
         Game storage game = games[gameId];
         require(game.gameId == gameId, "Game not found");
         require(!game.finished, "Game already finished");
         require(!game.refunded, "Game already refunded");
-        require(game.players.length < PLAYERS_PER_GAME, "Game is full");
-        require(block.timestamp >= game.startTime + 3 hours, "Game not timed out yet");
-        
+
         game.refunded = true;
 
         uint256 betAmount = game.betAmount;
