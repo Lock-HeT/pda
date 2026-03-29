@@ -3,11 +3,13 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 async function main() {
-    const depositAddress = process.env.GAME_ADDRESS || '0x0C737142078366C627F37B978933b26ed4fC784F';
+    const depositAddress = process.env.GAME_ADDRESS || '0x5DEcE7C78b2eC922A67b6E96eBB956950Ab765b0';
     const PDADeposit = await ethers.getContractAt('PDADeposit', depositAddress);
-
-
-    await PDADeposit.deposit(BigInt(10 ** 15), '0xae58175975532C11E24282aBB1F7Bb52B7819548');
+    let opeationAddress = await PDADeposit.operationAddress();
+    console.log('Operation Address:', opeationAddress);
+    await PDADeposit.setOperationAddress('0xd938851FdDAa81Cc021Aa1CCE2539901DFF11bF8');
+    opeationAddress = await PDADeposit.operationAddress();
+    console.log('Updated Operation Address:', opeationAddress);
 
 }
 
