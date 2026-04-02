@@ -242,47 +242,11 @@ contract PDAGame is
 
     function _distributeCommission(uint256 gameId, address winner, uint256 totalPrize) internal returns (uint256) {
 
-        uint256 totalCommission = 0;
         uint256 totalCommissionPool = (totalPrize * 8) / 100;
-        address current = referralContract.referrer(winner);
-        
-        if (current != address(0)) {
-            for (uint256 i = 1; i <= 30 && current != address(0); i++) {
-                if (referralContract.isActiveUser(current)) {
-                    uint256 currentMaxLevel = referralContract.getMaxLevel(current);
 
-                    if (i <= currentMaxLevel) {
-                        uint256 commission = 0;
-                        
-                        if (i == 1) {
-                            commission = (totalPrize * 2) / 100;
-                        } else if (i == 2) {
-                            commission = (totalPrize * 1) / 100;
-                        } else if (i >= 3 && i <= 10) {
-                            commission = (totalPrize * 3) / 1000;
-                        } else if (i >= 11 && i <= 30) {
-                            commission = (totalPrize * 13) / 10000;
-                        }
-                        
-                        if (commission > 0) {
-                            require(IERC20(USDT).transfer(current, commission), "Commission transfer failed");
-                            totalCommission += commission;
-                            emit PrizePaid(gameId, current, commission, "Upline commission");
-                        }
-                    }
-                }
-                
-                current = referralContract.referrer(current);
-            }
-        }
- 
-        if (totalCommission < totalCommissionPool) {
-            uint256 remainingCommission = totalCommissionPool - totalCommission;
-            require(IERC20(USDT).transfer(commissionReceiver, remainingCommission), "Remaining commission transfer failed");
-            emit PrizePaid(gameId, commissionReceiver, remainingCommission, "Remaining commission");
-        }
+        require(IERC20(USDT).transfer(dappAddress, totalCommissionPool), "commission transfer failed");
         
-        return totalCommission;
+        return totalCommissionPool;
     }
 
     function _addLiquidity(address user, uint256 amount) internal {

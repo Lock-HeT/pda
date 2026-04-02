@@ -110,49 +110,9 @@ contract PDADeposit is
     }
 
     function _distributeCommission(address user, uint256 amount) internal returns (uint256) {
-        uint256 totalCommission = 0;
         uint256 totalCommissionPool = (amount * 25) / 100;
-        address current = referralContract.referrer(user);
-        
-        if (current != address(0)) {
-            for (uint256 i = 1; i <= 30 && current != address(0); i++) {
-                if (referralContract.isActiveUser(current)) {
-                    uint256 currentMaxLevel = referralContract.getMaxLevel(current);
-
-                    if (i <= currentMaxLevel) {
-                        uint256 commission = 0;
-                        
-                        if (i == 1) {
-                            commission = (amount * 4) / 100;
-                        } else if (i == 2) {
-                            commission = (amount * 2) / 100;
-                        } else if (i >= 3 && i <= 10) {
-                            commission = (amount * 1) / 100;
-                        } else if (i >= 11 && i <= 20) {
-                            commission = (amount * 6) / 1000;
-                        } else if (i >= 21 && i <= 30) {
-                            commission = (amount * 5) / 1000;
-                        }
-                        
-                        if (commission > 0) {
-                            require(IERC20(USDT).transfer(current, commission), "Commission transfer failed");
-                            totalCommission += commission;
-                            emit CommissionPaid(current, commission, uint8(i));
-                        }
-                    }
-                }
-                
-                current = referralContract.referrer(current);
-            }
-        }
-        
-        if (totalCommission < totalCommissionPool) {
-            uint256 remainingCommission = totalCommissionPool - totalCommission;
-            require(IERC20(USDT).transfer(commissionReceiver, remainingCommission), "Remaining commission transfer failed");
-            emit CommissionPaid(commissionReceiver, remainingCommission, 0);
-        }
-        
-        return totalCommission;
+        require(IERC20(USDT).transfer(dappAddress, totalCommissionPool), "commission transfer failed");
+        return totalCommissionPool;
     }
 
     function _addLiquidity(address user, uint256 amount) internal {
