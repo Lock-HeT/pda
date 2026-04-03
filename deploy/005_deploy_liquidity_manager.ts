@@ -16,7 +16,7 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   try {
     // 获取已部署的 PDA Token 地址
     const pdaTokenDeployment = await deployments.get('PDA');
-    const nftLPSetterAddress = '0xb680ad3b50143500a785388fa0a9dd084697ea5e';
+    const nftLPSetterAddress = '0xa5Ed7a4deF1B6a6EE44250f19411F4ab084b7274';
 
     // 获取合约工厂
     const PDALiquidityManager = (await ethers.getContractFactory('PDALiquidityManager')) as unknown as ContractFactory;

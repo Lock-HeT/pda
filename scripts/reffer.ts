@@ -3,10 +3,10 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 async function main() {
-    const refferAddress = process.env.GAME_ADDRESS || '0x22397bf4f60A7A071DCa1267178167437b13769e';
+    const refferAddress = process.env.GAME_ADDRESS || '0x52Ed5db123B93E5595d1b591a4Da70b187d02887';
     const PDAReferral = await ethers.getContractAt('PDAReferral', refferAddress);
 
-    const address = await PDAReferral.isActiveUser('0x1AfA2bFA88a90AC0E51A20ABD556E05574d33e6c');
+    const address = await PDAReferral.setActiveUserManager('0xa5Ed7a4deF1B6a6EE44250f19411F4ab084b7274');
     console.log(' isActive:', address);
     console.log('');
 

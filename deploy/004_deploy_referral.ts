@@ -10,7 +10,7 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   console.log('Deploying PDAReferral Contract');
   console.log('========================================\n');
 
-  const activeUserManager = '0xb680ad3b50143500a785388fa0a9dd084697ea5e';
+  const activeUserManager = '0xa5Ed7a4deF1B6a6EE44250f19411F4ab084b7274';
   // 部署推荐关系合约
   const referral = await deployContract(
     hre,

@@ -11,18 +11,18 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
      const { deployments, getNamedAccounts } = hre;
      const { deployer } = await getNamedAccounts();
 
-     const burnAddress= '0xb680ad3b50143500a785388fa0a9dd084697ea5e';
+     const burnReceiveAddress= '0x7E4a21d64afD8F11C41D153ce478A404b1169969';
 
      const tokenDeployment = await deployContract(
           hre,
           'PDA',
-          [burnAddress, '0xc8DF60C860Cf7A440852cAf91f9a39bA3c362378', '0x1e0f55df4f48a6008ac848f7a3e2587ccdba2305', burnAddress]
+          [burnReceiveAddress, '0xc8DF60C860Cf7A440852cAf91f9a39bA3c362378', '0x8E3b1de34531AFdA25E758Cb349367513d4F0d6A', '0xa5Ed7a4deF1B6a6EE44250f19411F4ab084b7274']
      );
 
      console.log('✅ PDA.sol deployment completed!');
      console.log(`   PDA Address: ${tokenDeployment.address}`);
 
-     const whiteAddress = '0xc53DDE6CEc19907182E129A1771dc35690c21890';
+     const whiteAddress = '0x7c27D612B9db246d4830eAA5eA1e8fE3C9593cdd';
      const pdaContract = await hre.ethers.getContractAt('PDA', tokenDeployment.address);
      const tx = await pdaContract.addWhiteList(whiteAddress);
      const receipt = await (tx as any).wait();

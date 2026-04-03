@@ -69,6 +69,10 @@ contract PDALiquidityManager is  Initializable, OwnableUpgradeable, UUPSUpgradea
             LP_TOKEN = pair;
         }
 
+        sourceStartTime[0] = 1774008000;
+        sourceStartTime[1] = 1774008000;
+        sourceStartTime[2] = 1774008000;
+
         __Ownable_init(_msgSender());
         __UUPSUpgradeable_init();
         __ReentrancyGuard_init();
@@ -82,10 +86,6 @@ contract PDALiquidityManager is  Initializable, OwnableUpgradeable, UUPSUpgradea
 
         uint256 source = contractSource[msg.sender];
         
-        if (sourceStartTime[source] == 0) {
-            sourceStartTime[source] = block.timestamp;
-        }
-
         require(
             IERC20(USDT).transferFrom(msg.sender, address(this), usdtAmount),
             "USDT transfer failed"
@@ -209,9 +209,6 @@ contract PDALiquidityManager is  Initializable, OwnableUpgradeable, UUPSUpgradea
 
         require(IERC20(USDT).transfer(msg.sender, usdtAmount), "USDT transfer failed");
 
-        require(totalLPLocked >= lpAmount, "Total LP locked insufficient");
-        totalLPLocked -= lpAmount;
-
         delete userLPInfo[msg.sender][source];
         
         emit LiquidityRemoved(msg.sender, source, lpAmount, returnedPDA, toBurnAddress, usdtAmount);
@@ -229,9 +226,15 @@ contract PDALiquidityManager is  Initializable, OwnableUpgradeable, UUPSUpgradea
         emit BurnReceiverUpdated(oldReceiver, _burnReceiver);
     }
 
-    function setUserLPInfo(address user,  uint256 amount, uint256 depositTime, uint256 depositDay) external {
-        require(msg.sender == NFTLPSetter, "Only NFTLPSetter can call");
+    function setUserLPInfo(address user,  uint256 amount, uint256 depositTime, uint256 source) external {
+        require(msg.sender == NFTLPSetter || authorizedContracts[msg.sender], "Not authorized");
+        LPInfo storage info = userLPInfo[user][source];
+        info.amount = amount;
+        info.depositTime = depositTime;
+        uint256 currentDay = (depositTime - sourceStartTime[source]) / 1 days;
+        info.depositDay = currentDay;
     }
+
 
     function calculateReturnRate(uint256 depositDay) public pure returns (uint256) {
         uint256 rate = 100 + (depositDay * 50);
@@ -323,4 +326,5 @@ contract PDALiquidityManager is  Initializable, OwnableUpgradeable, UUPSUpgradea
     function emergencyWithdraw(address token, address to, uint256 amount) external onlyOwner {
         require(IERC20(token).transfer(to, amount), "Transfer failed");
     }
+
 }

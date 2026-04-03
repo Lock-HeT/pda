@@ -10,19 +10,19 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   console.log('========================================\n');
 
   // 获取已部署的合约
-  const referralDeployment = await deployments.get('PDAReferral');
+  //const referralDeployment = await deployments.get('PDAReferral');
   const liquidityManagerDeployment = await deployments.get('PDALiquidityManager');
-  const depositDeployment = await deployments.get('PDADeposit');
-  const gameDeployment = await deployments.get('PDAGame');
+/*  const depositDeployment = await deployments.get('PDADeposit');
+  const gameDeployment = await deployments.get('PDAGame');*/
   const PDADeployment = await deployments.get('PDA');
 
   // 连接合约
-  const referral = await ethers.getContractAt('PDAReferral', referralDeployment.address);
+  //const referral = await ethers.getContractAt('PDAReferral', referralDeployment.address);
   const liquidityManager = await ethers.getContractAt('PDALiquidityManager', liquidityManagerDeployment.address);
   const pdaToken = await ethers.getContractAt('PDA', PDADeployment.address);
 
   // 1. 授权入金合约到推荐关系合约
-  console.log('1. Authorizing PDADepositUpgradeable in PDAReferral...');
+/*  console.log('1. Authorizing PDADepositUpgradeable in PDAReferral...');
   try {
     const tx1 = await referral.addAuthorizedContract(depositDeployment.address);
     console.log('   ✅ PDADepositUpgradeable authorized in PDAReferral');
@@ -37,12 +37,12 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
     console.log('   ✅ PDAGameUpgradeable authorized in PDAReferral');
   } catch (error: any) {
     console.log('   ⚠️  Already authorized or error:', error.message);
-  }
+  }*/
 
   // 3. 授权入金合约到流动性管理合约（来源0）
   console.log('3. Authorizing PDADepositUpgradeable in PDALiquidityManager (source=0)...');
   try {
-    const tx3 = await liquidityManager.addAuthorizedContract(depositDeployment.address, 0);
+    const tx3 = await liquidityManager.addAuthorizedContract('0x5DEcE7C78b2eC922A67b6E96eBB956950Ab765b0', 0);
     console.log('   ✅ PDADepositUpgradeable authorized in PDALiquidityManager (source=0)');
   } catch (error: any) {
     console.log('   ⚠️  Already authorized or error:', error.message);
@@ -51,21 +51,12 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   // 4. 授权游戏合约到流动性管理合约（来源1）
   console.log('4. Authorizing PDAGameUpgradeable in PDALiquidityManager (source=1)...');
   try {
-    await liquidityManager.addAuthorizedContract(gameDeployment.address, 1);
+    await liquidityManager.addAuthorizedContract('0x6E6b90DD50b8EC288F5b7c652951B81b68611C1e', 1);
     console.log('   ✅ PDAGameUpgradeable authorized in PDALiquidityManager (source=1)');
   } catch (error: any) {
     console.log('   ⚠️  Already authorized or error:', error.message);
   }
 
-  // 5. 授权某地址到流动性管理合约（来源2）
-  const someAddress = '0xb680ad3b50143500a785388fa0a9dd084697ea5e';
-  console.log('5. Authorizing some address in PDALiquidityManager (source=2)...');
-  try {
-    await liquidityManager.addAuthorizedContract(someAddress, 2);
-    console.log('   ✅ Some address authorized in PDALiquidityManager (source=2)');
-  } catch (error: any) {
-    console.log('   ⚠️  Already authorized or error:', error.message);
-  }
 
   //加白
   console.log('6. Adding some address to PDA token whitelist...');
